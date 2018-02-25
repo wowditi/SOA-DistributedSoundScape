@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.example.org/UploadServiceElements/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/UploadServiceElements/" xmlns:types="http://www.example.org/SoundScapeDataTypes/">
+	<import schemaLocation="SoundScapeDataTypes.xsd"
+		namespace="http://www.example.org/SoundScapeDataTypes/"></import>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<element name="UploadSongRequest" type="tns:UploadSongRequest"></element>
+	
+
+	<element name="DeleteSongRequest" type="tns:DeleteSongRequest"></element>
+	
+
+	<element name="IsSongLoadedRequest"
+		type="tns:IsSongLoadedRequest">
+	</element>
+	
+
+	<element name="IsSongLoadedResponse" type="boolean"></element>
+
+	<element name="DeleteSongResponse" type="types:ASyncResponse"></element>
+
+	<element name="UploadSongResponse" type="types:ASyncResponse"></element>
+
+	<complexType name="DeleteSongRequest">
+		<sequence>
+			<element name="Link" type="types:Link"></element>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="IsSongLoadedRequest">
+		<sequence>
+			<element name="Link" type="types:Link"></element>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="UploadSongRequest">
+		<sequence>
+			<element name="Link" type="types:Link"></element>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+    <element name="ErrorMessage" type="string"></element>
+</schema>

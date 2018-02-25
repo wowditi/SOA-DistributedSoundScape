@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="UploadCallbackService" targetNamespace="http://www.example.org/UploadCallbackService/" xmlns:types="http://www.example.org/UploadServiceElements/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/UploadCallbackService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/UploadService/">
+			<xsd:import namespace="http://www.example.org/UploadServiceElements/" schemaLocation="UploadServiceElements.xsd"/>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UploadSongResponse">
+    <wsdl:part name="Response" element="types:UploadSongResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ErrorMessage">
+    <wsdl:part name="ErrorMessage" element="types:ErrorMessage">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteSongResponse">
+    <wsdl:part name="Response" element="types:DeleteSongResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UploadCallbackService">
+    <wsdl:operation name="UploadSongCallback">
+      <wsdl:input message="tns:UploadSongResponse">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSongCallback">
+      <wsdl:input message="tns:DeleteSongResponse">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UploadCallbackServiceSOAP" type="tns:UploadCallbackService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="UploadSongCallback">
+      <soap:operation soapAction="http://www.example.org/UploadCallbackService/UploadSong"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSongCallback">
+      <soap:operation soapAction="http://www.example.org/UploadCallbackService/DeleteSong"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UploadCallbackService">
+    <wsdl:port name="UploadCallbackServiceSOAP" binding="tns:UploadCallbackServiceSOAP">
+      <soap:address location="http://localhost:8080/DistributedSoundScape/services/UploadCallbackService/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

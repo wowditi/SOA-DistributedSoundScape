@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/RegistrationService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RegistrationService"
+	xmlns:types="http://www.example.org/RegistrationServiceElements/"
+	targetNamespace="http://www.example.org/RegistrationService/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/RegistrationService/">
+			<xsd:import namespace="http://www.example.org/RegistrationServiceElements/"
+				schemaLocation="schemas/type-definitions/RegistrationServiceElements.xsd" /> 
+        </xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="RegisterUserRequest">
+		<wsdl:part name="RegisterUserRequest" element="types:RegisterUserRequest" />
+	</wsdl:message>
+	<wsdl:message name="RegisterUserResponse">
+		<wsdl:part name="RegisterUserResponse" element="types:RegisterUserResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetSpeakersRequest">
+		<wsdl:part name="GetSpeakersRequest" element="types:GetSpeakersRequest" />
+	</wsdl:message>
+	<wsdl:message name="GetSpeakersResponse">
+		<wsdl:part name="GetSpeakersResponse" element="types:GetSpeakersResponse" />
+	</wsdl:message>
+	<wsdl:message name="SetSpeakerLocationRequest">
+		<wsdl:part name="SetSpeakerLocationRequest" element="types:SetSpeakerLocationRequest" />
+	</wsdl:message>
+	<wsdl:message name="SetSpeakerLocationResponse">
+		<wsdl:part name="SetSpeakerLocationResponse" element="types:SetSpeakerLocationResponse" />
+	</wsdl:message>
+	<wsdl:message name="RemoveUserRequest">
+		<wsdl:part name="RemoveUserRequest" element="types:RemoveUserRequest" />
+	</wsdl:message>
+	<wsdl:message name="ErrorMessage">
+		<wsdl:part name="ErrorMessage" element="types:ErrorMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="RegistrationService">
+		<wsdl:operation name="RegisterUser">
+			<wsdl:input message="tns:RegisterUserRequest" />
+			<wsdl:output message="tns:RegisterUserResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="GetSpeakers">
+			<wsdl:input message="tns:GetSpeakersRequest" />
+			<wsdl:output message="tns:GetSpeakersResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="SetSpeakerLocation">
+			<wsdl:input message="tns:SetSpeakerLocationRequest" />
+			<wsdl:output message="tns:SetSpeakerLocationResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="RemoveUser">
+			<wsdl:input message="tns:RemoveUserRequest" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="RegistrationServiceSOAP" type="tns:RegistrationService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="RegisterUser">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/RegisterUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSpeakers">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/GetSpeakers" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetSpeakerLocation">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/SetSpeakerLocation" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveUser">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/RemoveUser" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RegistrationService">
+		<wsdl:port binding="tns:RegistrationServiceSOAP" name="RegistrationServiceSOAP">
+			<soap:address
+				location="http://localhost:8080/DistributedSoundScape/services/RegistrationService/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

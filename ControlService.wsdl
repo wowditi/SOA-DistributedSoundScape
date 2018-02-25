@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/ControlService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ControlService"
+	xmlns:types="http://www.example.org/ControlServiceElements/"
+	targetNamespace="http://www.example.org/ControlService/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/ControlService/">
+			<xsd:import namespace="http://www.example.org/ControlServiceElements/"
+				schemaLocation="schemas/type-definitions/ControlServiceElements.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="SetSoundScapeSourceLayoutRequest">
+		<wsdl:part element="types:SetSoundScapeSourceLayoutRequest"
+			name="SetSoundScapeSourceLayoutRequest" />
+	</wsdl:message>
+	<wsdl:message name="SetSoundScapeSourceLayoutResponse">
+		<wsdl:part element="types:SetSoundScapeSourceLayoutResponse"
+			name="SetSoundScapeSourceLayoutResponse" />
+	</wsdl:message>
+	<wsdl:message name="ProcessPlaybackCommandRequest">
+		<wsdl:part element="types:ProcessPlaybackCommandRequest"
+			name="ProcessPlaybackCommandRequest" />
+	</wsdl:message>
+	<wsdl:message name="ProcessPlaybackCommandResponse">
+		<wsdl:part element="types:ProcessPlaybackCommandResponse"
+			name="ProcessPlaybackCommandResponse" />
+	</wsdl:message>
+	<wsdl:message name="ErrorMessage">
+		<wsdl:part name="ErrorMessage" element="types:ErrorMessage" />
+	</wsdl:message>
+	<wsdl:portType name="ControlService">
+		<wsdl:operation name="SetSoundScapeSourceLayout">
+			<wsdl:input message="tns:SetSoundScapeSourceLayoutRequest" />
+			<wsdl:output message="tns:SetSoundScapeSourceLayoutResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="ProcessPlaybackCommand">
+			<wsdl:input message="tns:ProcessPlaybackCommandRequest" />
+			<wsdl:output message="tns:ProcessPlaybackCommandResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ControlServiceSOAP" type="tns:ControlService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SetSoundScapeSourceLayout">
+			<soap:operation
+				soapAction="http://www.example.org/ControlService/SetSoundScapeSourceLayout" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ProcessPlaybackCommand">
+			<soap:operation
+				soapAction="http://www.example.org/ControlService/ProcessPlaybackCommand" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ControlService">
+		<wsdl:port binding="tns:ControlServiceSOAP" name="ControlServiceSOAP">
+			<soap:address
+				location="http://localhost:8080/DistributedSoundScape/services/ControlService/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

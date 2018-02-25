@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.example.org/RegistrationServiceElements/"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/RegistrationServiceElements/" xmlns:types="http://www.example.org/SoundScapeDataTypes/">
+	<import schemaLocation="SoundScapeDataTypes.xsd"
+		namespace="http://www.example.org/SoundScapeDataTypes/"></import>
+
+	<element name="RegisterUserRequest"
+		type="tns:RegisterUserRequest">
+	</element>
+
+	<element name="RegisterUserResponse" type="boolean"></element>
+
+	<element name="GetSpeakersRequest" type="tns:GetSpeakersRequest"></element>
+
+	<element name="GetSpeakersResponse"
+		type="tns:GetSpeakersResponse">
+	</element>
+
+	<element name="SetSpeakerLocationRequest"
+		type="tns:SetSpeakerLocationRequest">
+	</element>
+
+	<complexType name="SetSpeakerLocationRequest">
+		<sequence>
+			<element name="SpeakerDevice" type="types:SpeakerDevice"></element>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="GetSpeakersRequest">
+		<sequence>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GetSpeakersResponse">
+		<sequence>
+			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RegisterUserRequest">
+		<sequence>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+
+
+	<element name="SetSpeakerLocationResponse" type="boolean"></element>
+
+	<complexType name="RemoveUserRequest">
+		<sequence>
+			<element name="User" type="types:GeneralDevice"></element>
+		</sequence>
+	</complexType>
+
+
+	<element name="RemoveUserRequest" type="tns:RemoveUserRequest"></element>
+
+    <element name="ErrorMessage" type="string"></element>
+</schema>

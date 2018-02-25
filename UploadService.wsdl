@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/UploadService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UploadService"
+	xmlns:types="http://www.example.org/UploadServiceElements/"
+	targetNamespace="http://www.example.org/UploadService/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/UploadService/">
+			<xsd:import namespace="http://www.example.org/UploadServiceElements/"
+				schemaLocation="schemas/type-definitions/UploadServiceElements.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="UploadSongRequest">
+		<wsdl:part name="Request" element="types:UploadSongRequest" />
+	</wsdl:message>
+	<wsdl:message name="DeleteSongRequest">
+		<wsdl:part name="Request" element="types:DeleteSongRequest" />
+	</wsdl:message>
+	<wsdl:message name="IsSongLoadedRequest">
+		<wsdl:part name="Request" element="types:IsSongLoadedRequest" />
+	</wsdl:message>
+	<wsdl:message name="IsSongLoadedResponse">
+		<wsdl:part name="Response" element="types:IsSongLoadedResponse" />
+	</wsdl:message>
+	<wsdl:message name="ErrorMessage">
+		<wsdl:part name="ErrorMessage" element="types:ErrorMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="UploadService">
+		<wsdl:operation name="UploadSong">
+			<wsdl:input message="tns:UploadSongRequest" />
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSong">
+			<wsdl:input message="tns:DeleteSongRequest" />
+		</wsdl:operation>
+		<wsdl:operation name="IsSongLoaded">
+			<wsdl:input message="tns:IsSongLoadedRequest" />
+			<wsdl:output message="tns:IsSongLoadedResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="UploadServiceSOAP" type="tns:UploadService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="UploadSong">
+			<soap:operation soapAction="http://www.example.org/UploadService/UploadSong" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSong">
+			<soap:operation soapAction="http://www.example.org/UploadService/DeleteSong" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="IsSongLoaded">
+			<soap:operation soapAction="http://www.example.org/UploadService/IsSongLoaded" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UploadService">
+		<wsdl:port binding="tns:UploadServiceSOAP" name="UploadServiceSOAP">
+			<soap:address
+				location="http://localhost:8080/DistributedSoundScape/services/UploadService/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

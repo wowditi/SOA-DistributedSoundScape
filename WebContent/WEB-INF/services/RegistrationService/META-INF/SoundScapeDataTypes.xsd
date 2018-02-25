@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/SoundScapeDataTypes/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.example.org/SoundScapeDataTypes/">
+    <simpleType name="SoundscapeId">
+        <restriction base="unsignedInt"/>
+    </simpleType>
+    <simpleType name="Port">
+        <restriction base="unsignedShort"/>
+    </simpleType>
+    <simpleType name="IPv4Address">
+        <annotation>
+            <documentation>IPv4 address in dot-decimal notation. Equivalent to [0-255].[0-255].[0-255].[0-255]</documentation>
+        </annotation>
+        <restriction base="string">
+            <pattern value="((1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Location">
+        <sequence>
+            <element name="x" type="short"/>
+            <element name="y" type="short"/>
+            <element name="z" type="short"/>
+        </sequence>
+    </complexType>
+    <complexType name="GeneralDevice">
+        <sequence>
+            <element name="IpAddress" type="tns:IPv4Address"/>
+            <element name="Port" type="tns:Port"/>
+            <element name="SoundScapeId" type="tns:SoundscapeId"/>
+        </sequence>
+    </complexType>
+    <complexType name="SpeakerDevice">
+        <sequence>
+            <element name="GeneralDevice" type="tns:GeneralDevice"/>
+            <element name="Location" type="tns:Location"/>
+        </sequence>
+    </complexType>
+    <complexType name="SpeakerDeviceArray">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="SpeakerDevice" type="tns:SpeakerDevice"/>
+        </sequence>
+    </complexType>
+    <complexType name="Link">
+        <sequence>
+            <element name="Type" type="tns:LinkType"/>
+            <element name="Address" type="string"/>
+        </sequence>
+    </complexType>
+    <simpleType name="LinkType">
+        <restriction base="string">
+            <enumeration value="ftp"/>
+            <enumeration value="http"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="ChannelNumber">
+        <restriction base="unsignedShort"/>
+    </simpleType>
+    <simpleType name="VolumeLevel">
+        <restriction base="double">
+            <minInclusive value="0"/>
+        </restriction>
+    </simpleType>
+    <complexType name="ChannelLayout">
+        <sequence>
+            <element name="ChannelNumber" type="tns:ChannelNumber"/>
+            <element name="Location" type="tns:Location"/>
+            <element name="VolumeLevel" type="tns:VolumeLevel"/>
+        </sequence>
+    </complexType>
+    <complexType name="SoundScapeSourceLayout">
+        <sequence>
+            <element maxOccurs="unbounded" name="ChannelLayouts" type="tns:ChannelLayout"/>
+        </sequence>
+    </complexType>
+    <simpleType name="PlaybackCommand">
+        <restriction base="string"/>
+    </simpleType>
+    <complexType name="ASyncResponse">
+        <choice>
+            <element name="Successfull" type="boolean"/>
+            <element name="ErrorMessage" type="string"/>
+        </choice>
+    </complexType>
+</schema>
