@@ -3,32 +3,11 @@
 	<import schemaLocation="SoundScapeDataTypes.xsd"
 		namespace="http://www.example.org/SoundScapeDataTypes/"></import>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<element name="UploadSongRequest" type="tns:UploadSongRequest"></element>
 	
-
 	<element name="DeleteSongRequest" type="tns:DeleteSongRequest"></element>
 	
-
-	<element name="IsSongLoadedRequest"
-		type="tns:IsSongLoadedRequest">
-	</element>
-	
+	<element name="IsSongLoadedRequest"	type="tns:IsSongLoadedRequest">	</element>
 
 	<element name="IsSongLoadedResponse" type="boolean"></element>
 

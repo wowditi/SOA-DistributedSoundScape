@@ -48,9 +48,6 @@
 		</sequence>
 	</complexType>
 
-
-
-
 	<complexType name="Link">
 		<sequence>
 			<element name="Type" type="tns:LinkType"></element>
@@ -64,8 +61,6 @@
     		<enumeration value="http"></enumeration>
     	</restriction>
     </simpleType>
-
-
 
     <simpleType name="ChannelNumber">
     	<restriction base="unsignedShort"></restriction>

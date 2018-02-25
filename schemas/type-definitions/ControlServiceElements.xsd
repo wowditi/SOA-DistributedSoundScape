@@ -2,35 +2,7 @@
 <schema targetNamespace="http://www.example.org/ControlServiceElements/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/ControlServiceElements/" xmlns:types="http://www.example.org/SoundScapeDataTypes/">
 	<import schemaLocation="SoundScapeDataTypes.xsd"
 		namespace="http://www.example.org/SoundScapeDataTypes/"></import>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-
-	
-
-
-
-
-
-
-
+		
 	<element name="SetSoundScapeSourceLayoutRequest"
 		type="tns:SetSoundScapeSourceLayoutRequest">
 	</element>
