@@ -12,15 +12,24 @@
 			<element name="SoundScapeSourceLayout"
 				type="types:SoundScapeSourceLayout">
 			</element>
-			<element name="User" type="types:GeneralDevice"></element>
+			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
 		</sequence>
 	</complexType>
 
 	<element name="SetSoundScapeSourceLayoutResponse" type="boolean"></element>
 
-    <element name="ProcessPlaybackCommandRequest" type="types:PlaybackCommand"></element>
+	<element name="ProcessPlaybackCommandRequest"
+		type="tns:ProcessPlaybackCommandRequest">
+	</element>
 
-    <element name="ProcessPlaybackCommandResponse" type="boolean"></element>
+	<element name="ProcessPlaybackCommandResponse" type="boolean"></element>
 
     <element name="ErrorMessage" type="string"></element>
+
+    <complexType name="ProcessPlaybackCommandRequest">
+    	<sequence>
+    		<element name="Command" type="types:PlaybackCommand"></element>
+    		<element name="Speakers" type="types:SpeakerDeviceArray"></element>
+    	</sequence>
+    </complexType>
 </schema>

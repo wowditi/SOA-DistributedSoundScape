@@ -18,21 +18,21 @@
 	<complexType name="DeleteSongRequest">
 		<sequence>
 			<element name="Link" type="types:Link"></element>
-			<element name="User" type="types:GeneralDevice"></element>
+			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="IsSongLoadedRequest">
 		<sequence>
 			<element name="Link" type="types:Link"></element>
-			<element name="User" type="types:GeneralDevice"></element>
+			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="UploadSongRequest">
 		<sequence>
 			<element name="Link" type="types:Link"></element>
-			<element name="User" type="types:GeneralDevice"></element>
+			<element name="User" type="types:SpeakerDeviceArray"></element>
 		</sequence>
 	</complexType>
 
