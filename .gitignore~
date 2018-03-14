@@ -45,8 +45,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-# webapps settings
-WebContent/
 
 # OS
 .DS_Store
