@@ -56,8 +56,16 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 		addSpeakerStatement.setShort(3, speaker.getLocation().getX());
 		addSpeakerStatement.setShort(4, speaker.getLocation().getY());
 		addSpeakerStatement.setShort(5, speaker.getLocation().getZ());
+		addSpeakerStatement.executeUpdate(); 
+		PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
+		createSoundScape.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
+		createSoundScape.executeUpdate();
+		PreparedStatement createLink = db.prepareStatement("insert into soundScapeToSpeakers (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
+		createLink.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
+		createLink.setLong(2, ipv4);
+		createLink.setInt(3, speaker.getGeneralDevice().getPort().getPort().intValue());	
+		createLink.executeUpdate();
 		AddSpeakerResponse response = new AddSpeakerResponse();
-		addSpeakerStatement.execute(); 
 		response.setAddSpeakerResponse(true);
 		return response;
 	}
@@ -88,9 +96,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 
 	public org.example.www.registrationserviceelements.GetSpeakersResponseE getSpeakers(
 			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest4) throws ErrorMessage {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException(
-				"Please implement " + this.getClass().getName() + "#getSpeakers");
+		return null;
 	}
 
 	/**
