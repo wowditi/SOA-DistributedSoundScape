@@ -7,9 +7,6 @@
  */
 package org.example.www.registrationservice.server;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,9 +15,9 @@ import org.example.www.database.MariaDB;
 import org.example.www.registrationserviceelements.AddSpeakerResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponseE;
+import org.example.www.registrationserviceelements.RegisterUserResponse;
 import org.example.www.registrationserviceelements.SetSpeakerLocationResponse;
 import org.example.www.soundscapedatatypes.GeneralDevice;
-import org.example.www.soundscapedatatypes.IPv4Address;
 import org.example.www.soundscapedatatypes.Location;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
 import org.example.www.soundscapedatatypes.SpeakerDeviceArray;
@@ -177,10 +174,37 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	 */
 
 	public org.example.www.registrationserviceelements.RegisterUserResponse registerUser(
-			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest6) throws ErrorMessage {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException(
-				"Please implement " + this.getClass().getName() + "#registerUser");
+			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest6) throws RuntimeException, SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			GeneralDevice user = registerUserRequest6.getRegisterUserRequest().getUser();
+			String ipv4 = user.getIpAddress().getIPv4Address();
+			String statement = "INSERT INTO Users (ipAddress, port)";
+			statement += "VALUES (?, ?)";
+			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
+			addSpeakerStatement.setString(1, ipv4);
+			addSpeakerStatement.setInt(2, user.getPort().getPort().intValue());
+			addSpeakerStatement.executeUpdate(); 
+			PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
+			createSoundScape.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
+			createSoundScape.executeUpdate();
+			PreparedStatement createLink = db.prepareStatement("insert into userToSoundScapes (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
+			createLink.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
+			createLink.setString(2, ipv4);
+			createLink.setInt(3, user.getPort().getPort().intValue());	
+			createLink.executeUpdate();
+			RegisterUserResponse response = new RegisterUserResponse();
+			response.setRegisterUserResponse(true);
+			return response;
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 	/**

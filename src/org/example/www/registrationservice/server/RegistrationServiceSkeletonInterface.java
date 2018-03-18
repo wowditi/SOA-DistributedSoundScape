@@ -62,10 +62,12 @@ public interface RegistrationServiceSkeletonInterface {
 	 * @param registerUserRequest
 	 * @throws ErrorMessage
 	 *             :
+	 * @throws SQLException 
+	 * @throws RuntimeException 
 	 */
 
 	public org.example.www.registrationserviceelements.RegisterUserResponse registerUser(
-			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest) throws ErrorMessage;
+			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest) throws ErrorMessage, RuntimeException, SQLException;
 
 	/**
 	 * Auto generated method signature
