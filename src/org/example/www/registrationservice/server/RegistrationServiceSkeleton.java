@@ -58,14 +58,17 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			addSpeakerStatement.setShort(4, speaker.getLocation().getY());
 			addSpeakerStatement.setShort(5, speaker.getLocation().getZ());
 			addSpeakerStatement.executeUpdate(); 
+			addSpeakerStatement.close();
 			PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
 			createSoundScape.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
 			createSoundScape.executeUpdate();
+			createSoundScape.close();
 			PreparedStatement createLink = db.prepareStatement("insert into soundScapeToSpeakers (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
 			createLink.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
 			createLink.setString(2, ipv4);
 			createLink.setInt(3, speaker.getGeneralDevice().getPort().getPort().intValue());	
 			createLink.executeUpdate();
+			createLink.close();
 			AddSpeakerResponse response = new AddSpeakerResponse();
 			response.setAddSpeakerResponse(true);
 			return response;
@@ -109,8 +112,11 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			SetSpeakerLocationResponse response = new SetSpeakerLocationResponse();
 			if (setLocationStatement.executeUpdate() > 0)
 				response.setSetSpeakerLocationResponse(true);
-			else
+			else {
+				setLocationStatement.close();
 				throw new RuntimeException("The given speaker does not exist.");
+			}
+			setLocationStatement.close();
 			return response;
 		} finally {
 			db.cleanUp();
@@ -149,6 +155,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			innerResponse.setSpeakers(speakerArray);
 			response.setGetSpeakersResponse(innerResponse);
 			if (!getSpeakersStatement.execute()) {
+				getSpeakersStatement.close();
 				return response;
 			}
 			ResultSet speakers = getSpeakersStatement.getResultSet();
@@ -160,6 +167,8 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 				short z = speakers.getShort(5);
 				speakerArray.addSpeakerDevice(new SpeakerDevice(ipAddress, port, soundScapeId, x, y, z));
 			}			
+			getSpeakersStatement.close();
+			speakers.close();
 			return response;
 		} finally {
 			db.cleanUp();
@@ -192,14 +201,17 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			addSpeakerStatement.setString(1, ipv4);
 			addSpeakerStatement.setInt(2, user.getPort().getPort().intValue());
 			addSpeakerStatement.executeUpdate(); 
+			addSpeakerStatement.close();
 			PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
 			createSoundScape.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
 			createSoundScape.executeUpdate();
+			createSoundScape.close();
 			PreparedStatement createLink = db.prepareStatement("insert into userToSoundScapes (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
 			createLink.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
 			createLink.setString(2, ipv4);
 			createLink.setInt(3, user.getPort().getPort().intValue());	
 			createLink.executeUpdate();
+			createLink.close();
 			RegisterUserResponse response = new RegisterUserResponse();
 			response.setRegisterUserResponse(true);
 			return response;
@@ -232,8 +244,10 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			removeUserStatement.setString(1, ipv4);
 			removeUserStatement.setInt(2, user.getPort().getPort().intValue());
 			if (removeUserStatement.executeUpdate() == 0) {
+				removeUserStatement.close();
 				throw new RuntimeException("User does not exist.");
 			}
+			removeUserStatement.close();
 		} finally {
 			db.cleanUp();
 		}
@@ -267,8 +281,10 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			removeSpeakerStatement.setString(1, ipv4);
 			removeSpeakerStatement.setInt(2, speaker.getPort().getPort().intValue());
 			if (removeSpeakerStatement.executeUpdate() == 0) {
+				removeSpeakerStatement.close();
 				throw new RuntimeException("Speaker does not exist.");
 			}
+			removeSpeakerStatement.close();
 			RemoveSpeakerResponse response = new RemoveSpeakerResponse();
 			response.setRemoveSpeakerResponse(true);
 			return response;
