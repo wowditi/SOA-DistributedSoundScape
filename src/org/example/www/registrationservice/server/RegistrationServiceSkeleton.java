@@ -40,34 +40,38 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
 		}
-		SpeakerDevice speaker = addSpeakerRequest0.getAddSpeakerRequest().getSpeaker();
-		long ipv4;
 		try {
-			InetAddress i= InetAddress.getByName(speaker.getGeneralDevice().getIpAddress().getIPv4Address());
-			ipv4 = ByteBuffer.wrap(i.getAddress()).getInt() & 0x00000000ffffffffL;
-		} catch (UnknownHostException e) {
-			throw new RuntimeException("Unable to process ip-address: "+ e);
+			SpeakerDevice speaker = addSpeakerRequest0.getAddSpeakerRequest().getSpeaker();
+			long ipv4;
+			try {
+				InetAddress i= InetAddress.getByName(speaker.getGeneralDevice().getIpAddress().getIPv4Address());
+				ipv4 = ByteBuffer.wrap(i.getAddress()).getInt() & 0x00000000ffffffffL;
+			} catch (UnknownHostException e) {
+				throw new RuntimeException("Unable to process ip-address: "+ e);
+			}
+			String statement = "INSERT INTO Speakers (ipAddress, port, x, y, z)";
+			statement += "VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
+			addSpeakerStatement.setLong(1, ipv4);
+			addSpeakerStatement.setInt(2, speaker.getGeneralDevice().getPort().getPort().intValue());
+			addSpeakerStatement.setShort(3, speaker.getLocation().getX());
+			addSpeakerStatement.setShort(4, speaker.getLocation().getY());
+			addSpeakerStatement.setShort(5, speaker.getLocation().getZ());
+			addSpeakerStatement.executeUpdate(); 
+			PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
+			createSoundScape.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
+			createSoundScape.executeUpdate();
+			PreparedStatement createLink = db.prepareStatement("insert into soundScapeToSpeakers (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
+			createLink.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
+			createLink.setLong(2, ipv4);
+			createLink.setInt(3, speaker.getGeneralDevice().getPort().getPort().intValue());	
+			createLink.executeUpdate();
+			AddSpeakerResponse response = new AddSpeakerResponse();
+			response.setAddSpeakerResponse(true);
+			return response;
+		} finally {
+			db.cleanUp();
 		}
-		String statement = "INSERT INTO Speakers (ipAddress, port, x, y, z)";
-		statement += "VALUES (?, ?, ?, ?, ?)";
-		PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
-		addSpeakerStatement.setLong(1, ipv4);
-		addSpeakerStatement.setInt(2, speaker.getGeneralDevice().getPort().getPort().intValue());
-		addSpeakerStatement.setShort(3, speaker.getLocation().getX());
-		addSpeakerStatement.setShort(4, speaker.getLocation().getY());
-		addSpeakerStatement.setShort(5, speaker.getLocation().getZ());
-		addSpeakerStatement.executeUpdate(); 
-		PreparedStatement createSoundScape = db .prepareStatement("INSERT IGNORE INTO soundScapes (soundScapeId) VALUES(?)");
-		createSoundScape.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
-		createSoundScape.executeUpdate();
-		PreparedStatement createLink = db.prepareStatement("insert into soundScapeToSpeakers (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
-		createLink.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
-		createLink.setLong(2, ipv4);
-		createLink.setInt(3, speaker.getGeneralDevice().getPort().getPort().intValue());	
-		createLink.executeUpdate();
-		AddSpeakerResponse response = new AddSpeakerResponse();
-		response.setAddSpeakerResponse(true);
-		return response;
 	}
 
 	/**
