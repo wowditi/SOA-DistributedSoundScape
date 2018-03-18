@@ -212,10 +212,30 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	 * 
 	 * @param removeUserRequest8
 	 * @return
+	 * @throws SQLException 
 	 */
 
-	public void removeUser(org.example.www.registrationserviceelements.RemoveUserRequestE removeUserRequest8) {
-		// TODO : fill this with the necessary business logic
+	public void removeUser(org.example.www.registrationserviceelements.RemoveUserRequestE removeUserRequest8) throws SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			GeneralDevice user = removeUserRequest8.getRemoveUserRequest().getUser();
+			String ipv4 = user.getIpAddress().getIPv4Address();
+			String statement = "DELETE FROM Users where ipAddress = ? and port = ?";
+			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
+			addSpeakerStatement.setString(1, ipv4);
+			addSpeakerStatement.setInt(2, user.getPort().getPort().intValue());
+			if (addSpeakerStatement.executeUpdate() == 0) {
+				throw new RuntimeException("User does not exist.");
+			}
+		} finally {
+			db.cleanUp();
+		}
 
 	}
 

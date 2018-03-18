@@ -73,9 +73,10 @@ public interface RegistrationServiceSkeletonInterface {
 	 * Auto generated method signature
 	 * 
 	 * @param removeUserRequest
+	 * @throws SQLException 
 	 */
 
-	public void removeUser(org.example.www.registrationserviceelements.RemoveUserRequestE removeUserRequest);
+	public void removeUser(org.example.www.registrationserviceelements.RemoveUserRequestE removeUserRequest) throws SQLException;
 
 	/**
 	 * Auto generated method signature
