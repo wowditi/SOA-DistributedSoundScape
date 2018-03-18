@@ -37,7 +37,8 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 		try {
 			db = new MariaDB();
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to create a connection to the database", e);
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
 		}
 		SpeakerDevice speaker = addSpeakerRequest0.getAddSpeakerRequest().getSpeaker();
 		long ipv4;
@@ -45,7 +46,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			InetAddress i= InetAddress.getByName(speaker.getGeneralDevice().getIpAddress().getIPv4Address());
 			ipv4 = ByteBuffer.wrap(i.getAddress()).getInt() & 0x00000000ffffffffL;
 		} catch (UnknownHostException e) {
-			throw new RuntimeException("Unable to process ip-address", e);
+			throw new RuntimeException("Unable to process ip-address: "+ e);
 		}
 		String statement = "INSERT INTO Speakers (ipAddress, port, x, y, z)";
 		statement += "VALUES (?, ?, ?, ?, ?)";
@@ -56,10 +57,8 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 		addSpeakerStatement.setShort(4, speaker.getLocation().getY());
 		addSpeakerStatement.setShort(5, speaker.getLocation().getZ());
 		AddSpeakerResponse response = new AddSpeakerResponse();
-		if (addSpeakerStatement.execute()) 
-			response.setAddSpeakerResponse(true);
-		else
-			response.setAddSpeakerResponse(false);
+		addSpeakerStatement.execute(); 
+		response.setAddSpeakerResponse(true);
 		return response;
 	}
 

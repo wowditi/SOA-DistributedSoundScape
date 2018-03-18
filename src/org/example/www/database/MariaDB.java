@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class MariaDB {
 	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    static final String DB_URL = "jdbc:mariadb://mariadb/DistributedSoundScape";
+    static final String DB_URL = "jdbc:mariadb://mariadb:3306/DistributedSoundScape";
     static final String USER = "root";
     static final String PASS = "";
     
