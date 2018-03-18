@@ -23,19 +23,9 @@
               
                   if (
                   "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
-                  "GetSpeakersRequest".equals(typeName)){
+                  "RemoveSpeakerRequest".equals(typeName)){
                    
-                            return  org.example.www.registrationserviceelements.GetSpeakersRequest.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
-                  "SetSpeakerLocationRequest".equals(typeName)){
-                   
-                            return  org.example.www.registrationserviceelements.SetSpeakerLocationRequest.Factory.parse(reader);
+                            return  org.example.www.registrationserviceelements.RemoveSpeakerRequest.Factory.parse(reader);
                         
 
                   }
@@ -46,16 +36,6 @@
                   "GeneralDevice".equals(typeName)){
                    
                             return  org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
-                  "GetSpeakersResponse".equals(typeName)){
-                   
-                            return  org.example.www.registrationserviceelements.GetSpeakersResponse.Factory.parse(reader);
                         
 
                   }
@@ -83,16 +63,6 @@
               
                   if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
-                  "IPv4Address".equals(typeName)){
-                   
-                            return  org.example.www.soundscapedatatypes.IPv4Address.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
                   "SpeakerDeviceArray".equals(typeName)){
                    
                             return  org.example.www.soundscapedatatypes.SpeakerDeviceArray.Factory.parse(reader);
@@ -106,6 +76,66 @@
                   "RegisterUserRequest".equals(typeName)){
                    
                             return  org.example.www.registrationserviceelements.RegisterUserRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
+                  "RemoveUserRequest".equals(typeName)){
+                   
+                            return  org.example.www.registrationserviceelements.RemoveUserRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
+                  "GetSpeakersRequest".equals(typeName)){
+                   
+                            return  org.example.www.registrationserviceelements.GetSpeakersRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
+                  "SetSpeakerLocationRequest".equals(typeName)){
+                   
+                            return  org.example.www.registrationserviceelements.SetSpeakerLocationRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
+                  "GetSpeakersResponse".equals(typeName)){
+                   
+                            return  org.example.www.registrationserviceelements.GetSpeakersResponse.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
+                  "AddSpeakerRequest".equals(typeName)){
+                   
+                            return  org.example.www.registrationserviceelements.AddSpeakerRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
+                  "IPv4Address".equals(typeName)){
+                   
+                            return  org.example.www.soundscapedatatypes.IPv4Address.Factory.parse(reader);
                         
 
                   }
@@ -126,16 +156,6 @@
                   "SoundscapeId".equals(typeName)){
                    
                             return  org.example.www.soundscapedatatypes.SoundscapeId.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://www.example.org/RegistrationServiceElements/".equals(namespaceURI) &&
-                  "RemoveUserRequest".equals(typeName)){
-                   
-                            return  org.example.www.registrationserviceelements.RemoveUserRequest.Factory.parse(reader);
                         
 
                   }

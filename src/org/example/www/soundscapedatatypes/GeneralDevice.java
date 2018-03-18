@@ -456,7 +456,7 @@
                             if (!"GeneralDevice".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (GeneralDevice)org.example.www.uploadservice.ExtensionMapper.getTypeObject(
+                                return (GeneralDevice)org.example.www.registrationservice.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         

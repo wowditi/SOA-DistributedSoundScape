@@ -37,61 +37,99 @@
 
         
 
+            if("addSpeaker".equals(methodName)){
+                
+                org.example.www.registrationserviceelements.AddSpeakerResponse addSpeakerResponse35 = null;
+	                        org.example.www.registrationserviceelements.AddSpeakerRequestE wrappedParam =
+                                                             (org.example.www.registrationserviceelements.AddSpeakerRequestE)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    org.example.www.registrationserviceelements.AddSpeakerRequestE.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               addSpeakerResponse35 =
+                                                   
+                                                   
+                                                         skel.addSpeaker(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), addSpeakerResponse35, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
+                                                    "addSpeaker"));
+                                    } else 
+
             if("setSpeakerLocation".equals(methodName)){
                 
-                org.example.www.registrationserviceelements.SetSpeakerLocationResponse setSpeakerLocationResponse23 = null;
+                org.example.www.registrationserviceelements.SetSpeakerLocationResponse setSpeakerLocationResponse37 = null;
 	                        org.example.www.registrationserviceelements.SetSpeakerLocationRequestE wrappedParam =
                                                              (org.example.www.registrationserviceelements.SetSpeakerLocationRequestE)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.registrationserviceelements.SetSpeakerLocationRequestE.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setSpeakerLocationResponse23 =
+                                               setSpeakerLocationResponse37 =
                                                    
                                                    
                                                          skel.setSpeakerLocation(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setSpeakerLocationResponse23, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setSpeakerLocationResponse37, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
                                                     "setSpeakerLocation"));
                                     } else 
 
             if("getSpeakers".equals(methodName)){
                 
-                org.example.www.registrationserviceelements.GetSpeakersResponseE getSpeakersResponse25 = null;
+                org.example.www.registrationserviceelements.GetSpeakersResponseE getSpeakersResponse39 = null;
 	                        org.example.www.registrationserviceelements.GetSpeakersRequestE wrappedParam =
                                                              (org.example.www.registrationserviceelements.GetSpeakersRequestE)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.registrationserviceelements.GetSpeakersRequestE.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getSpeakersResponse25 =
+                                               getSpeakersResponse39 =
                                                    
                                                    
                                                          skel.getSpeakers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getSpeakersResponse25, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getSpeakersResponse39, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
                                                     "getSpeakers"));
                                     } else 
 
             if("registerUser".equals(methodName)){
                 
-                org.example.www.registrationserviceelements.RegisterUserResponse registerUserResponse27 = null;
+                org.example.www.registrationserviceelements.RegisterUserResponse registerUserResponse41 = null;
 	                        org.example.www.registrationserviceelements.RegisterUserRequestE wrappedParam =
                                                              (org.example.www.registrationserviceelements.RegisterUserRequestE)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.registrationserviceelements.RegisterUserRequestE.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               registerUserResponse27 =
+                                               registerUserResponse41 =
                                                    
                                                    
                                                          skel.registerUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), registerUserResponse27, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), registerUserResponse41, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
                                                     "registerUser"));
+                                    } else 
+
+            if("removeSpeaker".equals(methodName)){
+                
+                org.example.www.registrationserviceelements.RemoveSpeakerResponse removeSpeakerResponse43 = null;
+	                        org.example.www.registrationserviceelements.RemoveSpeakerRequestE wrappedParam =
+                                                             (org.example.www.registrationserviceelements.RemoveSpeakerRequestE)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    org.example.www.registrationserviceelements.RemoveSpeakerRequestE.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               removeSpeakerResponse43 =
+                                                   
+                                                   
+                                                         skel.removeSpeaker(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), removeSpeakerResponse43, false, new javax.xml.namespace.QName("http://www.example.org/RegistrationService/",
+                                                    "removeSpeaker"));
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -116,6 +154,48 @@
         }
         
         //
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.AddSpeakerRequestE param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerRequestE.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.AddSpeakerResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.ErrorMessage param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.ErrorMessage.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.SetSpeakerLocationRequestE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -136,20 +216,6 @@
             
                         try{
                              return param.getOMElement(org.example.www.registrationserviceelements.SetSpeakerLocationResponse.MY_QNAME,
-                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
-                        } catch(org.apache.axis2.databinding.ADBException e){
-                            throw org.apache.axis2.AxisFault.makeFault(e);
-                        }
-                    
-
-            }
-        
-            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.ErrorMessage param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault {
-
-            
-                        try{
-                             return param.getOMElement(org.example.www.registrationserviceelements.ErrorMessage.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -228,6 +294,53 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.RemoveSpeakerRequestE param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerRequestE.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.RemoveSpeakerResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.AddSpeakerResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.registrationserviceelements.AddSpeakerResponse wrapAddSpeaker(){
+                                org.example.www.registrationserviceelements.AddSpeakerResponse wrappedElement = new org.example.www.registrationserviceelements.AddSpeakerResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.SetSpeakerLocationResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -285,6 +398,25 @@
                                 return wrappedElement;
                          }
                     
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.RemoveSpeakerResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.registrationserviceelements.RemoveSpeakerResponse wrapRemoveSpeaker(){
+                                org.example.www.registrationserviceelements.RemoveSpeakerResponse wrappedElement = new org.example.www.registrationserviceelements.RemoveSpeakerResponse();
+                                return wrappedElement;
+                         }
+                    
 
 
         /**
@@ -302,6 +434,20 @@
 
         try {
         
+                if (org.example.www.registrationserviceelements.AddSpeakerRequestE.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.AddSpeakerRequestE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.AddSpeakerResponse.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.AddSpeakerResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
                 if (org.example.www.registrationserviceelements.ErrorMessage.class.equals(type)){
                 
                         return org.example.www.registrationserviceelements.ErrorMessage.Factory.parse(param.getXMLStreamReaderWithoutCaching());
@@ -333,6 +479,20 @@
                 if (org.example.www.registrationserviceelements.RegisterUserResponse.class.equals(type)){
                 
                         return org.example.www.registrationserviceelements.RegisterUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.RemoveSpeakerRequestE.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.RemoveSpeakerRequestE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.RemoveSpeakerResponse.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.RemoveSpeakerResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

@@ -1,6 +1,6 @@
 
 /**
- * RemoveUserRequest.java
+ * RemoveSpeakerRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
@@ -11,44 +11,44 @@
             
 
             /**
-            *  RemoveUserRequest bean class
+            *  RemoveSpeakerRequest bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class RemoveUserRequest
+        public  class RemoveSpeakerRequest
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
-                name = RemoveUserRequest
+                name = RemoveSpeakerRequest
                 Namespace URI = http://www.example.org/RegistrationServiceElements/
                 Namespace Prefix = ns2
                 */
             
 
                         /**
-                        * field for User
+                        * field for Speaker
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.GeneralDevice localUser ;
+                                    protected org.example.www.soundscapedatatypes.GeneralDevice localSpeaker ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return org.example.www.soundscapedatatypes.GeneralDevice
                            */
-                           public  org.example.www.soundscapedatatypes.GeneralDevice getUser(){
-                               return localUser;
+                           public  org.example.www.soundscapedatatypes.GeneralDevice getSpeaker(){
+                               return localSpeaker;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param User
+                               * @param param Speaker
                                */
-                               public void setUser(org.example.www.soundscapedatatypes.GeneralDevice param){
+                               public void setSpeaker(org.example.www.soundscapedatatypes.GeneralDevice param){
                             
-                                            this.localUser=param;
+                                            this.localSpeaker=param;
                                        
 
                                }
@@ -102,21 +102,21 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/RegistrationServiceElements/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":RemoveUserRequest",
+                           namespacePrefix+":RemoveSpeakerRequest",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "RemoveUserRequest",
+                           "RemoveSpeakerRequest",
                            xmlWriter);
                    }
 
                
                    }
                
-                                            if (localUser==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
+                                            if (localSpeaker==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("Speaker cannot be null!!");
                                             }
-                                           localUser.serialize(new javax.xml.namespace.QName("","User"),
+                                           localSpeaker.serialize(new javax.xml.namespace.QName("","Speaker"),
                                                xmlWriter);
                                         
                     xmlWriter.writeEndElement();
@@ -305,13 +305,13 @@
 
                 
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "User"));
+                                                                      "Speaker"));
                             
                             
-                                    if (localUser==null){
-                                         throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
+                                    if (localSpeaker==null){
+                                         throw new org.apache.axis2.databinding.ADBException("Speaker cannot be null!!");
                                     }
-                                    elementList.add(localUser);
+                                    elementList.add(localSpeaker);
                                 
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -337,9 +337,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static RemoveUserRequest parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            RemoveUserRequest object =
-                new RemoveUserRequest();
+        public static RemoveSpeakerRequest parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            RemoveSpeakerRequest object =
+                new RemoveSpeakerRequest();
 
             int event;
             java.lang.String nillableValue = null;
@@ -363,10 +363,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"RemoveUserRequest".equals(type)){
+                            if (!"RemoveSpeakerRequest".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (RemoveUserRequest)org.example.www.registrationservice.ExtensionMapper.getTypeObject(
+                                return (RemoveSpeakerRequest)org.example.www.registrationservice.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -391,9 +391,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","User").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","Speaker").equals(reader.getName())){
                                 
-                                                object.setUser(org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader));
+                                                object.setSpeaker(org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader));
                                               
                                         reader.next();
                                     

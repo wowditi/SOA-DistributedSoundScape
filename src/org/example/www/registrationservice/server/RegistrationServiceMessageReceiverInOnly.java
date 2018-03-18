@@ -57,6 +57,48 @@
 
         
         //
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.AddSpeakerRequestE param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerRequestE.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.AddSpeakerResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.ErrorMessage param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.ErrorMessage.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.SetSpeakerLocationRequestE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -77,20 +119,6 @@
             
                         try{
                              return param.getOMElement(org.example.www.registrationserviceelements.SetSpeakerLocationResponse.MY_QNAME,
-                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
-                        } catch(org.apache.axis2.databinding.ADBException e){
-                            throw org.apache.axis2.AxisFault.makeFault(e);
-                        }
-                    
-
-            }
-        
-            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.ErrorMessage param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault {
-
-            
-                        try{
-                             return param.getOMElement(org.example.www.registrationserviceelements.ErrorMessage.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -169,6 +197,53 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.RemoveSpeakerRequestE param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerRequestE.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.registrationserviceelements.RemoveSpeakerResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.AddSpeakerResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.registrationserviceelements.AddSpeakerResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.registrationserviceelements.AddSpeakerResponse wrapAddSpeaker(){
+                                org.example.www.registrationserviceelements.AddSpeakerResponse wrappedElement = new org.example.www.registrationserviceelements.AddSpeakerResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.SetSpeakerLocationResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -226,6 +301,25 @@
                                 return wrappedElement;
                          }
                     
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.registrationserviceelements.RemoveSpeakerResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.registrationserviceelements.RemoveSpeakerResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.registrationserviceelements.RemoveSpeakerResponse wrapRemoveSpeaker(){
+                                org.example.www.registrationserviceelements.RemoveSpeakerResponse wrappedElement = new org.example.www.registrationserviceelements.RemoveSpeakerResponse();
+                                return wrappedElement;
+                         }
+                    
 
 
         /**
@@ -243,6 +337,20 @@
 
         try {
         
+                if (org.example.www.registrationserviceelements.AddSpeakerRequestE.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.AddSpeakerRequestE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.AddSpeakerResponse.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.AddSpeakerResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
                 if (org.example.www.registrationserviceelements.ErrorMessage.class.equals(type)){
                 
                         return org.example.www.registrationserviceelements.ErrorMessage.Factory.parse(param.getXMLStreamReaderWithoutCaching());
@@ -274,6 +382,20 @@
                 if (org.example.www.registrationserviceelements.RegisterUserResponse.class.equals(type)){
                 
                         return org.example.www.registrationserviceelements.RegisterUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.RemoveSpeakerRequestE.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.RemoveSpeakerRequestE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.registrationserviceelements.RemoveSpeakerResponse.class.equals(type)){
+                
+                        return org.example.www.registrationserviceelements.RemoveSpeakerResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

@@ -468,7 +468,7 @@
                             if (!"Location".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (Location)org.example.www.controlservice.ExtensionMapper.getTypeObject(
+                                return (Location)org.example.www.registrationservice.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         

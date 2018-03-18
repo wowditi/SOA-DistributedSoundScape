@@ -31,6 +31,18 @@
 	<wsdl:message name="RemoveUserRequest">
 		<wsdl:part name="RemoveUserRequest" element="types:RemoveUserRequest" />
 	</wsdl:message>
+	<wsdl:message name="AddSpeakerRequest">
+		<wsdl:part name="AddSpeakerRequest" element="types:AddSpeakerRequest" />
+	</wsdl:message>
+	<wsdl:message name="AddSpeakerResponse">
+		<wsdl:part name="AddSpeakerResponse" element="types:AddSpeakerResponse" />
+	</wsdl:message>
+	<wsdl:message name="RemoveSpeakerRequest">
+		<wsdl:part name="RemoveSpeakerRequest" element="types:RemoveSpeakerRequest" />
+	</wsdl:message>
+	<wsdl:message name="RemoveSpeakerResponse">
+		<wsdl:part name="RemoveSpeakerResponse" element="types:RemoveSpeakerResponse" />
+	</wsdl:message>
 	<wsdl:message name="ErrorMessage">
 		<wsdl:part name="ErrorMessage" element="types:ErrorMessage"/>
 	</wsdl:message>
@@ -52,6 +64,16 @@
 		</wsdl:operation>
 		<wsdl:operation name="RemoveUser">
 			<wsdl:input message="tns:RemoveUserRequest" />
+		</wsdl:operation>
+		<wsdl:operation name="AddSpeaker">
+			<wsdl:input message="tns:AddSpeakerRequest" />
+			<wsdl:output message="tns:AddSpeakerResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="RemoveSpeaker">
+			<wsdl:input message="tns:RemoveSpeakerRequest" />
+			<wsdl:output message="tns:RemoveSpeakerResponse" />
+			<wsdl:fault name="Error" message="tns:ErrorMessage" />
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="RegistrationServiceSOAP" type="tns:RegistrationService">
@@ -102,6 +124,32 @@
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="AddSpeaker">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/AddSpeaker" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveSpeaker">
+			<soap:operation
+				soapAction="http://www.example.org/RegistrationService/RemoveSpeaker" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Error">
+				<soap:fault name="Error" use="literal" />
+			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="RegistrationService">

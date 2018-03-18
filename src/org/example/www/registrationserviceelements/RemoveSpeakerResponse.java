@@ -1,6 +1,6 @@
 
 /**
- * RemoveUserRequest.java
+ * RemoveSpeakerResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
@@ -11,44 +11,45 @@
             
 
             /**
-            *  RemoveUserRequest bean class
+            *  RemoveSpeakerResponse bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class RemoveUserRequest
+        public  class RemoveSpeakerResponse
         implements org.apache.axis2.databinding.ADBBean{
-        /* This type was generated from the piece of schema that had
-                name = RemoveUserRequest
-                Namespace URI = http://www.example.org/RegistrationServiceElements/
-                Namespace Prefix = ns2
-                */
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.example.org/RegistrationServiceElements/",
+                "RemoveSpeakerResponse",
+                "ns2");
+
             
 
                         /**
-                        * field for User
+                        * field for RemoveSpeakerResponse
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.GeneralDevice localUser ;
+                                    protected boolean localRemoveSpeakerResponse ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return org.example.www.soundscapedatatypes.GeneralDevice
+                           * @return boolean
                            */
-                           public  org.example.www.soundscapedatatypes.GeneralDevice getUser(){
-                               return localUser;
+                           public  boolean getRemoveSpeakerResponse(){
+                               return localRemoveSpeakerResponse;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param User
+                               * @param param RemoveSpeakerResponse
                                */
-                               public void setUser(org.example.www.soundscapedatatypes.GeneralDevice param){
+                               public void setRemoveSpeakerResponse(boolean param){
                             
-                                            this.localUser=param;
+                                            this.localRemoveSpeakerResponse=param;
                                        
 
                                }
@@ -69,8 +70,8 @@
 
         
                org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName);
-               return factory.createOMElement(dataSource,parentQName);
+                       new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME);
+               return factory.createOMElement(dataSource,MY_QNAME);
             
         }
 
@@ -86,41 +87,37 @@
             throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
             
                 
-
-
-                java.lang.String prefix = null;
-                java.lang.String namespace = null;
+                //We can safely assume an element has only one type associated with it
                 
+                            java.lang.String namespace = "http://www.example.org/RegistrationServiceElements/";
+                            java.lang.String _localName = "RemoveSpeakerResponse";
+                        
+                            writeStartElement(null, namespace, _localName, xmlWriter);
 
-                    prefix = parentQName.getPrefix();
-                    namespace = parentQName.getNamespaceURI();
-                    writeStartElement(prefix, namespace, parentQName.getLocalPart(), xmlWriter);
-                
-                  if (serializeType){
-               
-
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/RegistrationServiceElements/");
-                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
-                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":RemoveUserRequest",
-                           xmlWriter);
-                   } else {
-                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "RemoveUserRequest",
-                           xmlWriter);
-                   }
-
-               
-                   }
-               
-                                            if (localUser==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
-                                            }
-                                           localUser.serialize(new javax.xml.namespace.QName("","User"),
-                                               xmlWriter);
-                                        
-                    xmlWriter.writeEndElement();
-               
+                            // add the type details if this is used in a simple type
+                               if (serializeType){
+                                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/RegistrationServiceElements/");
+                                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
+                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                                           namespacePrefix+":RemoveSpeakerResponse",
+                                           xmlWriter);
+                                   } else {
+                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                                           "RemoveSpeakerResponse",
+                                           xmlWriter);
+                                   }
+                               }
+                            
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("property value cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRemoveSpeakerResponse));
+                                               }
+                            
+                            xmlWriter.writeEndElement();
+                    
 
         }
 
@@ -300,23 +297,14 @@
 
 
         
-                 java.util.ArrayList elementList = new java.util.ArrayList();
-                 java.util.ArrayList attribList = new java.util.ArrayList();
-
                 
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "User"));
-                            
-                            
-                                    if (localUser==null){
-                                         throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
-                                    }
-                                    elementList.add(localUser);
-                                
-
-                return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
-            
-            
+                //We can safely assume an element has only one type associated with it
+                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
+                            new java.lang.Object[]{
+                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
+                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRemoveSpeakerResponse)
+                            },
+                            null);
 
         }
 
@@ -337,9 +325,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static RemoveUserRequest parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            RemoveUserRequest object =
-                new RemoveUserRequest();
+        public static RemoveSpeakerResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            RemoveSpeakerResponse object =
+                new RemoveSpeakerResponse();
 
             int event;
             java.lang.String nillableValue = null;
@@ -351,32 +339,6 @@
                     reader.next();
 
                 
-                if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","type")!=null){
-                  java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                        "type");
-                  if (fullTypeName!=null){
-                    java.lang.String nsPrefix = null;
-                    if (fullTypeName.indexOf(":") > -1){
-                        nsPrefix = fullTypeName.substring(0,fullTypeName.indexOf(":"));
-                    }
-                    nsPrefix = nsPrefix==null?"":nsPrefix;
-
-                    java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
-                    
-                            if (!"RemoveUserRequest".equals(type)){
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (RemoveUserRequest)org.example.www.registrationservice.ExtensionMapper.getTypeObject(
-                                     nsUri,type,reader);
-                              }
-                        
-
-                  }
-                
-
-                }
-
-                
 
                 
                 // Note all attributes that were handled. Used to differ normal attributes
@@ -384,33 +346,35 @@
                 java.util.Vector handledAttributes = new java.util.Vector();
                 
 
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement() ){
                 
-                    
-                    reader.next();
-                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/RegistrationServiceElements/","RemoveSpeakerResponse").equals(reader.getName())){
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","User").equals(reader.getName())){
-                                
-                                                object.setUser(org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader));
-                                              
-                                        reader.next();
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"RemoveSpeakerResponse" +"  cannot be null");
+                                    }
                                     
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setRemoveSpeakerResponse(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                            
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
-                            while (!reader.isStartElement() && !reader.isEndElement())
+                             else{
+                                        // A start element we are not expecting indicates an invalid parameter was passed
+                                        throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                             }
+                          
+                             } else {
                                 reader.next();
-                            
-                                if (reader.isStartElement())
-                                // A start element we are not expecting indicates a trailing invalid property
-                                throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                            
+                             }  
+                           }  // end of while loop
+                        
 
 
 

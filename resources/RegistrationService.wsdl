@@ -9,12 +9,28 @@
     <wsdl:part name="RegisterUserResponse" element="types:RegisterUserResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="RemoveSpeakerResponse">
+    <wsdl:part name="RemoveSpeakerResponse" element="types:RemoveSpeakerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddSpeakerResponse">
+    <wsdl:part name="AddSpeakerResponse" element="types:AddSpeakerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddSpeakerRequest">
+    <wsdl:part name="AddSpeakerRequest" element="types:AddSpeakerRequest">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetSpeakersRequest">
     <wsdl:part name="GetSpeakersRequest" element="types:GetSpeakersRequest">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="SetSpeakerLocationRequest">
     <wsdl:part name="SetSpeakerLocationRequest" element="types:SetSpeakerLocationRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveSpeakerRequest">
+    <wsdl:part name="RemoveSpeakerRequest" element="types:RemoveSpeakerRequest">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ErrorMessage">
@@ -66,6 +82,22 @@
       <wsdl:input message="tns:RemoveUserRequest">
     </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="AddSpeaker">
+      <wsdl:input message="tns:AddSpeakerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddSpeakerResponse">
+    </wsdl:output>
+      <wsdl:fault name="Error" message="tns:ErrorMessage">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSpeaker">
+      <wsdl:input message="tns:RemoveSpeakerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RemoveSpeakerResponse">
+    </wsdl:output>
+      <wsdl:fault name="Error" message="tns:ErrorMessage">
+    </wsdl:fault>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="RegistrationServiceSOAP" type="tns:RegistrationService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -110,6 +142,30 @@
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AddSpeaker">
+      <soap:operation soapAction="http://www.example.org/RegistrationService/AddSpeaker"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Error">
+        <soap:fault name="Error" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSpeaker">
+      <soap:operation soapAction="http://www.example.org/RegistrationService/RemoveSpeaker"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Error">
+        <soap:fault name="Error" use="literal"/>
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="RegistrationService">

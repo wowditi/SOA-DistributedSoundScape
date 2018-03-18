@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT) --><serviceGroup>
-    <service name="UploadCallbackService">
+    <service name="RegistrationService">
         <messageReceivers>
-            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.example.www.uploadcallbackservice.server.UploadCallbackServiceMessageReceiverInOnly"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.example.www.registrationservice.server.RegistrationServiceMessageReceiverInOnly"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.registrationservice.server.RegistrationServiceMessageReceiverInOut"/>
         </messageReceivers>
-        <parameter name="ServiceClass">org.example.www.uploadcallbackservice.server.UploadCallbackServiceSkeleton</parameter>
+        <parameter name="ServiceClass">org.example.www.registrationservice.server.RegistrationServiceSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
-        <operation name="DeleteSongCallback" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/UploadCallbackService/">
-            <actionMapping>http://www.example.org/UploadCallbackService/DeleteSong</actionMapping>
+        <operation name="AddSpeaker" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/AddSpeaker</actionMapping>
+            <outputActionMapping>http://www.example.org/RegistrationService/RegistrationService/AddSpeakerResponse</outputActionMapping>
+            <faultActionMapping faultName="Error">http://www.example.org/RegistrationService/RegistrationService/AddSpeaker/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage">http://www.example.org/RegistrationService/RegistrationService/AddSpeaker/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/RegistrationService/RegistrationService/AddSpeaker/Fault/Error</faultActionMapping>
         </operation>
-        <operation name="UploadSongCallback" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/UploadCallbackService/">
-            <actionMapping>http://www.example.org/UploadCallbackService/UploadSong</actionMapping>
+        <operation name="SetSpeakerLocation" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/SetSpeakerLocation</actionMapping>
+            <outputActionMapping>http://www.example.org/RegistrationService/RegistrationService/SetSpeakerLocationResponse</outputActionMapping>
+            <faultActionMapping faultName="Error">http://www.example.org/RegistrationService/RegistrationService/SetSpeakerLocation/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage">http://www.example.org/RegistrationService/RegistrationService/SetSpeakerLocation/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/RegistrationService/RegistrationService/SetSpeakerLocation/Fault/Error</faultActionMapping>
+        </operation>
+        <operation name="GetSpeakers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/GetSpeakers</actionMapping>
+            <outputActionMapping>http://www.example.org/RegistrationService/RegistrationService/GetSpeakersResponse</outputActionMapping>
+            <faultActionMapping faultName="Error">http://www.example.org/RegistrationService/RegistrationService/GetSpeakers/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage">http://www.example.org/RegistrationService/RegistrationService/GetSpeakers/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/RegistrationService/RegistrationService/GetSpeakers/Fault/Error</faultActionMapping>
+        </operation>
+        <operation name="RegisterUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/RegisterUser</actionMapping>
+            <outputActionMapping>http://www.example.org/RegistrationService/RegistrationService/RegisterUserResponse</outputActionMapping>
+            <faultActionMapping faultName="Error">http://www.example.org/RegistrationService/RegistrationService/RegisterUser/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage">http://www.example.org/RegistrationService/RegistrationService/RegisterUser/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/RegistrationService/RegistrationService/RegisterUser/Fault/Error</faultActionMapping>
+        </operation>
+        <operation name="RemoveUser" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/RemoveUser</actionMapping>
+        </operation>
+        <operation name="RemoveSpeaker" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/RegistrationService/">
+            <actionMapping>http://www.example.org/RegistrationService/RemoveSpeaker</actionMapping>
+            <outputActionMapping>http://www.example.org/RegistrationService/RegistrationService/RemoveSpeakerResponse</outputActionMapping>
+            <faultActionMapping faultName="Error">http://www.example.org/RegistrationService/RegistrationService/RemoveSpeaker/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage">http://www.example.org/RegistrationService/RegistrationService/RemoveSpeaker/Fault/Error</faultActionMapping>
+            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/RegistrationService/RegistrationService/RemoveSpeaker/Fault/Error</faultActionMapping>
         </operation>
     </service>
 </serviceGroup>

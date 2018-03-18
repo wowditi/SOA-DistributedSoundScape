@@ -32,7 +32,7 @@
 	<complexType name="UploadSongRequest">
 		<sequence>
 			<element name="Link" type="types:Link"></element>
-			<element name="User" type="types:SpeakerDeviceArray"></element>
+			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
 		</sequence>
 	</complexType>
 

@@ -10,7 +10,7 @@ package org.example.www.registrationservice.server;
 
 public class ErrorMessage extends java.lang.Exception{
 
-    private static final long serialVersionUID = 1519577417626L;
+    private static final long serialVersionUID = 1521371435955L;
     
     private org.example.www.registrationserviceelements.ErrorMessage faultMessage;
 

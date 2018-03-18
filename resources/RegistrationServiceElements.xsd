@@ -34,4 +34,18 @@
     </complexType>
     <element name="RemoveUserRequest" type="tns:RemoveUserRequest"/>
     <element name="ErrorMessage" type="string"/>
+    <element name="AddSpeakerRequest" type="tns:AddSpeakerRequest"/>
+    <element name="RemoveSpeakerRequest" type="tns:RemoveSpeakerRequest"/>
+    <complexType name="AddSpeakerRequest">
+        <sequence>
+            <element name="Speaker" type="types:SpeakerDevice"/>
+        </sequence>
+    </complexType>
+    <complexType name="RemoveSpeakerRequest">
+        <sequence>
+            <element name="Speaker" type="types:GeneralDevice"/>
+        </sequence>
+    </complexType>
+    <element name="AddSpeakerResponse" type="boolean"/>
+    <element name="RemoveSpeakerResponse" type="boolean"/>
 </schema>
