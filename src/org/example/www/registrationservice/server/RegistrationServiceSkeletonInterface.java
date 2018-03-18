@@ -84,9 +84,10 @@ public interface RegistrationServiceSkeletonInterface {
 	 * @param removeSpeakerRequest
 	 * @throws ErrorMessage
 	 *             :
+	 * @throws SQLException 
 	 */
 
 	public org.example.www.registrationserviceelements.RemoveSpeakerResponse removeSpeaker(
-			org.example.www.registrationserviceelements.RemoveSpeakerRequestE removeSpeakerRequest) throws ErrorMessage;
+			org.example.www.registrationserviceelements.RemoveSpeakerRequestE removeSpeakerRequest) throws ErrorMessage, SQLException;
 
 }

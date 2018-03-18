@@ -16,6 +16,7 @@ import org.example.www.registrationserviceelements.AddSpeakerResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponseE;
 import org.example.www.registrationserviceelements.RegisterUserResponse;
+import org.example.www.registrationserviceelements.RemoveSpeakerResponse;
 import org.example.www.registrationserviceelements.SetSpeakerLocationResponse;
 import org.example.www.soundscapedatatypes.GeneralDevice;
 import org.example.www.soundscapedatatypes.Location;
@@ -227,10 +228,10 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			GeneralDevice user = removeUserRequest8.getRemoveUserRequest().getUser();
 			String ipv4 = user.getIpAddress().getIPv4Address();
 			String statement = "DELETE FROM Users where ipAddress = ? and port = ?";
-			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
-			addSpeakerStatement.setString(1, ipv4);
-			addSpeakerStatement.setInt(2, user.getPort().getPort().intValue());
-			if (addSpeakerStatement.executeUpdate() == 0) {
+			PreparedStatement removeUserStatement = db.prepareStatement(statement);
+			removeUserStatement.setString(1, ipv4);
+			removeUserStatement.setInt(2, user.getPort().getPort().intValue());
+			if (removeUserStatement.executeUpdate() == 0) {
 				throw new RuntimeException("User does not exist.");
 			}
 		} finally {
@@ -245,14 +246,35 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	 * @param removeSpeakerRequest9
 	 * @return removeSpeakerResponse10
 	 * @throws ErrorMessage
+	 * @throws SQLException 
 	 */
 
 	public org.example.www.registrationserviceelements.RemoveSpeakerResponse removeSpeaker(
 			org.example.www.registrationserviceelements.RemoveSpeakerRequestE removeSpeakerRequest9)
-			throws ErrorMessage {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException(
-				"Please implement " + this.getClass().getName() + "#removeSpeaker");
+			throws ErrorMessage, SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			GeneralDevice speaker = removeSpeakerRequest9.getRemoveSpeakerRequest().getSpeaker();
+			String ipv4 = speaker.getIpAddress().getIPv4Address();
+			String statement = "DELETE FROM Speakers where ipAddress = ? and port = ?";
+			PreparedStatement removeSpeakerStatement = db.prepareStatement(statement);
+			removeSpeakerStatement.setString(1, ipv4);
+			removeSpeakerStatement.setInt(2, speaker.getPort().getPort().intValue());
+			if (removeSpeakerStatement.executeUpdate() == 0) {
+				throw new RuntimeException("Speaker does not exist.");
+			}
+			RemoveSpeakerResponse response = new RemoveSpeakerResponse();
+			response.setRemoveSpeakerResponse(true);
+			return response;
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 }
