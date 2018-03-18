@@ -27,6 +27,16 @@ import org.example.www.soundscapedatatypes.SpeakerDeviceArray;
  * RegistrationServiceSkeleton java skeleton for the axisService
  */
 public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonInterface {
+	
+	private final String database;
+	
+	public RegistrationServiceSkeleton() {
+		database = "DistributedSoundScape";
+	}
+	
+	public RegistrationServiceSkeleton(String database) {
+		this.database = database;
+	}
 
 	/**
 	 * Auto generated method signature
@@ -41,7 +51,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			org.example.www.registrationserviceelements.AddSpeakerRequestE addSpeakerRequest0) throws RuntimeException, SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
@@ -90,7 +100,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			throws RuntimeException, SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
@@ -136,7 +146,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest4) throws RuntimeException, SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
@@ -187,7 +197,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest6) throws RuntimeException, SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
@@ -231,7 +241,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	public void removeUser(org.example.www.registrationserviceelements.RemoveUserRequestE removeUserRequest8) throws SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
@@ -268,7 +278,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			throws ErrorMessage, SQLException {
 		MariaDB db;
 		try {
-			db = new MariaDB();
+			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
