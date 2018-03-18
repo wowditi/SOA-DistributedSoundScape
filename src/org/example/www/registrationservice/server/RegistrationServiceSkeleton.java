@@ -117,8 +117,15 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			Long soundScapeId = getSpeakersRequest4.getGetSpeakersRequest().getUser()
 					.getSoundScapeId().getSoundscapeId().longValue();
 			getSpeakersStatement.setLong(1, soundScapeId);
-			ResultSet speakers = getSpeakersStatement.executeQuery();
+			GetSpeakersResponseE response = new GetSpeakersResponseE();
+			GetSpeakersResponse innerResponse = new GetSpeakersResponse();
 			SpeakerDeviceArray speakerArray = new SpeakerDeviceArray();
+			innerResponse.setSpeakers(speakerArray);
+			response.setGetSpeakersResponse(innerResponse);
+			if (!getSpeakersStatement.execute()) {
+				return response;
+			}
+			ResultSet speakers = getSpeakersStatement.getResultSet();
 			while (speakers.next()) {
 				String ipAddress = speakers.getString(1);
 				int port = speakers.getInt(2);
@@ -126,12 +133,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 				short y = speakers.getShort(4);
 				short z = speakers.getShort(5);
 				speakerArray.addSpeakerDevice(new SpeakerDevice(ipAddress, port, soundScapeId, x, y, z));
-			}
-			System.out.println(speakerArray.getSpeakerDevice().length);
-			GetSpeakersResponseE response = new GetSpeakersResponseE();
-			GetSpeakersResponse innerResponse = new GetSpeakersResponse();
-			innerResponse.setSpeakers(speakerArray);
-			response.setGetSpeakersResponse(innerResponse);
+			}			
 			return response;
 		} finally {
 			db.cleanUp();
