@@ -35,11 +35,13 @@ public interface RegistrationServiceSkeletonInterface {
 	 * @param setSpeakerLocationRequest
 	 * @throws ErrorMessage
 	 *             :
+	 * @throws SQLException 
+	 * @throws RuntimeException 
 	 */
 
 	public org.example.www.registrationserviceelements.SetSpeakerLocationResponse setSpeakerLocation(
 			org.example.www.registrationserviceelements.SetSpeakerLocationRequestE setSpeakerLocationRequest)
-			throws ErrorMessage;
+			throws ErrorMessage, RuntimeException, SQLException;
 
 	/**
 	 * Auto generated method signature

@@ -18,6 +18,7 @@ import org.example.www.database.MariaDB;
 import org.example.www.registrationserviceelements.AddSpeakerResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponse;
 import org.example.www.registrationserviceelements.GetSpeakersResponseE;
+import org.example.www.registrationserviceelements.SetSpeakerLocationResponse;
 import org.example.www.soundscapedatatypes.GeneralDevice;
 import org.example.www.soundscapedatatypes.IPv4Address;
 import org.example.www.soundscapedatatypes.Location;
@@ -85,10 +86,37 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 
 	public org.example.www.registrationserviceelements.SetSpeakerLocationResponse setSpeakerLocation(
 			org.example.www.registrationserviceelements.SetSpeakerLocationRequestE setSpeakerLocationRequest2)
-			throws ErrorMessage {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException(
-				"Please implement " + this.getClass().getName() + "#setSpeakerLocation");
+			throws RuntimeException, SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			GeneralDevice user = setSpeakerLocationRequest2.getSetSpeakerLocationRequest().getUser();
+			SpeakerDevice speaker = setSpeakerLocationRequest2.getSetSpeakerLocationRequest().getSpeakerDevice();
+			if (!user.getSoundScapeId().getSoundscapeId().equals(speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId())) {
+				throw new RuntimeException("User soundScape is not equal to speaker soundScape");
+			}
+			String statement = "update Speakers set x = ?, y = ?, z = ? where ipAddress = ? and port = ?";
+			PreparedStatement setLocationStatement = db.prepareStatement(statement);
+			Location location = speaker.getLocation();
+			setLocationStatement.setShort(1, location.getX());
+			setLocationStatement.setShort(2, location.getY());
+			setLocationStatement.setShort(3, location.getZ());
+			setLocationStatement.setString(4, speaker.getGeneralDevice().getIpAddress().getIPv4Address());
+			setLocationStatement.setInt(5, speaker.getGeneralDevice().getPort().getPort().intValue());
+			SetSpeakerLocationResponse response = new SetSpeakerLocationResponse();
+			if (setLocationStatement.executeUpdate() > 0)
+				response.setSetSpeakerLocationResponse(true);
+			else
+				throw new RuntimeException("The given speaker does not exist.");
+			return response;
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 	/**
