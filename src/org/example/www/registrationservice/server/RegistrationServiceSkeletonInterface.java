@@ -47,10 +47,12 @@ public interface RegistrationServiceSkeletonInterface {
 	 * @param getSpeakersRequest
 	 * @throws ErrorMessage
 	 *             :
+	 * @throws SQLException 
+	 * @throws RuntimeException 
 	 */
 
 	public org.example.www.registrationserviceelements.GetSpeakersResponseE getSpeakers(
-			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest) throws ErrorMessage;
+			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest) throws ErrorMessage, RuntimeException, SQLException;
 
 	/**
 	 * Auto generated method signature

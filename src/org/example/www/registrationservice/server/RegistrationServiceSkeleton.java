@@ -11,11 +11,18 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.example.www.database.MariaDB;
 import org.example.www.registrationserviceelements.AddSpeakerResponse;
+import org.example.www.registrationserviceelements.GetSpeakersResponse;
+import org.example.www.registrationserviceelements.GetSpeakersResponseE;
+import org.example.www.soundscapedatatypes.GeneralDevice;
+import org.example.www.soundscapedatatypes.IPv4Address;
+import org.example.www.soundscapedatatypes.Location;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
+import org.example.www.soundscapedatatypes.SpeakerDeviceArray;
 
 /**
  * RegistrationServiceSkeleton java skeleton for the axisService
@@ -42,17 +49,11 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 		}
 		try {
 			SpeakerDevice speaker = addSpeakerRequest0.getAddSpeakerRequest().getSpeaker();
-			long ipv4;
-			try {
-				InetAddress i= InetAddress.getByName(speaker.getGeneralDevice().getIpAddress().getIPv4Address());
-				ipv4 = ByteBuffer.wrap(i.getAddress()).getInt() & 0x00000000ffffffffL;
-			} catch (UnknownHostException e) {
-				throw new RuntimeException("Unable to process ip-address: "+ e);
-			}
+			String ipv4 = speaker.getGeneralDevice().getIpAddress().getIPv4Address();
 			String statement = "INSERT INTO Speakers (ipAddress, port, x, y, z)";
 			statement += "VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
-			addSpeakerStatement.setLong(1, ipv4);
+			addSpeakerStatement.setString(1, ipv4);
 			addSpeakerStatement.setInt(2, speaker.getGeneralDevice().getPort().getPort().intValue());
 			addSpeakerStatement.setShort(3, speaker.getLocation().getX());
 			addSpeakerStatement.setShort(4, speaker.getLocation().getY());
@@ -63,7 +64,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			createSoundScape.executeUpdate();
 			PreparedStatement createLink = db.prepareStatement("insert into soundScapeToSpeakers (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
 			createLink.setLong(1, speaker.getGeneralDevice().getSoundScapeId().getSoundscapeId().longValue());
-			createLink.setLong(2, ipv4);
+			createLink.setString(2, ipv4);
 			createLink.setInt(3, speaker.getGeneralDevice().getPort().getPort().intValue());	
 			createLink.executeUpdate();
 			AddSpeakerResponse response = new AddSpeakerResponse();
@@ -96,11 +97,45 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	 * @param getSpeakersRequest4
 	 * @return getSpeakersResponse5
 	 * @throws ErrorMessage
+	 * @throws SQLException 
 	 */
 
 	public org.example.www.registrationserviceelements.GetSpeakersResponseE getSpeakers(
-			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest4) throws ErrorMessage {
-		return null;
+			org.example.www.registrationserviceelements.GetSpeakersRequestE getSpeakersRequest4) throws RuntimeException, SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			String statement = "select scape.ipAddress, scape.port, speaker.x, speaker.y, "
+					+ "speaker.z from soundScapeToSpeakers scape join (Speakers speaker) ON scape.port = "
+					+ "speaker.port and scape.ipAddress = speaker.ipAddress where soundScapeId = ?";
+			PreparedStatement getSpeakersStatement = db.prepareStatement(statement);
+			Long soundScapeId = getSpeakersRequest4.getGetSpeakersRequest().getUser()
+					.getSoundScapeId().getSoundscapeId().longValue();
+			getSpeakersStatement.setLong(1, soundScapeId);
+			ResultSet speakers = getSpeakersStatement.executeQuery();
+			SpeakerDeviceArray speakerArray = new SpeakerDeviceArray();
+			while (speakers.next()) {
+				String ipAddress = speakers.getString(1);
+				int port = speakers.getInt(2);
+				short x = speakers.getShort(3);
+				short y = speakers.getShort(4);
+				short z = speakers.getShort(5);
+				speakerArray.addSpeakerDevice(new SpeakerDevice(ipAddress, port, soundScapeId, x, y, z));
+			}
+			System.out.println(speakerArray.getSpeakerDevice().length);
+			GetSpeakersResponseE response = new GetSpeakersResponseE();
+			GetSpeakersResponse innerResponse = new GetSpeakersResponse();
+			innerResponse.setSpeakers(speakerArray);
+			response.setGetSpeakersResponse(innerResponse);
+			return response;
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 	/**

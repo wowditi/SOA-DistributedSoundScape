@@ -6,426 +6,390 @@
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
 
-            
-                package org.example.www.soundscapedatatypes;
-            
+package org.example.www.soundscapedatatypes;
 
-            /**
-            *  IPv4Address bean class
-            */
-            @SuppressWarnings({"unchecked","unused"})
-        
-        public  class IPv4Address
-        implements org.apache.axis2.databinding.ADBBean{
-        
-                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.example.org/SoundScapeDataTypes/",
-                "IPv4Address",
-                "ns1");
+/**
+ * IPv4Address bean class
+ */
+@SuppressWarnings({ "unchecked", "unused" })
 
-            
+public class IPv4Address implements org.apache.axis2.databinding.ADBBean {
 
-                        /**
-                        * field for IPv4Address
-                        */
+	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+			"http://www.example.org/SoundScapeDataTypes/", "IPv4Address", "ns1");
 
-                        
-                                    protected java.lang.String localIPv4Address ;
-                                
+	/**
+	 * field for IPv4Address
+	 */
+	
+	public IPv4Address(String address) {
+		setIPv4Address(address);
+	}
+	
+	public IPv4Address() {}
 
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getIPv4Address(){
-                               return localIPv4Address;
-                           }
+	protected java.lang.String localIPv4Address;
 
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param IPv4Address
-                               */
-                               public void setIPv4Address(java.lang.String param){
-                            
-                                            if (org.apache.axis2.databinding.utils.ConverterUtil.convertToString(param).matches("((1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.){3}(1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])")) {
-                                                this.localIPv4Address=param;
-                                            }
-                                            else {
-                                                throw new java.lang.RuntimeException("Input values do not follow defined XSD restrictions");
-                                            }
-                                        
+	/**
+	 * Auto generated getter method
+	 * 
+	 * @return java.lang.String
+	 */
+	public java.lang.String getIPv4Address() {
+		return localIPv4Address;
+	}
 
-                               }
-                            
+	/**
+	 * Auto generated setter method
+	 * 
+	 * @param param
+	 *            IPv4Address
+	 */
+	public void setIPv4Address(java.lang.String param) {
 
-                            public java.lang.String toString(){
-                                
-                                        return localIPv4Address.toString();
-                                    
-                            }
-                        
+		if (org.apache.axis2.databinding.utils.ConverterUtil.convertToString(param)
+				.matches("((1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.){3}(1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])")) {
+			this.localIPv4Address = param;
+		} else {
+			throw new java.lang.RuntimeException("Input values do not follow defined XSD restrictions");
+		}
 
-     
-     
-        /**
-        *
-        * @param parentQName
-        * @param factory
-        * @return org.apache.axiom.om.OMElement
-        */
-       public org.apache.axiom.om.OMElement getOMElement (
-               final javax.xml.namespace.QName parentQName,
-               final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException{
+	}
 
+	public java.lang.String toString() {
 
-        
-               org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME);
-               return factory.createOMElement(dataSource,MY_QNAME);
-            
-        }
+		return localIPv4Address.toString();
 
-         public void serialize(final javax.xml.namespace.QName parentQName,
-                                       javax.xml.stream.XMLStreamWriter xmlWriter)
-                                throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
-                           serialize(parentQName,xmlWriter,false);
-         }
+	}
 
-         public void serialize(final javax.xml.namespace.QName parentQName,
-                               javax.xml.stream.XMLStreamWriter xmlWriter,
-                               boolean serializeType)
-            throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
-            
-                
-                //We can safely assume an element has only one type associated with it
-                
-                            java.lang.String namespace = parentQName.getNamespaceURI();
-                            java.lang.String _localName = parentQName.getLocalPart();
-                        
-                            writeStartElement(null, namespace, _localName, xmlWriter);
+	/**
+	 *
+	 * @param parentQName
+	 * @param factory
+	 * @return org.apache.axiom.om.OMElement
+	 */
+	public org.apache.axiom.om.OMElement getOMElement(final javax.xml.namespace.QName parentQName,
+			final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
 
-                            // add the type details if this is used in a simple type
-                               if (serializeType){
-                                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/SoundScapeDataTypes/");
-                                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
-                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                                           namespacePrefix+":IPv4Address",
-                                           xmlWriter);
-                                   } else {
-                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                                           "IPv4Address",
-                                           xmlWriter);
-                                   }
-                               }
-                            
-                                          if (localIPv4Address==null){
-                                            
-                                                     throw new org.apache.axis2.databinding.ADBException("IPv4Address cannot be null !!");
-                                                
-                                         }else{
-                                        
-                                                       xmlWriter.writeCharacters(localIPv4Address);
-                                            
-                                         }
-                                    
-                            xmlWriter.writeEndElement();
-                    
+		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, MY_QNAME);
+		return factory.createOMElement(dataSource, MY_QNAME);
 
-        }
+	}
 
-        private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://www.example.org/SoundScapeDataTypes/")){
-                return "ns1";
-            }
-            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-        }
+	public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter)
+			throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
+		serialize(parentQName, xmlWriter, false);
+	}
 
-        /**
-         * Utility method to write an element start tag.
-         */
-        private void writeStartElement(java.lang.String prefix, java.lang.String namespace, java.lang.String localPart,
-                                       javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-            if (writerPrefix != null) {
-                xmlWriter.writeStartElement(namespace, localPart);
-            } else {
-                if (namespace.length() == 0) {
-                    prefix = "";
-                } else if (prefix == null) {
-                    prefix = generatePrefix(namespace);
-                }
+	public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter,
+			boolean serializeType)
+			throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
 
-                xmlWriter.writeStartElement(prefix, localPart, namespace);
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-        }
-        
-        /**
-         * Util method to write an attribute with the ns prefix
-         */
-        private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
-                                    java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-            if (xmlWriter.getPrefix(namespace) == null) {
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-            xmlWriter.writeAttribute(namespace,attName,attValue);
-        }
+		// We can safely assume an element has only one type associated with it
 
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeAttribute(java.lang.String namespace,java.lang.String attName,
-                                    java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName,attValue);
-            } else {
-                registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(namespace,attName,attValue);
-            }
-        }
+		java.lang.String namespace = parentQName.getNamespaceURI();
+		java.lang.String _localName = parentQName.getLocalPart();
 
+		writeStartElement(null, namespace, _localName, xmlWriter);
 
-           /**
-             * Util method to write an attribute without the ns prefix
-             */
-            private void writeQNameAttribute(java.lang.String namespace, java.lang.String attName,
-                                             javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+		// add the type details if this is used in a simple type
+		if (serializeType) {
+			java.lang.String namespacePrefix = registerPrefix(xmlWriter, "http://www.example.org/SoundScapeDataTypes/");
+			if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
+				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
+						namespacePrefix + ":IPv4Address", xmlWriter);
+			} else {
+				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "IPv4Address", xmlWriter);
+			}
+		}
 
-                java.lang.String attributeNamespace = qname.getNamespaceURI();
-                java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-                if (attributePrefix == null) {
-                    attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-                }
-                java.lang.String attributeValue;
-                if (attributePrefix.trim().length() > 0) {
-                    attributeValue = attributePrefix + ":" + qname.getLocalPart();
-                } else {
-                    attributeValue = qname.getLocalPart();
-                }
+		if (localIPv4Address == null) {
 
-                if (namespace.equals("")) {
-                    xmlWriter.writeAttribute(attName, attributeValue);
-                } else {
-                    registerPrefix(xmlWriter, namespace);
-                    xmlWriter.writeAttribute(namespace, attName, attributeValue);
-                }
-            }
-        /**
-         *  method to handle Qnames
-         */
+			throw new org.apache.axis2.databinding.ADBException("IPv4Address cannot be null !!");
 
-        private void writeQName(javax.xml.namespace.QName qname,
-                                javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-            java.lang.String namespaceURI = qname.getNamespaceURI();
-            if (namespaceURI != null) {
-                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-                if (prefix == null) {
-                    prefix = generatePrefix(namespaceURI);
-                    xmlWriter.writeNamespace(prefix, namespaceURI);
-                    xmlWriter.setPrefix(prefix,namespaceURI);
-                }
+		} else {
 
-                if (prefix.trim().length() > 0){
-                    xmlWriter.writeCharacters(prefix + ":" + org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-                } else {
-                    // i.e this is the default namespace
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-                }
+			xmlWriter.writeCharacters(localIPv4Address);
 
-            } else {
-                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-            }
-        }
+		}
 
-        private void writeQNames(javax.xml.namespace.QName[] qnames,
-                                 javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+		xmlWriter.writeEndElement();
 
-            if (qnames != null) {
-                // we have to store this data until last moment since it is not possible to write any
-                // namespace data after writing the charactor data
-                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-                java.lang.String namespaceURI = null;
-                java.lang.String prefix = null;
+	}
 
-                for (int i = 0; i < qnames.length; i++) {
-                    if (i > 0) {
-                        stringToWrite.append(" ");
-                    }
-                    namespaceURI = qnames[i].getNamespaceURI();
-                    if (namespaceURI != null) {
-                        prefix = xmlWriter.getPrefix(namespaceURI);
-                        if ((prefix == null) || (prefix.length() == 0)) {
-                            prefix = generatePrefix(namespaceURI);
-                            xmlWriter.writeNamespace(prefix, namespaceURI);
-                            xmlWriter.setPrefix(prefix,namespaceURI);
-                        }
+	private static java.lang.String generatePrefix(java.lang.String namespace) {
+		if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
+			return "ns1";
+		}
+		return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+	}
 
-                        if (prefix.trim().length() > 0){
-                            stringToWrite.append(prefix).append(":").append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-                        } else {
-                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-                        }
-                    } else {
-                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-                    }
-                }
-                xmlWriter.writeCharacters(stringToWrite.toString());
-            }
+	/**
+	 * Utility method to write an element start tag.
+	 */
+	private void writeStartElement(java.lang.String prefix, java.lang.String namespace, java.lang.String localPart,
+			javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+		java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+		if (writerPrefix != null) {
+			xmlWriter.writeStartElement(namespace, localPart);
+		} else {
+			if (namespace.length() == 0) {
+				prefix = "";
+			} else if (prefix == null) {
+				prefix = generatePrefix(namespace);
+			}
 
-        }
+			xmlWriter.writeStartElement(prefix, localPart, namespace);
+			xmlWriter.writeNamespace(prefix, namespace);
+			xmlWriter.setPrefix(prefix, namespace);
+		}
+	}
 
+	/**
+	 * Util method to write an attribute with the ns prefix
+	 */
+	private void writeAttribute(java.lang.String prefix, java.lang.String namespace, java.lang.String attName,
+			java.lang.String attValue, javax.xml.stream.XMLStreamWriter xmlWriter)
+			throws javax.xml.stream.XMLStreamException {
+		if (xmlWriter.getPrefix(namespace) == null) {
+			xmlWriter.writeNamespace(prefix, namespace);
+			xmlWriter.setPrefix(prefix, namespace);
+		}
+		xmlWriter.writeAttribute(namespace, attName, attValue);
+	}
 
-        /**
-         * Register a namespace prefix
-         */
-        private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
-            java.lang.String prefix = xmlWriter.getPrefix(namespace);
-            if (prefix == null) {
-                prefix = generatePrefix(namespace);
-                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-                while (true) {
-                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
-                    if (uri == null || uri.length() == 0) {
-                        break;
-                    }
-                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                }
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-            return prefix;
-        }
+	/**
+	 * Util method to write an attribute without the ns prefix
+	 */
+	private void writeAttribute(java.lang.String namespace, java.lang.String attName, java.lang.String attValue,
+			javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+		if (namespace.equals("")) {
+			xmlWriter.writeAttribute(attName, attValue);
+		} else {
+			registerPrefix(xmlWriter, namespace);
+			xmlWriter.writeAttribute(namespace, attName, attValue);
+		}
+	}
 
+	/**
+	 * Util method to write an attribute without the ns prefix
+	 */
+	private void writeQNameAttribute(java.lang.String namespace, java.lang.String attName,
+			javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
+			throws javax.xml.stream.XMLStreamException {
 
-  
-        /**
-        * databinding method to get an XML representation of this object
-        *
-        */
-        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
-                    throws org.apache.axis2.databinding.ADBException{
+		java.lang.String attributeNamespace = qname.getNamespaceURI();
+		java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+		if (attributePrefix == null) {
+			attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+		}
+		java.lang.String attributeValue;
+		if (attributePrefix.trim().length() > 0) {
+			attributeValue = attributePrefix + ":" + qname.getLocalPart();
+		} else {
+			attributeValue = qname.getLocalPart();
+		}
 
+		if (namespace.equals("")) {
+			xmlWriter.writeAttribute(attName, attributeValue);
+		} else {
+			registerPrefix(xmlWriter, namespace);
+			xmlWriter.writeAttribute(namespace, attName, attributeValue);
+		}
+	}
 
-        
-                
-                //We can safely assume an element has only one type associated with it
-                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-                            new java.lang.Object[]{
-                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIPv4Address)
-                            },
-                            null);
+	/**
+	 * method to handle Qnames
+	 */
 
-        }
+	private void writeQName(javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
+			throws javax.xml.stream.XMLStreamException {
+		java.lang.String namespaceURI = qname.getNamespaceURI();
+		if (namespaceURI != null) {
+			java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+			if (prefix == null) {
+				prefix = generatePrefix(namespaceURI);
+				xmlWriter.writeNamespace(prefix, namespaceURI);
+				xmlWriter.setPrefix(prefix, namespaceURI);
+			}
 
-  
+			if (prefix.trim().length() > 0) {
+				xmlWriter.writeCharacters(
+						prefix + ":" + org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+			} else {
+				// i.e this is the default namespace
+				xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+			}
 
-     /**
-      *  Factory class that keeps the parse method
-      */
-    public static class Factory{
+		} else {
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+		}
+	}
 
-        
-        
-                public static IPv4Address fromString(java.lang.String value,
-                                                    java.lang.String namespaceURI){
-                    IPv4Address returnValue = new  IPv4Address();
-                    
-                            returnValue.setIPv4Address(
-                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString(value));
-                        
+	private void writeQNames(javax.xml.namespace.QName[] qnames, javax.xml.stream.XMLStreamWriter xmlWriter)
+			throws javax.xml.stream.XMLStreamException {
 
-                    return returnValue;
-                }
+		if (qnames != null) {
+			// we have to store this data until last moment since it is not possible to
+			// write any
+			// namespace data after writing the charactor data
+			java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+			java.lang.String namespaceURI = null;
+			java.lang.String prefix = null;
 
-                public static IPv4Address fromString(javax.xml.stream.XMLStreamReader xmlStreamReader,
-                                                                    java.lang.String content) {
-                    if (content.indexOf(":") > -1){
-                        java.lang.String prefix = content.substring(0,content.indexOf(":"));
-                        java.lang.String namespaceUri = xmlStreamReader.getNamespaceContext().getNamespaceURI(prefix);
-                        return IPv4Address.Factory.fromString(content,namespaceUri);
-                    } else {
-                       return IPv4Address.Factory.fromString(content,"");
-                    }
-                }
+			for (int i = 0; i < qnames.length; i++) {
+				if (i > 0) {
+					stringToWrite.append(" ");
+				}
+				namespaceURI = qnames[i].getNamespaceURI();
+				if (namespaceURI != null) {
+					prefix = xmlWriter.getPrefix(namespaceURI);
+					if ((prefix == null) || (prefix.length() == 0)) {
+						prefix = generatePrefix(namespaceURI);
+						xmlWriter.writeNamespace(prefix, namespaceURI);
+						xmlWriter.setPrefix(prefix, namespaceURI);
+					}
 
-            
+					if (prefix.trim().length() > 0) {
+						stringToWrite.append(prefix).append(":")
+								.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+					} else {
+						stringToWrite
+								.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+					}
+				} else {
+					stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+				}
+			}
+			xmlWriter.writeCharacters(stringToWrite.toString());
+		}
 
-        /**
-        * static method to create the object
-        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-        * Postcondition: If this object is an element, the reader is positioned at its end element
-        *                If this object is a complex type, the reader is positioned at the end element of its outer element
-        */
-        public static IPv4Address parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            IPv4Address object =
-                new IPv4Address();
+	}
 
-            int event;
-            java.lang.String nillableValue = null;
-            java.lang.String prefix ="";
-            java.lang.String namespaceuri ="";
-            try {
-                
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
+	/**
+	 * Register a namespace prefix
+	 */
+	private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace)
+			throws javax.xml.stream.XMLStreamException {
+		java.lang.String prefix = xmlWriter.getPrefix(namespace);
+		if (prefix == null) {
+			prefix = generatePrefix(namespace);
+			javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+			while (true) {
+				java.lang.String uri = nsContext.getNamespaceURI(prefix);
+				if (uri == null || uri.length() == 0) {
+					break;
+				}
+				prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+			}
+			xmlWriter.writeNamespace(prefix, namespace);
+			xmlWriter.setPrefix(prefix, namespace);
+		}
+		return prefix;
+	}
 
-                
+	/**
+	 * databinding method to get an XML representation of this object
+	 *
+	 */
+	public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
+			throws org.apache.axis2.databinding.ADBException {
 
-                
-                // Note all attributes that were handled. Used to differ normal attributes
-                // from anyAttributes.
-                java.util.Vector handledAttributes = new java.util.Vector();
-                
+		// We can safely assume an element has only one type associated with it
+		return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
+				new java.lang.Object[] { org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
+						org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIPv4Address) },
+				null);
 
-                   
-                while(!reader.isEndElement()) {
-                    if (reader.isStartElement()  || reader.hasText()){
-                
-                                    if (reader.isStartElement()  || reader.hasText()){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"IPv4Address" +"  cannot be null");
-                                    }
-                                    
+	}
 
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setIPv4Address(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                              }  // End of if for expected property start element
-                                
-                             else{
-                                        // A start element we are not expecting indicates an invalid parameter was passed
-                                        throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                             }
-                          
-                             } else {
-                                reader.next();
-                             }  
-                           }  // end of while loop
-                        
+	/**
+	 * Factory class that keeps the parse method
+	 */
+	public static class Factory {
 
+		public static IPv4Address fromString(java.lang.String value, java.lang.String namespaceURI) {
+			IPv4Address returnValue = new IPv4Address();
 
+			returnValue.setIPv4Address(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(value));
 
-            } catch (javax.xml.stream.XMLStreamException e) {
-                throw new java.lang.Exception(e);
-            }
+			return returnValue;
+		}
 
-            return object;
-        }
+		public static IPv4Address fromString(javax.xml.stream.XMLStreamReader xmlStreamReader,
+				java.lang.String content) {
+			if (content.indexOf(":") > -1) {
+				java.lang.String prefix = content.substring(0, content.indexOf(":"));
+				java.lang.String namespaceUri = xmlStreamReader.getNamespaceContext().getNamespaceURI(prefix);
+				return IPv4Address.Factory.fromString(content, namespaceUri);
+			} else {
+				return IPv4Address.Factory.fromString(content, "");
+			}
+		}
 
-        }//end of factory class
+		/**
+		 * static method to create the object Precondition: If this object is an
+		 * element, the current or next start element starts this object and any
+		 * intervening reader events are ignorable If this object is not an element, it
+		 * is a complex type and the reader is at the event just after the outer start
+		 * element Postcondition: If this object is an element, the reader is positioned
+		 * at its end element If this object is a complex type, the reader is positioned
+		 * at the end element of its outer element
+		 */
+		public static IPv4Address parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
+			IPv4Address object = new IPv4Address();
 
-        
+			int event;
+			java.lang.String nillableValue = null;
+			java.lang.String prefix = "";
+			java.lang.String namespaceuri = "";
+			try {
 
-        }
-           
-    
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				// Note all attributes that were handled. Used to differ normal attributes
+				// from anyAttributes.
+				java.util.Vector handledAttributes = new java.util.Vector();
+
+				while (!reader.isEndElement()) {
+					if (reader.isStartElement() || reader.hasText()) {
+
+						if (reader.isStartElement() || reader.hasText()) {
+
+							nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+									"nil");
+							if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+								throw new org.apache.axis2.databinding.ADBException(
+										"The element: " + "IPv4Address" + "  cannot be null");
+							}
+
+							java.lang.String content = reader.getElementText();
+
+							object.setIPv4Address(
+									org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+
+						} // End of if for expected property start element
+
+						else {
+							// A start element we are not expecting indicates an invalid parameter was
+							// passed
+							throw new org.apache.axis2.databinding.ADBException(
+									"Unexpected subelement " + reader.getName());
+						}
+
+					} else {
+						reader.next();
+					}
+				} // end of while loop
+
+			} catch (javax.xml.stream.XMLStreamException e) {
+				throw new java.lang.Exception(e);
+			}
+
+			return object;
+		}
+
+	}// end of factory class
+
+}
