@@ -22,6 +22,26 @@
 
               
                   if (
+                  "http://www.example.org/ControlServiceElements/".equals(namespaceURI) &&
+                  "ProcessPlaybackCommandRequest".equals(typeName)){
+                   
+                            return  org.example.www.controlserviceelements.ProcessPlaybackCommandRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
+                  "GeneralDevice".equals(typeName)){
+                   
+                            return  org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
                   "VolumeLevel".equals(typeName)){
                    
@@ -43,9 +63,9 @@
               
                   if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
-                  "GeneralDevice".equals(typeName)){
+                  "Location".equals(typeName)){
                    
-                            return  org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader);
+                            return  org.example.www.soundscapedatatypes.Location.Factory.parse(reader);
                         
 
                   }
@@ -53,9 +73,19 @@
               
                   if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
-                  "Location".equals(typeName)){
+                  "SpeakerDevice".equals(typeName)){
                    
-                            return  org.example.www.soundscapedatatypes.Location.Factory.parse(reader);
+                            return  org.example.www.soundscapedatatypes.SpeakerDevice.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
+                  "SpeakerDeviceArray".equals(typeName)){
+                   
+                            return  org.example.www.soundscapedatatypes.SpeakerDeviceArray.Factory.parse(reader);
                         
 
                   }
@@ -113,9 +143,9 @@
               
                   if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
-                  "ChannelNumber".equals(typeName)){
+                  "SoundscapeId".equals(typeName)){
                    
-                            return  org.example.www.soundscapedatatypes.ChannelNumber.Factory.parse(reader);
+                            return  org.example.www.soundscapedatatypes.SoundscapeId.Factory.parse(reader);
                         
 
                   }
@@ -123,9 +153,9 @@
               
                   if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
-                  "SoundscapeId".equals(typeName)){
+                  "ChannelNumber".equals(typeName)){
                    
-                            return  org.example.www.soundscapedatatypes.SoundscapeId.Factory.parse(reader);
+                            return  org.example.www.soundscapedatatypes.ChannelNumber.Factory.parse(reader);
                         
 
                   }

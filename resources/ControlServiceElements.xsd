@@ -4,11 +4,17 @@
     <complexType name="SetSoundScapeSourceLayoutRequest">
         <sequence>
             <element name="SoundScapeSourceLayout" type="types:SoundScapeSourceLayout"/>
-            <element name="User" type="types:GeneralDevice"/>
+            <element name="Speakers" type="types:SpeakerDeviceArray"/>
         </sequence>
     </complexType>
     <element name="SetSoundScapeSourceLayoutResponse" type="boolean"/>
-    <element name="ProcessPlaybackCommandRequest" type="types:PlaybackCommand"/>
+    <element name="ProcessPlaybackCommandRequest" type="tns:ProcessPlaybackCommandRequest"/>
     <element name="ProcessPlaybackCommandResponse" type="boolean"/>
     <element name="ErrorMessage" type="string"/>
+    <complexType name="ProcessPlaybackCommandRequest">
+        <sequence>
+            <element name="Command" type="types:PlaybackCommand"/>
+            <element name="Speakers" type="types:SpeakerDeviceArray"/>
+        </sequence>
+    </complexType>
 </schema>

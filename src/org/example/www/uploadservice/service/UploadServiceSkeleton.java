@@ -5,7 +5,7 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT)
  */
-package org.example.www.uploadservice.server;
+package org.example.www.uploadservice.service;
 
 /**
  * UploadServiceSkeleton java skeleton for the axisService
@@ -20,6 +20,7 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 */
 
 	public void uploadSong(org.example.www.uploadserviceelements.UploadSongRequestE uploadSongRequest0) {
+		// TODO : fill this with the necessary business logic
 
 	}
 

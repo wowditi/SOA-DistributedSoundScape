@@ -20,6 +20,24 @@ public class GeneralDevice implements org.apache.axis2.databinding.ADBBean {
 	 * Namespace Prefix = ns1
 	 */
 	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (!GeneralDevice.class.isAssignableFrom(obj.getClass())) {
+	        return false;
+	    }
+	    final GeneralDevice other = (GeneralDevice) obj;
+	    if (!getIpAddress().getIPv4Address().equals(other.getIpAddress().getIPv4Address()))
+	        return false;
+	    if (!getPort().getPort().equals(other.getPort().getPort()))
+	    	return false;
+	    if (!getSoundScapeId().getSoundscapeId().equals(other.getSoundScapeId().getSoundscapeId()))
+	    	return false;
+	    return true;
+	}
+	
 	public GeneralDevice(String ipAddress, int port, Long soundScapeId) {
 		setIpAddress(new IPv4Address(ipAddress));
 		setPort(new Port(port));

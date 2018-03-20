@@ -20,7 +20,7 @@
         /* This type was generated from the piece of schema that had
                 name = UploadSongRequest
                 Namespace URI = http://www.example.org/UploadServiceElements/
-                Namespace Prefix = ns2
+                Namespace Prefix = ns3
                 */
             
 
@@ -55,30 +55,30 @@
                             
 
                         /**
-                        * field for User
+                        * field for Speakers
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.GeneralDevice localUser ;
+                                    protected org.example.www.soundscapedatatypes.SpeakerDeviceArray localSpeakers ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return org.example.www.soundscapedatatypes.GeneralDevice
+                           * @return org.example.www.soundscapedatatypes.SpeakerDeviceArray
                            */
-                           public  org.example.www.soundscapedatatypes.GeneralDevice getUser(){
-                               return localUser;
+                           public  org.example.www.soundscapedatatypes.SpeakerDeviceArray getSpeakers(){
+                               return localSpeakers;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param User
+                               * @param param Speakers
                                */
-                               public void setUser(org.example.www.soundscapedatatypes.GeneralDevice param){
+                               public void setSpeakers(org.example.www.soundscapedatatypes.SpeakerDeviceArray param){
                             
-                                            this.localUser=param;
+                                            this.localSpeakers=param;
                                        
 
                                }
@@ -149,10 +149,10 @@
                                            localLink.serialize(new javax.xml.namespace.QName("","Link"),
                                                xmlWriter);
                                         
-                                            if (localUser==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
+                                            if (localSpeakers==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("Speakers cannot be null!!");
                                             }
-                                           localUser.serialize(new javax.xml.namespace.QName("","User"),
+                                           localSpeakers.serialize(new javax.xml.namespace.QName("","Speakers"),
                                                xmlWriter);
                                         
                     xmlWriter.writeEndElement();
@@ -162,7 +162,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/UploadServiceElements/")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -350,13 +350,13 @@
                                     elementList.add(localLink);
                                 
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "User"));
+                                                                      "Speakers"));
                             
                             
-                                    if (localUser==null){
-                                         throw new org.apache.axis2.databinding.ADBException("User cannot be null!!");
+                                    if (localSpeakers==null){
+                                         throw new org.apache.axis2.databinding.ADBException("Speakers cannot be null!!");
                                     }
-                                    elementList.add(localUser);
+                                    elementList.add(localSpeakers);
                                 
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -452,9 +452,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","User").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","Speakers").equals(reader.getName())){
                                 
-                                                object.setUser(org.example.www.soundscapedatatypes.GeneralDevice.Factory.parse(reader));
+                                                object.setSpeakers(org.example.www.soundscapedatatypes.SpeakerDeviceArray.Factory.parse(reader));
                                               
                                         reader.next();
                                     

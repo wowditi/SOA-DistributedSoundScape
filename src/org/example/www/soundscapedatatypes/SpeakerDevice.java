@@ -25,12 +25,29 @@ public class SpeakerDevice implements org.apache.axis2.databinding.ADBBean {
 	 * Namespace Prefix = ns1
 	 */
 	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (!SpeakerDevice.class.isAssignableFrom(obj.getClass())) {
+	        return false;
+	    }
+	    final SpeakerDevice other = (SpeakerDevice) obj;
+	    if (!getGeneralDevice().equals(other.getGeneralDevice()))
+	        return false;
+	    if (!getLocation().equals(other.getLocation()))
+	    	return false;
+	    return true;
+	}
+
 	public SpeakerDevice(String ipAddress, int port, Long soundscape, short x, short y, short z) {
 		setGeneralDevice(new GeneralDevice(ipAddress, port, soundscape));
-		setLocation(new Location(x,y,z));
+		setLocation(new Location(x, y, z));
 	}
-	
-	public SpeakerDevice() {}
+
+	public SpeakerDevice() {
+	}
 
 	/**
 	 * field for GeneralDevice

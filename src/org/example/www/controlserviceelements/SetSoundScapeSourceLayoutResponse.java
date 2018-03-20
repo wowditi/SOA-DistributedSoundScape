@@ -6,359 +6,389 @@
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
 
-package org.example.www.controlserviceelements;
+            
+                package org.example.www.controlserviceelements;
+            
 
-/**
- * SetSoundScapeSourceLayoutResponse bean class
- */
-@SuppressWarnings({ "unchecked", "unused" })
+            /**
+            *  SetSoundScapeSourceLayoutResponse bean class
+            */
+            @SuppressWarnings({"unchecked","unused"})
+        
+        public  class SetSoundScapeSourceLayoutResponse
+        implements org.apache.axis2.databinding.ADBBean{
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.example.org/ControlServiceElements/",
+                "SetSoundScapeSourceLayoutResponse",
+                "ns4");
 
-public class SetSoundScapeSourceLayoutResponse implements org.apache.axis2.databinding.ADBBean {
+            
 
-	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-			"http://www.example.org/ControlServiceElements/", "SetSoundScapeSourceLayoutResponse", "ns3");
+                        /**
+                        * field for SetSoundScapeSourceLayoutResponse
+                        */
 
-	/**
-	 * field for SetSoundScapeSourceLayoutResponse
-	 */
+                        
+                                    protected boolean localSetSoundScapeSourceLayoutResponse ;
+                                
 
-	protected boolean localSetSoundScapeSourceLayoutResponse;
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getSetSoundScapeSourceLayoutResponse(){
+                               return localSetSoundScapeSourceLayoutResponse;
+                           }
 
-	/**
-	 * Auto generated getter method
-	 * 
-	 * @return boolean
-	 */
-	public boolean getSetSoundScapeSourceLayoutResponse() {
-		return localSetSoundScapeSourceLayoutResponse;
-	}
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param SetSoundScapeSourceLayoutResponse
+                               */
+                               public void setSetSoundScapeSourceLayoutResponse(boolean param){
+                            
+                                            this.localSetSoundScapeSourceLayoutResponse=param;
+                                       
 
-	/**
-	 * Auto generated setter method
-	 * 
-	 * @param param
-	 *            SetSoundScapeSourceLayoutResponse
-	 */
-	public void setSetSoundScapeSourceLayoutResponse(boolean param) {
+                               }
+                            
 
-		this.localSetSoundScapeSourceLayoutResponse = param;
+     
+     
+        /**
+        *
+        * @param parentQName
+        * @param factory
+        * @return org.apache.axiom.om.OMElement
+        */
+       public org.apache.axiom.om.OMElement getOMElement (
+               final javax.xml.namespace.QName parentQName,
+               final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException{
 
-	}
 
-	/**
-	 *
-	 * @param parentQName
-	 * @param factory
-	 * @return org.apache.axiom.om.OMElement
-	 */
-	public org.apache.axiom.om.OMElement getOMElement(final javax.xml.namespace.QName parentQName,
-			final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
+        
+               org.apache.axiom.om.OMDataSource dataSource =
+                       new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME);
+               return factory.createOMElement(dataSource,MY_QNAME);
+            
+        }
 
-		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, MY_QNAME);
-		return factory.createOMElement(dataSource, MY_QNAME);
+         public void serialize(final javax.xml.namespace.QName parentQName,
+                                       javax.xml.stream.XMLStreamWriter xmlWriter)
+                                throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
+                           serialize(parentQName,xmlWriter,false);
+         }
 
-	}
+         public void serialize(final javax.xml.namespace.QName parentQName,
+                               javax.xml.stream.XMLStreamWriter xmlWriter,
+                               boolean serializeType)
+            throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
+            
+                
+                //We can safely assume an element has only one type associated with it
+                
+                            java.lang.String namespace = "http://www.example.org/ControlServiceElements/";
+                            java.lang.String _localName = "SetSoundScapeSourceLayoutResponse";
+                        
+                            writeStartElement(null, namespace, _localName, xmlWriter);
 
-	public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter)
-			throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
-		serialize(parentQName, xmlWriter, false);
-	}
+                            // add the type details if this is used in a simple type
+                               if (serializeType){
+                                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/ControlServiceElements/");
+                                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
+                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                                           namespacePrefix+":SetSoundScapeSourceLayoutResponse",
+                                           xmlWriter);
+                                   } else {
+                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                                           "SetSoundScapeSourceLayoutResponse",
+                                           xmlWriter);
+                                   }
+                               }
+                            
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("property value cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSetSoundScapeSourceLayoutResponse));
+                                               }
+                            
+                            xmlWriter.writeEndElement();
+                    
 
-	public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter,
-			boolean serializeType)
-			throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
+        }
 
-		// We can safely assume an element has only one type associated with it
+        private static java.lang.String generatePrefix(java.lang.String namespace) {
+            if(namespace.equals("http://www.example.org/ControlServiceElements/")){
+                return "ns4";
+            }
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
 
-		java.lang.String namespace = "http://www.example.org/ControlServiceElements/";
-		java.lang.String _localName = "SetSoundScapeSourceLayoutResponse";
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix, java.lang.String namespace, java.lang.String localPart,
+                                       javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(namespace, localPart);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
 
-		writeStartElement(null, namespace, _localName, xmlWriter);
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+        
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
+                                    java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+            if (xmlWriter.getPrefix(namespace) == null) {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+            xmlWriter.writeAttribute(namespace,attName,attValue);
+        }
 
-		// add the type details if this is used in a simple type
-		if (serializeType) {
-			java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-					"http://www.example.org/ControlServiceElements/");
-			if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
-				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
-						namespacePrefix + ":SetSoundScapeSourceLayoutResponse", xmlWriter);
-			} else {
-				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
-						"SetSoundScapeSourceLayoutResponse", xmlWriter);
-			}
-		}
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,java.lang.String attName,
+                                    java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName,attValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace,attName,attValue);
+            }
+        }
 
-		if (false) {
 
-			throw new org.apache.axis2.databinding.ADBException("property value cannot be null!!");
+           /**
+             * Util method to write an attribute without the ns prefix
+             */
+            private void writeQNameAttribute(java.lang.String namespace, java.lang.String attName,
+                                             javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
 
-		} else {
-			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil
-					.convertToString(localSetSoundScapeSourceLayoutResponse));
-		}
+                java.lang.String attributeNamespace = qname.getNamespaceURI();
+                java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+                if (attributePrefix == null) {
+                    attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+                }
+                java.lang.String attributeValue;
+                if (attributePrefix.trim().length() > 0) {
+                    attributeValue = attributePrefix + ":" + qname.getLocalPart();
+                } else {
+                    attributeValue = qname.getLocalPart();
+                }
 
-		xmlWriter.writeEndElement();
+                if (namespace.equals("")) {
+                    xmlWriter.writeAttribute(attName, attributeValue);
+                } else {
+                    registerPrefix(xmlWriter, namespace);
+                    xmlWriter.writeAttribute(namespace, attName, attributeValue);
+                }
+            }
+        /**
+         *  method to handle Qnames
+         */
 
-	}
+        private void writeQName(javax.xml.namespace.QName qname,
+                                javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix,namespaceURI);
+                }
 
-	private static java.lang.String generatePrefix(java.lang.String namespace) {
-		if (namespace.equals("http://www.example.org/ControlServiceElements/")) {
-			return "ns3";
-		}
-		return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-	}
+                if (prefix.trim().length() > 0){
+                    xmlWriter.writeCharacters(prefix + ":" + org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+                }
 
-	/**
-	 * Utility method to write an element start tag.
-	 */
-	private void writeStartElement(java.lang.String prefix, java.lang.String namespace, java.lang.String localPart,
-			javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-		java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-		if (writerPrefix != null) {
-			xmlWriter.writeStartElement(namespace, localPart);
-		} else {
-			if (namespace.length() == 0) {
-				prefix = "";
-			} else if (prefix == null) {
-				prefix = generatePrefix(namespace);
-			}
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+            }
+        }
 
-			xmlWriter.writeStartElement(prefix, localPart, namespace);
-			xmlWriter.writeNamespace(prefix, namespace);
-			xmlWriter.setPrefix(prefix, namespace);
-		}
-	}
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+                                 javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
 
-	/**
-	 * Util method to write an attribute with the ns prefix
-	 */
-	private void writeAttribute(java.lang.String prefix, java.lang.String namespace, java.lang.String attName,
-			java.lang.String attValue, javax.xml.stream.XMLStreamWriter xmlWriter)
-			throws javax.xml.stream.XMLStreamException {
-		if (xmlWriter.getPrefix(namespace) == null) {
-			xmlWriter.writeNamespace(prefix, namespace);
-			xmlWriter.setPrefix(prefix, namespace);
-		}
-		xmlWriter.writeAttribute(namespace, attName, attValue);
-	}
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
 
-	/**
-	 * Util method to write an attribute without the ns prefix
-	 */
-	private void writeAttribute(java.lang.String namespace, java.lang.String attName, java.lang.String attValue,
-			javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-		if (namespace.equals("")) {
-			xmlWriter.writeAttribute(attName, attValue);
-		} else {
-			registerPrefix(xmlWriter, namespace);
-			xmlWriter.writeAttribute(namespace, attName, attValue);
-		}
-	}
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+                    namespaceURI = qnames[i].getNamespaceURI();
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix,namespaceURI);
+                        }
 
-	/**
-	 * Util method to write an attribute without the ns prefix
-	 */
-	private void writeQNameAttribute(java.lang.String namespace, java.lang.String attName,
-			javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
-			throws javax.xml.stream.XMLStreamException {
+                        if (prefix.trim().length() > 0){
+                            stringToWrite.append(prefix).append(":").append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+                    }
+                }
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
 
-		java.lang.String attributeNamespace = qname.getNamespaceURI();
-		java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-		if (attributePrefix == null) {
-			attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-		}
-		java.lang.String attributeValue;
-		if (attributePrefix.trim().length() > 0) {
-			attributeValue = attributePrefix + ":" + qname.getLocalPart();
-		} else {
-			attributeValue = qname.getLocalPart();
-		}
+        }
 
-		if (namespace.equals("")) {
-			xmlWriter.writeAttribute(attName, attributeValue);
-		} else {
-			registerPrefix(xmlWriter, namespace);
-			xmlWriter.writeAttribute(namespace, attName, attributeValue);
-		}
-	}
 
-	/**
-	 * method to handle Qnames
-	 */
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+                    if (uri == null || uri.length() == 0) {
+                        break;
+                    }
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+            return prefix;
+        }
 
-	private void writeQName(javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
-			throws javax.xml.stream.XMLStreamException {
-		java.lang.String namespaceURI = qname.getNamespaceURI();
-		if (namespaceURI != null) {
-			java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-			if (prefix == null) {
-				prefix = generatePrefix(namespaceURI);
-				xmlWriter.writeNamespace(prefix, namespaceURI);
-				xmlWriter.setPrefix(prefix, namespaceURI);
-			}
 
-			if (prefix.trim().length() > 0) {
-				xmlWriter.writeCharacters(
-						prefix + ":" + org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-			} else {
-				// i.e this is the default namespace
-				xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-			}
+  
+        /**
+        * databinding method to get an XML representation of this object
+        *
+        */
+        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
+                    throws org.apache.axis2.databinding.ADBException{
 
-		} else {
-			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
-		}
-	}
 
-	private void writeQNames(javax.xml.namespace.QName[] qnames, javax.xml.stream.XMLStreamWriter xmlWriter)
-			throws javax.xml.stream.XMLStreamException {
+        
+                
+                //We can safely assume an element has only one type associated with it
+                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
+                            new java.lang.Object[]{
+                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
+                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSetSoundScapeSourceLayoutResponse)
+                            },
+                            null);
 
-		if (qnames != null) {
-			// we have to store this data until last moment since it is not possible to
-			// write any
-			// namespace data after writing the charactor data
-			java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-			java.lang.String namespaceURI = null;
-			java.lang.String prefix = null;
+        }
 
-			for (int i = 0; i < qnames.length; i++) {
-				if (i > 0) {
-					stringToWrite.append(" ");
-				}
-				namespaceURI = qnames[i].getNamespaceURI();
-				if (namespaceURI != null) {
-					prefix = xmlWriter.getPrefix(namespaceURI);
-					if ((prefix == null) || (prefix.length() == 0)) {
-						prefix = generatePrefix(namespaceURI);
-						xmlWriter.writeNamespace(prefix, namespaceURI);
-						xmlWriter.setPrefix(prefix, namespaceURI);
-					}
+  
 
-					if (prefix.trim().length() > 0) {
-						stringToWrite.append(prefix).append(":")
-								.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-					} else {
-						stringToWrite
-								.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-					}
-				} else {
-					stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
-				}
-			}
-			xmlWriter.writeCharacters(stringToWrite.toString());
-		}
+     /**
+      *  Factory class that keeps the parse method
+      */
+    public static class Factory{
 
-	}
+        
+        
 
-	/**
-	 * Register a namespace prefix
-	 */
-	private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace)
-			throws javax.xml.stream.XMLStreamException {
-		java.lang.String prefix = xmlWriter.getPrefix(namespace);
-		if (prefix == null) {
-			prefix = generatePrefix(namespace);
-			javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-			while (true) {
-				java.lang.String uri = nsContext.getNamespaceURI(prefix);
-				if (uri == null || uri.length() == 0) {
-					break;
-				}
-				prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-			}
-			xmlWriter.writeNamespace(prefix, namespace);
-			xmlWriter.setPrefix(prefix, namespace);
-		}
-		return prefix;
-	}
+        /**
+        * static method to create the object
+        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+        * Postcondition: If this object is an element, the reader is positioned at its end element
+        *                If this object is a complex type, the reader is positioned at the end element of its outer element
+        */
+        public static SetSoundScapeSourceLayoutResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            SetSoundScapeSourceLayoutResponse object =
+                new SetSoundScapeSourceLayoutResponse();
 
-	/**
-	 * databinding method to get an XML representation of this object
-	 *
-	 */
-	public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
-			throws org.apache.axis2.databinding.ADBException {
+            int event;
+            java.lang.String nillableValue = null;
+            java.lang.String prefix ="";
+            java.lang.String namespaceuri ="";
+            try {
+                
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
 
-		// We can safely assume an element has only one type associated with it
-		return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-				new java.lang.Object[] { org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-						org.apache.axis2.databinding.utils.ConverterUtil
-								.convertToString(localSetSoundScapeSourceLayoutResponse) },
-				null);
+                
 
-	}
+                
+                // Note all attributes that were handled. Used to differ normal attributes
+                // from anyAttributes.
+                java.util.Vector handledAttributes = new java.util.Vector();
+                
 
-	/**
-	 * Factory class that keeps the parse method
-	 */
-	public static class Factory {
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement() ){
+                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/","SetSoundScapeSourceLayoutResponse").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"SetSoundScapeSourceLayoutResponse" +"  cannot be null");
+                                    }
+                                    
 
-		/**
-		 * static method to create the object Precondition: If this object is an
-		 * element, the current or next start element starts this object and any
-		 * intervening reader events are ignorable If this object is not an element, it
-		 * is a complex type and the reader is at the event just after the outer start
-		 * element Postcondition: If this object is an element, the reader is positioned
-		 * at its end element If this object is a complex type, the reader is positioned
-		 * at the end element of its outer element
-		 */
-		public static SetSoundScapeSourceLayoutResponse parse(javax.xml.stream.XMLStreamReader reader)
-				throws java.lang.Exception {
-			SetSoundScapeSourceLayoutResponse object = new SetSoundScapeSourceLayoutResponse();
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setSetSoundScapeSourceLayoutResponse(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                            
+                              }  // End of if for expected property start element
+                                
+                             else{
+                                        // A start element we are not expecting indicates an invalid parameter was passed
+                                        throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                             }
+                          
+                             } else {
+                                reader.next();
+                             }  
+                           }  // end of while loop
+                        
 
-			int event;
-			java.lang.String nillableValue = null;
-			java.lang.String prefix = "";
-			java.lang.String namespaceuri = "";
-			try {
 
-				while (!reader.isStartElement() && !reader.isEndElement())
-					reader.next();
 
-				// Note all attributes that were handled. Used to differ normal attributes
-				// from anyAttributes.
-				java.util.Vector handledAttributes = new java.util.Vector();
+            } catch (javax.xml.stream.XMLStreamException e) {
+                throw new java.lang.Exception(e);
+            }
 
-				while (!reader.isEndElement()) {
-					if (reader.isStartElement()) {
+            return object;
+        }
 
-						if (reader.isStartElement()
-								&& new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/",
-										"SetSoundScapeSourceLayoutResponse").equals(reader.getName())) {
+        }//end of factory class
 
-							nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-									"nil");
-							if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-								throw new org.apache.axis2.databinding.ADBException(
-										"The element: " + "SetSoundScapeSourceLayoutResponse" + "  cannot be null");
-							}
+        
 
-							java.lang.String content = reader.getElementText();
-
-							object.setSetSoundScapeSourceLayoutResponse(
-									org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
-
-						} // End of if for expected property start element
-
-						else {
-							// A start element we are not expecting indicates an invalid parameter was
-							// passed
-							throw new org.apache.axis2.databinding.ADBException(
-									"Unexpected subelement " + reader.getName());
-						}
-
-					} else {
-						reader.next();
-					}
-				} // end of while loop
-
-			} catch (javax.xml.stream.XMLStreamException e) {
-				throw new java.lang.Exception(e);
-			}
-
-			return object;
-		}
-
-	}// end of factory class
-
-}
+        }
+           
+    

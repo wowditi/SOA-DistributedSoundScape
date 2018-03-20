@@ -1,55 +1,55 @@
 
 /**
- * UploadSongResponse.java
+ * ProcessPlaybackCommandRequestE.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
 
             
-                package org.example.www.uploadserviceelements;
+                package org.example.www.controlserviceelements;
             
 
             /**
-            *  UploadSongResponse bean class
+            *  ProcessPlaybackCommandRequestE bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class UploadSongResponse
+        public  class ProcessPlaybackCommandRequestE
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.example.org/UploadServiceElements/",
-                "UploadSongResponse",
-                "ns3");
+                "http://www.example.org/ControlServiceElements/",
+                "ProcessPlaybackCommandRequest",
+                "ns4");
 
             
 
                         /**
-                        * field for UploadSongResponse
+                        * field for ProcessPlaybackCommandRequest
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.ASyncResponse localUploadSongResponse ;
+                                    protected org.example.www.controlserviceelements.ProcessPlaybackCommandRequest localProcessPlaybackCommandRequest ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return org.example.www.soundscapedatatypes.ASyncResponse
+                           * @return org.example.www.controlserviceelements.ProcessPlaybackCommandRequest
                            */
-                           public  org.example.www.soundscapedatatypes.ASyncResponse getUploadSongResponse(){
-                               return localUploadSongResponse;
+                           public  org.example.www.controlserviceelements.ProcessPlaybackCommandRequest getProcessPlaybackCommandRequest(){
+                               return localProcessPlaybackCommandRequest;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param UploadSongResponse
+                               * @param param ProcessPlaybackCommandRequest
                                */
-                               public void setUploadSongResponse(org.example.www.soundscapedatatypes.ASyncResponse param){
+                               public void setProcessPlaybackCommandRequest(org.example.www.controlserviceelements.ProcessPlaybackCommandRequest param){
                             
-                                            this.localUploadSongResponse=param;
+                                            this.localProcessPlaybackCommandRequest=param;
                                        
 
                                }
@@ -89,17 +89,17 @@
                 
                 //We can safely assume an element has only one type associated with it
                 
-                                 if (localUploadSongResponse==null){
-                                   throw new org.apache.axis2.databinding.ADBException("UploadSongResponse cannot be null!");
+                                 if (localProcessPlaybackCommandRequest==null){
+                                   throw new org.apache.axis2.databinding.ADBException("ProcessPlaybackCommandRequest cannot be null!");
                                  }
-                                 localUploadSongResponse.serialize(MY_QNAME,xmlWriter);
+                                 localProcessPlaybackCommandRequest.serialize(MY_QNAME,xmlWriter);
                             
 
         }
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://www.example.org/UploadServiceElements/")){
-                return "ns3";
+            if(namespace.equals("http://www.example.org/ControlServiceElements/")){
+                return "ns4";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -275,7 +275,7 @@
         
                 
                 //We can safely assume an element has only one type associated with it
-                return localUploadSongResponse.getPullParser(MY_QNAME);
+                return localProcessPlaybackCommandRequest.getPullParser(MY_QNAME);
 
         }
 
@@ -296,9 +296,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static UploadSongResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            UploadSongResponse object =
-                new UploadSongResponse();
+        public static ProcessPlaybackCommandRequestE parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            ProcessPlaybackCommandRequestE object =
+                new ProcessPlaybackCommandRequestE();
 
             int event;
             java.lang.String nillableValue = null;
@@ -321,9 +321,9 @@
                 while(!reader.isEndElement()) {
                     if (reader.isStartElement() ){
                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/UploadServiceElements/","UploadSongResponse").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/","ProcessPlaybackCommandRequest").equals(reader.getName())){
                                 
-                                                object.setUploadSongResponse(org.example.www.soundscapedatatypes.ASyncResponse.Factory.parse(reader));
+                                                object.setProcessPlaybackCommandRequest(org.example.www.controlserviceelements.ProcessPlaybackCommandRequest.Factory.parse(reader));
                                             
                               }  // End of if for expected property start element
                                 

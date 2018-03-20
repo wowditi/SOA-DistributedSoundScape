@@ -20,6 +20,24 @@ public class Location implements org.apache.axis2.databinding.ADBBean {
 	 * = ns1
 	 */
 	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (!Location.class.isAssignableFrom(obj.getClass())) {
+	        return false;
+	    }
+	    final Location other = (Location) obj;
+	    if (getX() != other.getX())
+	        return false;
+	    if (getY() != other.getY())
+	    	return false;
+	    if (getZ() != other.getZ())
+	    	return false;
+	    return true;
+	}
+	
 	public Location(short x, short y, short z) {
 		setX(x);
 		setY(y);
