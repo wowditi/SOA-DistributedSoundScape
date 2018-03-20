@@ -37,7 +37,7 @@
         
                 public org.example.www.controlserviceelements.ProcessPlaybackCommandResponse processPlaybackCommand
                 (
-                  org.example.www.controlserviceelements.ProcessPlaybackCommandRequest processPlaybackCommandRequest
+                  org.example.www.controlserviceelements.ProcessPlaybackCommandRequestE processPlaybackCommandRequest
                  )
             throws ErrorMessage;
         
