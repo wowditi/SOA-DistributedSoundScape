@@ -10,6 +10,8 @@ package org.example.www.controlservice.server;
 import java.util.ArrayList;
 
 import org.example.www.controlserviceelements.ProcessPlaybackCommandRequest;
+import org.example.www.controlserviceelements.ProcessPlaybackCommandRequestE;
+import org.example.www.controlserviceelements.ProcessPlaybackCommandResponse;
 import org.example.www.soundscapedatatypes.ChannelLayout;
 import org.example.www.soundscapedatatypes.Location;
 import org.example.www.soundscapedatatypes.PlaybackCommand;
@@ -136,5 +138,12 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 			this.command = command;
 		}
 		
+	}
+
+	@Override
+	public ProcessPlaybackCommandResponse processPlaybackCommand(
+			ProcessPlaybackCommandRequestE processPlaybackCommandRequest) throws ErrorMessage {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
