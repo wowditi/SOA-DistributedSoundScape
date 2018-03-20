@@ -12,7 +12,12 @@ import java.util.List;
 
 public class DownloadUtils {
 	private static final int BUFFER_SIZE = 4096;
-	private static final List<String> allowedExtensions = new ArrayList<String>();
+	@SuppressWarnings("serial")
+	private static final List<String> allowedExtensions = new ArrayList<String>() {{ 
+		add("mp3");
+		add("flac");
+		
+	}};
 
 	public static String downloadSong(String fileURL, String saveDir) throws MalformedURLException, IOException, RuntimeException {
 		String fileName = "";
@@ -35,8 +40,8 @@ public class DownloadUtils {
 				fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1, fileURL.length());
 			}
 
-			String[] splitFilename = fileName.split(".");
-			if (allowedExtensions.contains(splitFilename[splitFilename.length])) {
+			String[] splitFilename = fileName.split("\\.");
+			if (allowedExtensions.contains(splitFilename[splitFilename.length-1])) {
 				// opens input stream from the HTTP connection
 				InputStream inputStream = httpConn.getInputStream();
 				String saveFilePath = saveDir + File.separator + fileName;

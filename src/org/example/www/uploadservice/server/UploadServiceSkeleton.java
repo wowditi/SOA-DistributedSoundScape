@@ -68,9 +68,9 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 					try {
 						fileName = DownloadUtils.downloadSong("http://" + url, "");
 					} catch (MalformedURLException e) {
-						throw new RuntimeException("Malformed url: \"http://" + url + "\"");
+						throw new RuntimeException("Malformed url: \"http://" + url + "\": "+ e);
 					} catch (IOException e) {
-						throw new RuntimeException("Unable to download file.");
+						throw new RuntimeException("Unable to download file: "+e);
 					}
 					break;
 				case "ftp":
@@ -86,6 +86,7 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 						SpeakerUtils.sendFileToSpeaker(new File(fileName), speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
 					} catch (SQLException e) {
+						e.printStackTrace();
 						throw new RuntimeException("The database could not be updated with the new song"+e);
 					}
 				});

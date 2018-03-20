@@ -11,6 +11,7 @@ public class SpeakerUtils {
 
 	public static void sendFileToSpeaker(File file, String ipAddress, int port, MariaDB db) throws SQLException {
 		//Send file
+		System.out.println("sending");
 		try {
 			Thread.sleep(new Random().nextInt(50));
 		} catch (InterruptedException e) {
