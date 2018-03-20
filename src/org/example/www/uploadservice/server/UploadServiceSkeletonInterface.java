@@ -35,6 +35,7 @@ import java.sql.SQLException;
          * 
                                     * @param isSongLoadedRequest
              * @throws ErrorMessage : 
+         * @throws SQLException 
          */
 
         
@@ -42,20 +43,21 @@ import java.sql.SQLException;
                 (
                   org.example.www.uploadserviceelements.IsSongLoadedRequestE isSongLoadedRequest
                  )
-            throws ErrorMessage;
+            throws ErrorMessage, SQLException;
         
          
         /**
          * Auto generated method signature
          * 
                                     * @param deleteSongRequest
+         * @throws SQLException 
          */
 
         
                 public void deleteSong
                 (
                   org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest
-                 )
+                 ) throws SQLException
             ;
         
          }

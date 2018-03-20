@@ -11,14 +11,20 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.example.www.database.MariaDB;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
 import org.example.www.uploadservice.server.ErrorMessage;
 import org.example.www.uploadservice.server.UploadServiceSkeletonInterface;
+import org.example.www.uploadserviceelements.IsSongLoadedResponse;
 import org.example.www.utils.DownloadUtils;
 import org.example.www.utils.SpeakerUtils;
 
@@ -49,8 +55,6 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 
 	public void uploadSong(org.example.www.uploadserviceelements.UploadSongRequestE uploadSongRequest0)
 			throws SQLException {
-		System.out.println("test");
-		try {
 		MariaDB db;
 		try {
 			db = new MariaDB(database);
@@ -83,7 +87,7 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			for (SpeakerDevice speaker : speakers) {
 				executor.submit(() -> {
 				    try {
-						SpeakerUtils.sendFileToSpeaker(new File(fileName), speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+						SpeakerUtils.sendFileToSpeaker(new File(fileName), type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -104,9 +108,6 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 		} finally {
 			db.cleanUp();
 		}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -115,14 +116,62 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * @param isSongLoadedRequest1
 	 * @return isSongLoadedResponse2
 	 * @throws ErrorMessage
+	 * @throws SQLException 
 	 */
 
 	public org.example.www.uploadserviceelements.IsSongLoadedResponse isSongLoaded(
-			org.example.www.uploadserviceelements.IsSongLoadedRequestE isSongLoadedRequest1) throws ErrorMessage {
-		// TODO : fill this with the necessary business logic
-		System.out.println("test2");
-		throw new java.lang.UnsupportedOperationException(
-				"Do Please implement " + this.getClass().getName() + "#isSongLoaded2");
+			org.example.www.uploadserviceelements.IsSongLoadedRequestE isSongLoadedRequest1) throws ErrorMessage, SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB(database);
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			SpeakerDevice[] speakers = isSongLoadedRequest1.getIsSongLoadedRequest().getSpeakers().getSpeakerDevice();
+			String type = isSongLoadedRequest1.getIsSongLoadedRequest().getLink().getType().getValue();
+			String url = isSongLoadedRequest1.getIsSongLoadedRequest().getLink().getAddress();
+			// Send file to speakers
+			ArrayList<Future<Boolean>> futureList = new ArrayList<Future<Boolean>>();
+			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
+			for (SpeakerDevice speaker : speakers) {
+				Future<Boolean> future = executor.submit(() -> {
+				    try {
+						return SpeakerUtils.isSongLoadedOnSpeaker(type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
+					} catch (SQLException e) {
+						e.printStackTrace();
+						throw new RuntimeException("The database could not be updated with the new song"+e);
+					}
+				});
+				futureList.add(future);
+			}
+			executor.shutdown();
+			IsSongLoadedResponse response = new IsSongLoadedResponse();
+			response.setIsSongLoadedResponse(true);
+			for (Future<Boolean> future : futureList) {
+				try {
+					if (!future.get(1, TimeUnit.MINUTES)) {
+						response.setIsSongLoadedResponse(false);
+						break;
+					} else {
+						System.out.println("true");
+					}
+				} catch (ExecutionException e) {
+					throw new RuntimeException("Unable to get retrieve the needed information: "+e);
+				} catch (TimeoutException e) {
+					throw new RuntimeException("Unable to get a timely response from the database: "+e);
+				} catch (InterruptedException e) {
+					throw new RuntimeException("Unable to get a timely response from the database: "+e);
+				}
+			}
+			//Callback send success
+			return response;
+			
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 	/**
@@ -130,11 +179,47 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * 
 	 * @param deleteSongRequest3
 	 * @return
+	 * @throws SQLException 
 	 */
 
-	public void deleteSong(org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest3) {
-		// TODO : fill this with the necessary business logic
-
+	public void deleteSong(org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest3) throws SQLException {
+		MariaDB db;
+		try {
+			db = new MariaDB(database);
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new RuntimeException("Unable to create a connection to the database: " + e);
+		}
+		try {
+			SpeakerDevice[] speakers = deleteSongRequest3.getDeleteSongRequest().getSpeakers().getSpeakerDevice();
+			String type = deleteSongRequest3.getDeleteSongRequest().getLink().getType().getValue();
+			String url = deleteSongRequest3.getDeleteSongRequest().getLink().getAddress();
+			// Send file to speakers
+			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
+			for (SpeakerDevice speaker : speakers) {
+				executor.submit(() -> {
+				    try {
+						SpeakerUtils.deleteFileFromSpeaker(type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
+					} catch (SQLException e) {
+						e.printStackTrace();
+						throw new RuntimeException("The database could not be updated with the new song"+e);
+					}
+				});
+			}
+			executor.shutdown();
+			try {
+				executor.awaitTermination(5, TimeUnit.MINUTES);
+			} catch (InterruptedException e) {
+				//Callback send failure
+				return;
+			}
+			//Callback send success
+			return;
+			
+		} finally {
+			db.cleanUp();
+		}
 	}
 
 }
