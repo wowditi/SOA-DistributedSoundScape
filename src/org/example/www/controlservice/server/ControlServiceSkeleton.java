@@ -8,6 +8,8 @@
 package org.example.www.controlservice.server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.example.www.controlserviceelements.ProcessPlaybackCommandRequest;
 import org.example.www.controlserviceelements.ProcessPlaybackCommandRequestE;
@@ -26,6 +28,7 @@ import org.example.www.soundscapedatatypes.VolumeLevel;
 public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 
 	private SoundScapeSourceLayout layout;
+	private Map<Location, ChannelLayout[]> volumeMap;
 
 	/**
 	 * Auto generated method signature
@@ -38,8 +41,23 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 	public org.example.www.controlserviceelements.SetSoundScapeSourceLayoutResponse setSoundScapeSourceLayout(
 			org.example.www.controlserviceelements.SetSoundScapeSourceLayoutRequestE setSoundScapeSourceLayoutRequest0)
 			throws ErrorMessage {
-		this.layout = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
+		SoundScapeSourceLayout newLayout = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
 				.getSoundScapeSourceLayout();
+
+		if (!this.layout.equals(newLayout)) {
+			this.layout = newLayout;
+			volumeMap = new HashMap<Location, ChannelLayout[]>();
+		}
+		// for every speaker
+		SpeakerDeviceArray speakers = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
+				.getSpeakers();
+		for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
+
+			if (!volumeMap.containsKey(speaker.getLocation())) {
+				addLocChanels(speaker.getLocation());
+			}
+		}
+
 		org.example.www.controlserviceelements.SetSoundScapeSourceLayoutResponse response = new org.example.www.controlserviceelements.SetSoundScapeSourceLayoutResponse();
 		response.setSetSoundScapeSourceLayoutResponse(true);
 		return response;
@@ -59,36 +77,50 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 	public org.example.www.controlserviceelements.ProcessPlaybackCommandResponse processPlaybackCommand(
 			org.example.www.controlserviceelements.ProcessPlaybackCommandRequest processPlaybackCommandRequest2)
 			throws ErrorMessage {
-		//make a queue for simultanious sending
+		// make a queue for simultanious sending
 		PlaybackCommandQueue queue = new PlaybackCommandQueue();
-		
-		//get the command
+
+		// get the command
 		PlaybackCommand command = processPlaybackCommandRequest2.getCommand();
-		
+
 		// for every speaker
 		SpeakerDeviceArray speakers = processPlaybackCommandRequest2.getSpeakers();
 		for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
 
-			// Calculate new set of volume levels for every channel
-			ChannelLayout[] channels = new ChannelLayout[layout.getChannelLayouts().length];
-			for (int i = 0; i < layout.getChannelLayouts().length; i++) {
-				ChannelLayout sourceChannel = layout.getChannelLayouts()[i];
-				Location speakerloc = speaker.getLocation();
-
-				channels[i].setChannelNumber(sourceChannel.getChannelNumber());
-				channels[i].setVolumeLevel(calcVolumeLevel(sourceChannel, speakerloc));
+			// Get or calculate set of volume levels for every channel
+			if (!volumeMap.containsKey(speaker.getLocation())) {
+				addLocChanels(speaker.getLocation());
 			}
+			ChannelLayout[] channels = volumeMap.get(speaker.getLocation());
 			
 			queue.addInstruction(new PlaybackCommandInstruction(speaker, channels, command));
-			
+
 		}
 
+		queue.send();
+		org.example.www.controlserviceelements.ProcessPlaybackCommandResponse response = new org.example.www.controlserviceelements.ProcessPlaybackCommandResponse();
+		response.setProcessPlaybackCommandResponse(true);
+		return response;
 		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException(
-				"Please implement " + this.getClass().getName() + "#processPlaybackCommand");
+		//throw new java.lang.UnsupportedOperationException(
+		//		"Please implement " + this.getClass().getName() + "#processPlaybackCommand");
 
 	}
 
+	
+	private void addLocChanels(Location speakerLoc) {
+		// Calculate new set of volume levels for every channel
+		ChannelLayout[] channels = new ChannelLayout[layout.getChannelLayouts().length];
+		for (int i = 0; i < layout.getChannelLayouts().length; i++) {
+			ChannelLayout sourceChannel = layout.getChannelLayouts()[i];
+
+			channels[i].setChannelNumber(sourceChannel.getChannelNumber());
+			channels[i].setVolumeLevel(calcVolumeLevel(sourceChannel, speakerLoc));
+
+		}
+		volumeMap.put(speakerLoc, channels);
+	}
+	
 	private VolumeLevel calcVolumeLevel(ChannelLayout sourceChannel, Location speakerLoc) {
 		Location sourceLoc = sourceChannel.getLocation();
 
@@ -114,13 +146,18 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 	private class PlaybackCommandQueue {
 
 		ArrayList<PlaybackCommandInstruction> queue = new ArrayList<PlaybackCommandInstruction>();
-		
+
 		public void addInstruction(PlaybackCommandInstruction instruction) {
 			this.queue.add(instruction);
 		}
-		
+
 		public void clear() {
 			this.queue = new ArrayList<PlaybackCommandInstruction>();
+		}
+		
+		public void send() {
+			//placeholder, no actual speakers to send to
+			this.clear();
 		}
 	}
 
@@ -129,15 +166,13 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		final SpeakerDevice speaker;
 		final ChannelLayout[] chanelVolumes;
 		final PlaybackCommand command;
-		
-		PlaybackCommandInstruction(SpeakerDevice speaker,
-		ChannelLayout[] chanelVolumes,
-		PlaybackCommand command) {
+
+		PlaybackCommandInstruction(SpeakerDevice speaker, ChannelLayout[] chanelVolumes, PlaybackCommand command) {
 			this.speaker = speaker;
 			this.chanelVolumes = chanelVolumes;
 			this.command = command;
 		}
-		
+
 	}
 
 	@Override

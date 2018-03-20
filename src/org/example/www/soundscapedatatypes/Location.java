@@ -8,6 +8,7 @@
 
 package org.example.www.soundscapedatatypes;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 /**
  * Location bean class
  */
@@ -36,6 +37,15 @@ public class Location implements org.apache.axis2.databinding.ADBBean {
 	    if (getZ() != other.getZ())
 	    	return false;
 	    return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17,31).
+				append(getX()).
+				append(getY()).
+				append(getZ()).
+				toHashCode();
 	}
 	
 	public Location(short x, short y, short z) {
