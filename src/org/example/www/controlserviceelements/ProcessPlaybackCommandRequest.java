@@ -17,39 +17,68 @@
         
         public  class ProcessPlaybackCommandRequest
         implements org.apache.axis2.databinding.ADBBean{
-        
-                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.example.org/ControlServiceElements/",
-                "ProcessPlaybackCommandRequest",
-                "ns3");
-
+        /* This type was generated from the piece of schema that had
+                name = ProcessPlaybackCommandRequest
+                Namespace URI = http://www.example.org/ControlServiceElements/
+                Namespace Prefix = ns4
+                */
             
 
                         /**
-                        * field for ProcessPlaybackCommandRequest
+                        * field for Command
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.PlaybackCommand localProcessPlaybackCommandRequest ;
+                                    protected org.example.www.soundscapedatatypes.PlaybackCommand localCommand ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return org.example.www.soundscapedatatypes.PlaybackCommand
                            */
-                           public  org.example.www.soundscapedatatypes.PlaybackCommand getProcessPlaybackCommandRequest(){
-                               return localProcessPlaybackCommandRequest;
+                           public  org.example.www.soundscapedatatypes.PlaybackCommand getCommand(){
+                               return localCommand;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ProcessPlaybackCommandRequest
+                               * @param param Command
                                */
-                               public void setProcessPlaybackCommandRequest(org.example.www.soundscapedatatypes.PlaybackCommand param){
+                               public void setCommand(org.example.www.soundscapedatatypes.PlaybackCommand param){
                             
-                                            this.localProcessPlaybackCommandRequest=param;
+                                            this.localCommand=param;
+                                       
+
+                               }
+                            
+
+                        /**
+                        * field for Speakers
+                        */
+
+                        
+                                    protected org.example.www.soundscapedatatypes.SpeakerDeviceArray localSpeakers ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return org.example.www.soundscapedatatypes.SpeakerDeviceArray
+                           */
+                           public  org.example.www.soundscapedatatypes.SpeakerDeviceArray getSpeakers(){
+                               return localSpeakers;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Speakers
+                               */
+                               public void setSpeakers(org.example.www.soundscapedatatypes.SpeakerDeviceArray param){
+                            
+                                            this.localSpeakers=param;
                                        
 
                                }
@@ -70,8 +99,8 @@
 
         
                org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME);
-               return factory.createOMElement(dataSource,MY_QNAME);
+                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName);
+               return factory.createOMElement(dataSource,parentQName);
             
         }
 
@@ -87,19 +116,53 @@
             throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
             
                 
-                //We can safely assume an element has only one type associated with it
+
+
+                java.lang.String prefix = null;
+                java.lang.String namespace = null;
                 
-                                 if (localProcessPlaybackCommandRequest==null){
-                                   throw new org.apache.axis2.databinding.ADBException("ProcessPlaybackCommandRequest cannot be null!");
-                                 }
-                                 localProcessPlaybackCommandRequest.serialize(MY_QNAME,xmlWriter);
-                            
+
+                    prefix = parentQName.getPrefix();
+                    namespace = parentQName.getNamespaceURI();
+                    writeStartElement(prefix, namespace, parentQName.getLocalPart(), xmlWriter);
+                
+                  if (serializeType){
+               
+
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/ControlServiceElements/");
+                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
+                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                           namespacePrefix+":ProcessPlaybackCommandRequest",
+                           xmlWriter);
+                   } else {
+                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
+                           "ProcessPlaybackCommandRequest",
+                           xmlWriter);
+                   }
+
+               
+                   }
+               
+                                            if (localCommand==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("Command cannot be null!!");
+                                            }
+                                           localCommand.serialize(new javax.xml.namespace.QName("","Command"),
+                                               xmlWriter);
+                                        
+                                            if (localSpeakers==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("Speakers cannot be null!!");
+                                            }
+                                           localSpeakers.serialize(new javax.xml.namespace.QName("","Speakers"),
+                                               xmlWriter);
+                                        
+                    xmlWriter.writeEndElement();
+               
 
         }
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/ControlServiceElements/")){
-                return "ns3";
+                return "ns4";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -273,9 +336,32 @@
 
 
         
+                 java.util.ArrayList elementList = new java.util.ArrayList();
+                 java.util.ArrayList attribList = new java.util.ArrayList();
+
                 
-                //We can safely assume an element has only one type associated with it
-                return localProcessPlaybackCommandRequest.getPullParser(MY_QNAME);
+                            elementList.add(new javax.xml.namespace.QName("",
+                                                                      "Command"));
+                            
+                            
+                                    if (localCommand==null){
+                                         throw new org.apache.axis2.databinding.ADBException("Command cannot be null!!");
+                                    }
+                                    elementList.add(localCommand);
+                                
+                            elementList.add(new javax.xml.namespace.QName("",
+                                                                      "Speakers"));
+                            
+                            
+                                    if (localSpeakers==null){
+                                         throw new org.apache.axis2.databinding.ADBException("Speakers cannot be null!!");
+                                    }
+                                    elementList.add(localSpeakers);
+                                
+
+                return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
+            
+            
 
         }
 
@@ -310,6 +396,32 @@
                     reader.next();
 
                 
+                if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","type")!=null){
+                  java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                        "type");
+                  if (fullTypeName!=null){
+                    java.lang.String nsPrefix = null;
+                    if (fullTypeName.indexOf(":") > -1){
+                        nsPrefix = fullTypeName.substring(0,fullTypeName.indexOf(":"));
+                    }
+                    nsPrefix = nsPrefix==null?"":nsPrefix;
+
+                    java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
+                    
+                            if (!"ProcessPlaybackCommandRequest".equals(type)){
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
+                                return (ProcessPlaybackCommandRequest)org.example.www.controlservice.ExtensionMapper.getTypeObject(
+                                     nsUri,type,reader);
+                              }
+                        
+
+                  }
+                
+
+                }
+
+                
 
                 
                 // Note all attributes that were handled. Used to differ normal attributes
@@ -317,26 +429,49 @@
                 java.util.Vector handledAttributes = new java.util.Vector();
                 
 
-                   
-                while(!reader.isEndElement()) {
-                    if (reader.isStartElement() ){
                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/","ProcessPlaybackCommandRequest").equals(reader.getName())){
+                    
+                    reader.next();
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                                object.setProcessPlaybackCommandRequest(org.example.www.soundscapedatatypes.PlaybackCommand.Factory.parse(reader));
-                                            
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","Command").equals(reader.getName())){
+                                
+                                                object.setCommand(org.example.www.soundscapedatatypes.PlaybackCommand.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    
                               }  // End of if for expected property start element
                                 
-                             else{
-                                        // A start element we are not expecting indicates an invalid parameter was passed
-                                        throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                             }
-                          
-                             } else {
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","Speakers").equals(reader.getName())){
+                                
+                                                object.setSpeakers(org.example.www.soundscapedatatypes.SpeakerDeviceArray.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                              
+                            while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
-                             }  
-                           }  // end of while loop
-                        
+                            
+                                if (reader.isStartElement())
+                                // A start element we are not expecting indicates a trailing invalid property
+                                throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                            
 
 
 

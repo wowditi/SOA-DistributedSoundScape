@@ -1,6 +1,6 @@
 
 /**
- * ErrorMessage.java
+ * ProcessPlaybackCommandRequestE.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
@@ -11,45 +11,45 @@
             
 
             /**
-            *  ErrorMessage bean class
+            *  ProcessPlaybackCommandRequestE bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class ErrorMessage
+        public  class ProcessPlaybackCommandRequestE
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/ControlServiceElements/",
-                "ErrorMessage",
+                "ProcessPlaybackCommandRequest",
                 "ns4");
 
             
 
                         /**
-                        * field for ErrorMessage
+                        * field for ProcessPlaybackCommandRequest
                         */
 
                         
-                                    protected java.lang.String localErrorMessage ;
+                                    protected org.example.www.controlserviceelements.ProcessPlaybackCommandRequest localProcessPlaybackCommandRequest ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return org.example.www.controlserviceelements.ProcessPlaybackCommandRequest
                            */
-                           public  java.lang.String getErrorMessage(){
-                               return localErrorMessage;
+                           public  org.example.www.controlserviceelements.ProcessPlaybackCommandRequest getProcessPlaybackCommandRequest(){
+                               return localProcessPlaybackCommandRequest;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ErrorMessage
+                               * @param param ProcessPlaybackCommandRequest
                                */
-                               public void setErrorMessage(java.lang.String param){
+                               public void setProcessPlaybackCommandRequest(org.example.www.controlserviceelements.ProcessPlaybackCommandRequest param){
                             
-                                            this.localErrorMessage=param;
+                                            this.localProcessPlaybackCommandRequest=param;
                                        
 
                                }
@@ -89,37 +89,11 @@
                 
                 //We can safely assume an element has only one type associated with it
                 
-                            java.lang.String namespace = "http://www.example.org/ControlServiceElements/";
-                            java.lang.String _localName = "ErrorMessage";
-                        
-                            writeStartElement(null, namespace, _localName, xmlWriter);
-
-                            // add the type details if this is used in a simple type
-                               if (serializeType){
-                                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/ControlServiceElements/");
-                                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
-                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                                           namespacePrefix+":ErrorMessage",
-                                           xmlWriter);
-                                   } else {
-                                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                                           "ErrorMessage",
-                                           xmlWriter);
-                                   }
-                               }
+                                 if (localProcessPlaybackCommandRequest==null){
+                                   throw new org.apache.axis2.databinding.ADBException("ProcessPlaybackCommandRequest cannot be null!");
+                                 }
+                                 localProcessPlaybackCommandRequest.serialize(MY_QNAME,xmlWriter);
                             
-                                          if (localErrorMessage==null){
-                                            
-                                                     throw new org.apache.axis2.databinding.ADBException("ErrorMessage cannot be null !!");
-                                                
-                                         }else{
-                                        
-                                                       xmlWriter.writeCharacters(localErrorMessage);
-                                            
-                                         }
-                                    
-                            xmlWriter.writeEndElement();
-                    
 
         }
 
@@ -301,12 +275,7 @@
         
                 
                 //We can safely assume an element has only one type associated with it
-                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-                            new java.lang.Object[]{
-                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localErrorMessage)
-                            },
-                            null);
+                return localProcessPlaybackCommandRequest.getPullParser(MY_QNAME);
 
         }
 
@@ -327,9 +296,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static ErrorMessage parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            ErrorMessage object =
-                new ErrorMessage();
+        public static ProcessPlaybackCommandRequestE parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            ProcessPlaybackCommandRequestE object =
+                new ProcessPlaybackCommandRequestE();
 
             int event;
             java.lang.String nillableValue = null;
@@ -352,18 +321,9 @@
                 while(!reader.isEndElement()) {
                     if (reader.isStartElement() ){
                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/","ErrorMessage").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/ControlServiceElements/","ProcessPlaybackCommandRequest").equals(reader.getName())){
                                 
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"ErrorMessage" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setErrorMessage(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                object.setProcessPlaybackCommandRequest(org.example.www.controlserviceelements.ProcessPlaybackCommandRequest.Factory.parse(reader));
                                             
                               }  // End of if for expected property start element
                                 
