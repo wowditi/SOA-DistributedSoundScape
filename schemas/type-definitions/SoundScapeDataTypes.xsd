@@ -59,6 +59,7 @@
     	<restriction base="string">
     		<enumeration value="ftp"></enumeration>
     		<enumeration value="http"></enumeration>
+    		<enumeration value="https"></enumeration>
     	</restriction>
     </simpleType>
 

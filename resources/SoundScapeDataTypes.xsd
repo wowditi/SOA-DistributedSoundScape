@@ -48,6 +48,7 @@
         <restriction base="string">
             <enumeration value="ftp"/>
             <enumeration value="http"/>
+            <enumeration value="https"/>
         </restriction>
     </simpleType>
     <simpleType name="ChannelNumber">
