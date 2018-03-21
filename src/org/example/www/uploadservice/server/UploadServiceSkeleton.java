@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +20,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.example.www.database.MariaDB;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
 import org.example.www.uploadservice.server.ErrorMessage;
@@ -77,6 +77,15 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 						throw new RuntimeException("Unable to download file: "+e);
 					}
 					break;
+				case "https":
+					try {
+						fileName = DownloadUtils.downloadSong("http://" + url, "");
+					} catch (MalformedURLException e) {
+						throw new RuntimeException("Malformed url: \"http://" + url + "\": "+ e);
+					} catch (IOException e) {
+						throw new RuntimeException("Unable to download file: "+e);
+					}
+					break;
 				case "ftp":
 					throw new RuntimeException("Sorry ftp is not (yet) supported");
 				default:
@@ -89,6 +98,8 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 				    try {
 						SpeakerUtils.sendFileToSpeaker(new File(fileName), type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
+					} catch (SQLIntegrityConstraintViolationException e) {
+						//Song was already loaded
 					} catch (SQLException e) {
 						e.printStackTrace();
 						throw new RuntimeException("The database could not be updated with the new song"+e);
@@ -120,7 +131,7 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 */
 
 	public org.example.www.uploadserviceelements.IsSongLoadedResponse isSongLoaded(
-			org.example.www.uploadserviceelements.IsSongLoadedRequestE isSongLoadedRequest1) throws ErrorMessage, SQLException {
+			org.example.www.uploadserviceelements.IsSongLoadedRequestE isSongLoadedRequest1) throws SQLException {
 		MariaDB db;
 		try {
 			db = new MariaDB(database);
@@ -155,8 +166,6 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 					if (!future.get(1, TimeUnit.MINUTES)) {
 						response.setIsSongLoadedResponse(false);
 						break;
-					} else {
-						System.out.println("true");
 					}
 				} catch (ExecutionException e) {
 					throw new RuntimeException("Unable to get retrieve the needed information: "+e);

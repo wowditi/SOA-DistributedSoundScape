@@ -37,6 +37,9 @@ public class MariaDB {
 	private final String createTables = "-- ****************** SqlDBM: MySQL ******************;\n" + 
 			"-- ***************************************************;\n" + 
 			"\n" + 
+			"DROP TABLE `speakerToSongs`;\n" + 
+			"\n" + 
+			"\n" + 
 			"DROP TABLE `soundScapeToSpeakers`;\n" + 
 			"\n" + 
 			"\n" + 
@@ -97,6 +100,23 @@ public class MariaDB {
 			"\n" + 
 			"\n" + 
 			"\n" + 
+			"-- ************************************** `speakerToSongs`\n" + 
+			"\n" + 
+			"CREATE TABLE `speakerToSongs`\n" + 
+			"(\n" + 
+			" `ipAddress` VARCHAR(15) NOT NULL ,\n" + 
+			" `port`      SMALLINT UNSIGNED NOT NULL ,\n" + 
+			" `song`      VARCHAR(2083) NOT NULL ,\n" + 
+			"\n" + 
+			"PRIMARY KEY (`ipAddress`, `port`, `song`),\n" + 
+			"KEY `fkIdx_100` (`ipAddress`, `port`),\n" + 
+			"CONSTRAINT `FK_100` FOREIGN KEY `fkIdx_100` (`ipAddress`, `port`) REFERENCES `Speakers` (`ipAddress`, `port`)\n" + 
+			");\n" + 
+			"\n" + 
+			"\n" + 
+			"\n" + 
+			"\n" + 
+			"\n" + 
 			"-- ************************************** `soundScapeToSpeakers`\n" + 
 			"\n" + 
 			"CREATE TABLE `soundScapeToSpeakers`\n" + 
@@ -129,5 +149,10 @@ public class MariaDB {
 			"CONSTRAINT `FK_59` FOREIGN KEY `fkIdx_59` (`soundScapeId`) REFERENCES `soundScapes` (`soundScapeId`) ON DELETE CASCADE,\n" + 
 			"KEY `fkIdx_63` (`ipAddress`, `port`),\n" + 
 			"CONSTRAINT `FK_63` FOREIGN KEY `fkIdx_63` (`ipAddress`, `port`) REFERENCES `Users` (`ipAddress`, `port`) ON DELETE CASCADE\n" + 
-			");";
+			");\n" + 
+			"\n" + 
+			"\n" + 
+			"\n" + 
+			"\n" + 
+			"";
 }
