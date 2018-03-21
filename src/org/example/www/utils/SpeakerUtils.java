@@ -17,7 +17,7 @@ public class SpeakerUtils {
 		} catch (InterruptedException e) {
 			//Do nothing, its for mock-up purposes anyways
 		}
-		String statement = "INSERT INTO speakerToSongs (ipAddress, port, song) VALUES (?, ?, ?)";
+		String statement = "INSERT IGNORE INTO speakerToSongs (ipAddress, port, song) VALUES (?, ?, ?)";
 		PreparedStatement insertStatement = db.prepareStatement(statement);
 		insertStatement.setString(1, ipAddress);
 		insertStatement.setInt(2, port);
