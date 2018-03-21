@@ -29,7 +29,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ControlServiceSkeletonTest {
-	ControlServiceSkeleton skeleton;
+	private ControlServiceSkeleton skeleton;
 
 	@BeforeEach
 	public void setup() {
@@ -44,43 +44,6 @@ public class ControlServiceSkeletonTest {
 		innerRequest.setSpeakers(createSpeakerDeviceArray(new short[]{0}, new short[]{0}, new short[]{0}));
 		request.setSetSoundScapeSourceLayoutRequest(innerRequest);
 		skeleton.setSoundScapeSourceLayout(request);
-
-		RegistrationServiceSkeleton skeleton = new RegistrationServiceSkeleton("DistributedSoundScapeTest");
-		GetSpeakersResponseE speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(false, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-		AddSpeakerRequestE addSpeakerRequest1 = new AddSpeakerRequestE("1.1.1.1", 1, 1, (short) 1, (short) 1,
-				(short) 1);
-		skeleton.addSpeaker(addSpeakerRequest1);
-		SpeakerDevice speaker1 = addSpeakerRequest1.getAddSpeakerRequest().getSpeaker();
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(true, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-		assertEquals(1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice().length);
-		assertEquals(speaker1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		AddSpeakerRequestE addSpeakerRequest2 = new AddSpeakerRequestE("255.255.255.255", 65535, 1, (short) 50,
-				(short) 30, (short) 23);
-		skeleton.addSpeaker(addSpeakerRequest2);
-		SpeakerDevice speaker2 = addSpeakerRequest2.getAddSpeakerRequest().getSpeaker();
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(true, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-		assertEquals(2, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice().length);
-		assertEquals(speaker1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		assertEquals(speaker2, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[1]);
-		assertNotEquals(speaker1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[1]);
-		assertNotEquals(speaker2, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 50));
-		assertEquals(false, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-		AddSpeakerRequestE addSpeakerRequest3 = new AddSpeakerRequestE("0.0.0.0", 65535, 50, (short) 51, (short) 23,
-				(short) 23);
-		skeleton.addSpeaker(addSpeakerRequest3);
-		SpeakerDevice speaker3 = addSpeakerRequest3.getAddSpeakerRequest().getSpeaker();
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 50));
-		assertEquals(true, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-		assertEquals(1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice().length);
-		assertEquals(speaker3, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		AddSpeakerRequestE addSpeakerRequest4 = new AddSpeakerRequestE("0.0.0.0", 65535, 230, (short) 213, (short) 213,
-				(short) 234);
-		SQLException e = assertThrows(SQLException.class, () -> skeleton.addSpeaker(addSpeakerRequest4));
-		e.getMessage().contains("Duplicate entry");
 	}
 
 	private SpeakerDeviceArray createSpeakerDeviceArraySpecific(short[] x, short[] y, short[] z) {
