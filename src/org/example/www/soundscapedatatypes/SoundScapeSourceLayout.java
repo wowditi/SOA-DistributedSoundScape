@@ -21,6 +21,10 @@ public class SoundScapeSourceLayout implements org.apache.axis2.databinding.ADBB
 	 * SoundScapeSourceLayout Namespace URI =
 	 * http://www.example.org/SoundScapeDataTypes/ Namespace Prefix = ns1
 	 */
+	
+	public SoundScapeSourceLayout() {
+		setChannelLayouts(new ChannelLayout[0]);
+	}
 
 	/**
 	 * field for ChannelLayouts This was an Array!
