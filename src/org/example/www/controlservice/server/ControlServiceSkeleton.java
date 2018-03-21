@@ -27,8 +27,8 @@ import org.example.www.soundscapedatatypes.VolumeLevel;
  */
 public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 
-	private SoundScapeSourceLayout layout;
-	private Map<Location, ChannelLayout[]> volumeMap;
+	protected SoundScapeSourceLayout layout = new SoundScapeSourceLayout();
+	protected Map<Location, ChannelLayout[]> volumeMap = new HashMap<Location, ChannelLayout[]>();
 
 	/**
 	 * Auto generated method signature
@@ -92,7 +92,7 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 				addLocChanels(speaker.getLocation());
 			}
 			ChannelLayout[] channels = volumeMap.get(speaker.getLocation());
-			
+
 			queue.addInstruction(new PlaybackCommandInstruction(speaker, channels, command));
 
 		}
@@ -102,16 +102,15 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		response.setProcessPlaybackCommandResponse(true);
 		return response;
 		// TODO : fill this with the necessary business logic
-		//throw new java.lang.UnsupportedOperationException(
-		//		"Please implement " + this.getClass().getName() + "#processPlaybackCommand");
+		// throw new java.lang.UnsupportedOperationException(
+		// "Please implement " + this.getClass().getName() + "#processPlaybackCommand");
 
 	}
 
-	
 	private void addLocChanels(Location speakerLoc) {
 		// Calculate new set of volume levels for every channel
 		ChannelLayout[] channels = new ChannelLayout[layout.getChannelLayouts().length];
-		for (int i = 0; i < layout.getChannelLayouts().length; i++) {
+		for (int i = 0; i < channels.length; i++) {
 			ChannelLayout sourceChannel = layout.getChannelLayouts()[i];
 
 			channels[i].setChannelNumber(sourceChannel.getChannelNumber());
@@ -120,13 +119,19 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		}
 		volumeMap.put(speakerLoc, channels);
 	}
-	
+
 	private VolumeLevel calcVolumeLevel(ChannelLayout sourceChannel, Location speakerLoc) {
 		Location sourceLoc = sourceChannel.getLocation();
 
 		// Claculate volume multiplier based on vector projection scalar projecting
 		// speaker on source vector
-		double volumeMultiplier = dotProduct(speakerLoc, sourceLoc) / dotProduct(sourceLoc, sourceLoc);
+		double volumeMultiplier;
+
+		if (dotProduct(sourceLoc, sourceLoc) !=0) { 
+			volumeMultiplier = dotProduct(speakerLoc, sourceLoc) / dotProduct(sourceLoc, sourceLoc);
+		} else {
+			volumeMultiplier = 1;
+		}
 		volumeMultiplier = Math.max(volumeMultiplier, 0);
 
 		VolumeLevel newVolume = new VolumeLevel();
@@ -154,9 +159,9 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		public void clear() {
 			this.queue = new ArrayList<PlaybackCommandInstruction>();
 		}
-		
+
 		public void send() {
-			//placeholder, no actual speakers to send to
+			// placeholder, no actual speakers to send to
 			this.clear();
 		}
 	}
