@@ -34,10 +34,7 @@ public class MariaDB {
 		
 	}
 	
-	private final String createTables = "-- ****************** SqlDBM: MySQL ******************;\n" + 
-			"-- ***************************************************;\n" + 
-			"\n" + 
-			"DROP TABLE `speakerToSongs`;\n" + 
+	private final String createTables = "DROP TABLE `speakerToSongs`;\n" + 
 			"\n" + 
 			"\n" + 
 			"DROP TABLE `soundScapeToSpeakers`;\n" + 
@@ -110,7 +107,7 @@ public class MariaDB {
 			"\n" + 
 			"PRIMARY KEY (`ipAddress`, `port`, `song`),\n" + 
 			"KEY `fkIdx_100` (`ipAddress`, `port`),\n" + 
-			"CONSTRAINT `FK_100` FOREIGN KEY `fkIdx_100` (`ipAddress`, `port`) REFERENCES `Speakers` (`ipAddress`, `port`)\n" + 
+			"CONSTRAINT `FK_100` FOREIGN KEY `fkIdx_100` (`ipAddress`, `port`) REFERENCES `Speakers` (`ipAddress`, `port`) ON DELETE CASCADE\n" + 
 			");\n" + 
 			"\n" + 
 			"\n" + 
@@ -150,9 +147,6 @@ public class MariaDB {
 			"KEY `fkIdx_63` (`ipAddress`, `port`),\n" + 
 			"CONSTRAINT `FK_63` FOREIGN KEY `fkIdx_63` (`ipAddress`, `port`) REFERENCES `Users` (`ipAddress`, `port`) ON DELETE CASCADE\n" + 
 			");\n" + 
-			"\n" + 
-			"\n" + 
-			"\n" + 
 			"\n" + 
 			"";
 }
