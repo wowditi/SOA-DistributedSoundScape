@@ -11,6 +11,7 @@ import org.example.www.registrationserviceelements.AddSpeakerRequestE;
 import org.example.www.registrationserviceelements.GetSpeakersRequestE;
 import org.example.www.soundscapedatatypes.Link;
 import org.example.www.soundscapedatatypes.SpeakerDeviceArray;
+import org.example.www.uploadserviceelements.DeleteSongRequestE;
 import org.example.www.uploadserviceelements.IsSongLoadedRequestE;
 import org.example.www.uploadserviceelements.UploadSongRequestE;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +62,12 @@ public class UploadServiceSkeletonTest {
 		skel.uploadSong(new UploadSongRequestE(url1, speakers));
 		assertTrue(skel.isSongLoaded(new IsSongLoadedRequestE(url2, speakers)).getIsSongLoadedResponse());
 		assertTrue(skel.isSongLoaded(new IsSongLoadedRequestE(url1, speakers)).getIsSongLoadedResponse());
-		
+		skel.deleteSong(new DeleteSongRequestE(url1, speakers));
+		assertFalse(skel.isSongLoaded(new IsSongLoadedRequestE(url1, speakers)).getIsSongLoadedResponse());
+		assertTrue(skel.isSongLoaded(new IsSongLoadedRequestE(url2, speakers)).getIsSongLoadedResponse());
+		skel.deleteSong(new DeleteSongRequestE(url2, speakers));
+		assertFalse(skel.isSongLoaded(new IsSongLoadedRequestE(url1, speakers)).getIsSongLoadedResponse());
+		assertFalse(skel.isSongLoaded(new IsSongLoadedRequestE(url2, speakers)).getIsSongLoadedResponse());
 	}
 
 }

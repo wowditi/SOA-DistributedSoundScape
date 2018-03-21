@@ -23,7 +23,7 @@ public class Link implements org.apache.axis2.databinding.ADBBean {
 	
 	public Link(String url, String type) {
 		setAddress(url);
-		setType(new LinkType(type, true));
+		setType(new LinkType(type, false));
 	}
 	
 
