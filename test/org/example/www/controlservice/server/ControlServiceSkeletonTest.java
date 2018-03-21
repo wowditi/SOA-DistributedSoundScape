@@ -29,11 +29,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ControlServiceSkeletonTest {
-	ControlServiceSkeleton skeleton;
+	final private ControlServiceSkeleton skeleton  = new ControlServiceSkeleton();
 
 	@BeforeEach
 	public void setup() {
-		skeleton = new ControlServiceSkeleton();
+		try {
+			MariaDB mariadb = new MariaDB("DistributedSoundScapeTest");
+			try {
+				mariadb.restoreDatabase();
+			} finally {
+				mariadb.cleanUp();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test

@@ -89,8 +89,6 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		// make a queue for simultanious sending
 		ProcessPlaybackCommandResponse response = new ProcessPlaybackCommandResponse();
 		response.setProcessPlaybackCommandResponse(false);
-		if (true)
-			return response;
 		try {
 		ProcessPlaybackCommandRequest request = processPlaybackCommandRequest
 				.getProcessPlaybackCommandRequest();
@@ -147,9 +145,9 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		// speaker on source vector
 		double volumeMultiplier = dotProduct(speakerLoc, sourceLoc) / dotProduct(sourceLoc, sourceLoc);
 		volumeMultiplier = Math.max(volumeMultiplier, 0);
-
+		if (Double.isNaN(volumeMultiplier))
+			volumeMultiplier = 0;
 		VolumeLevel newVolume = new VolumeLevel();
-		System.out.println(volumeMultiplier);
 		newVolume.setVolumeLevel(sourceChannel.getVolumeLevel().getVolumeLevel() * volumeMultiplier);
 		return newVolume;
 
