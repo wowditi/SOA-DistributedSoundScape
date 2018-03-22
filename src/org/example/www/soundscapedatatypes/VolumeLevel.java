@@ -55,6 +55,19 @@ public class VolumeLevel implements org.apache.axis2.databinding.ADBBean {
 
 	}
 
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (!VolumeLevel.class.isAssignableFrom(obj.getClass())) {
+	        return false;
+	    }
+	    final VolumeLevel other = (VolumeLevel) obj;
+	    if (getVolumeLevel() != other.getVolumeLevel())
+	    	return false;
+	    return true;
+	}
+	
 	/**
 	 *
 	 * @param parentQName

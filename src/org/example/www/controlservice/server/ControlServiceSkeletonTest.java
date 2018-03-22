@@ -33,22 +33,22 @@ public class ControlServiceSkeletonTest {
 	}
 
 	@Test
-	public void addSoundScapeSourceLayoutTest() throws RuntimeException {
+	public void addSoundScapeSourceLayoutTest() throws RuntimeException{
 
 		SetSoundScapeSourceLayoutRequest request = new SetSoundScapeSourceLayoutRequest();
-		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[100], new short[1], new short[1], new short[1]);
-		request.setSoundScapeSourceLayout(createSoundScapeSource(new double[100], new short[1], new short[1], new short[1]));
-		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[1], new short[1], new short[1]);
+		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] {100}, new short[] {1}, new short[] {1}, new short[] {1});
+		request.setSoundScapeSourceLayout(createSoundScapeSource(new double[] {100}, new short[] {1}, new short[] {1}, new short[] {1}));
+		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] {1}, new short[] {1}, new short[] {1});
 		request.setSpeakers(sourceSpeakers);
 		SetSoundScapeSourceLayoutRequestE E = new SetSoundScapeSourceLayoutRequestE();
 		E.setSetSoundScapeSourceLayoutRequest(request);
 		try {
 			skelleton.setSoundScapeSourceLayout(E);
 		} catch (ErrorMessage e) {
-			assertEquals(true, false);
 			e.printStackTrace();
+			assertTrue(false);
 		}
-		assertEquals(skelleton.layout, sourceLayout);
+		assertTrue(skelleton.layout.equals(sourceLayout));
 		for (SpeakerDevice speaker : sourceSpeakers.getSpeakerDevice()) {
 			Location loc = speaker.getLocation();
 			assertTrue(skelleton.volumeMap.containsKey(loc));
@@ -56,50 +56,7 @@ public class ControlServiceSkeletonTest {
 		
 	}
 
-	@Test
-	public void removeSpeakerTest() throws RuntimeException, SQLException, ErrorMessage {
-		RegistrationServiceSkeleton skeleton = new RegistrationServiceSkeleton("DistributedSoundScapeTest");
-		AddSpeakerRequestE addSpeakerRequest1 = new AddSpeakerRequestE("1.1.1.1", 1, 1, (short) 1, (short) 1,
-				(short) 1);
-		skeleton.addSpeaker(addSpeakerRequest1);
-		SpeakerDevice speaker1 = addSpeakerRequest1.getAddSpeakerRequest().getSpeaker();
-		AddSpeakerRequestE addSpeakerRequest2 = new AddSpeakerRequestE("1.34.32.5", 45, 1, (short) 34, (short) 11,
-				(short) 23);
-		skeleton.addSpeaker(addSpeakerRequest2);
-		SpeakerDevice speaker2 = addSpeakerRequest2.getAddSpeakerRequest().getSpeaker();
-		AddSpeakerRequestE addSpeakerRequest3 = new AddSpeakerRequestE("1.1.1.1", 2, 1, (short) 132, (short) 15,
-				(short) 1557);
-		skeleton.addSpeaker(addSpeakerRequest3);
-		SpeakerDevice speaker3 = addSpeakerRequest3.getAddSpeakerRequest().getSpeaker();
-		GetSpeakersResponseE speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(3, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice().length);
-		skeleton.removeSpeaker(new RemoveSpeakerRequestE(speaker2.getGeneralDevice()));
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(speaker1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		assertEquals(speaker3, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[1]);
-		skeleton.removeSpeaker(new RemoveSpeakerRequestE(speaker3.getGeneralDevice()));
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(speaker1, speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0]);
-		skeleton.removeSpeaker(new RemoveSpeakerRequestE(speaker1.getGeneralDevice()));
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(false, speakerResponse.getGetSpeakersResponse().getSpeakers().isSpeakerDeviceSpecified());
-	}
-
-	@Test
-	public void setSpeakerLocationTest() throws RuntimeException, SQLException {
-		RegistrationServiceSkeleton skeleton = new RegistrationServiceSkeleton("DistributedSoundScapeTest");
-		AddSpeakerRequestE addSpeakerRequest1 = new AddSpeakerRequestE("1.1.1.1", 1, 1, (short) 1, (short) 1,
-				(short) 1);
-		skeleton.addSpeaker(addSpeakerRequest1);
-		GetSpeakersResponseE speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(new Location((short) 1, (short) 1, (short) 1),
-				speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0].getLocation());
-		skeleton.setSpeakerLocation(new SetSpeakerLocationRequestE(new GeneralDevice("1.1.1.1", 1, (long) 1),
-				new SpeakerDevice("1.1.1.1", 1, (long) 1, (short) 5, (short) 10, (short) 15)));
-		speakerResponse = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1));
-		assertEquals(new Location((short) 5, (short) 10, (short) 15),
-				speakerResponse.getGetSpeakersResponse().getSpeakers().getSpeakerDevice()[0].getLocation());
-	}
+	
 
 	private SpeakerDeviceArray createSpeakerDeviceArraySpecific(long soundScapeID, short[] xArray, short[] yArray, short[] zArray) {
 		assert (xArray.length == yArray.length) && (yArray.length == zArray.length);

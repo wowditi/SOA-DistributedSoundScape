@@ -44,6 +44,7 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 			org.example.www.controlserviceelements.SetSoundScapeSourceLayoutRequestE setSoundScapeSourceLayoutRequest0)
 			throws ErrorMessage {
 		SetSoundScapeSourceLayoutResponse response = new SetSoundScapeSourceLayoutResponse();
+		response.setSetSoundScapeSourceLayoutResponse(false);
 		try {
 		SoundScapeSourceLayout newLayout = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
 				.getSoundScapeSourceLayout();
