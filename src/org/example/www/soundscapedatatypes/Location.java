@@ -48,6 +48,12 @@ public class Location implements org.apache.axis2.databinding.ADBBean {
 				toHashCode();
 	}
 	
+	public java.lang.String toString() {
+
+		return "X:" + getX() + " Y:" + getY() + " Z:" + getZ();
+
+	}
+	
 	public Location(short x, short y, short z) {
 		setX(x);
 		setY(y);

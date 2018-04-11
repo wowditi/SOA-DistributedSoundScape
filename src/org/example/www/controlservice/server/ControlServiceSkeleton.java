@@ -46,29 +46,29 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		SetSoundScapeSourceLayoutResponse response = new SetSoundScapeSourceLayoutResponse();
 		response.setSetSoundScapeSourceLayoutResponse(false);
 		try {
-		SoundScapeSourceLayout newLayout = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
-				.getSoundScapeSourceLayout();
+			SoundScapeSourceLayout newLayout = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
+					.getSoundScapeSourceLayout();
 
-		if (!this.layout.equals(newLayout)) {
-			this.layout = newLayout;
-			volumeMap = new HashMap<Location, ChannelLayout[]>();
-		}
-		// for every speaker
-		SpeakerDeviceArray speakers = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
-				.getSpeakers();
-		if (speakers.isSpeakerDeviceSpecified()) {
-			for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
-	
-				if (!volumeMap.containsKey(speaker.getLocation())) {
-					addLocChanels(speaker.getLocation());
+			if (!this.layout.equals(newLayout)) {
+				this.layout = newLayout;
+				volumeMap = new HashMap<Location, ChannelLayout[]>();
+			}
+			// for every speaker
+			SpeakerDeviceArray speakers = setSoundScapeSourceLayoutRequest0.getSetSoundScapeSourceLayoutRequest()
+					.getSpeakers();
+			if (speakers.isSpeakerDeviceSpecified()) {
+				for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
+
+					if (!volumeMap.containsKey(speaker.getLocation())) {
+						addLocChanels(speaker.getLocation());
+					}
 				}
 			}
-		}
 
-		response.setSetSoundScapeSourceLayoutResponse(true);
+			response.setSetSoundScapeSourceLayoutResponse(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("An error occured: "+e);
+			throw new RuntimeException("An error occured: " + e);
 		}
 		return response;
 		// TODO : fill this with the necessary business logic
@@ -91,33 +91,32 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		ProcessPlaybackCommandResponse response = new ProcessPlaybackCommandResponse();
 		response.setProcessPlaybackCommandResponse(false);
 		try {
-		ProcessPlaybackCommandRequest request = processPlaybackCommandRequest
-				.getProcessPlaybackCommandRequest();
-		PlaybackCommandQueue queue = new PlaybackCommandQueue();
+			ProcessPlaybackCommandRequest request = processPlaybackCommandRequest.getProcessPlaybackCommandRequest();
+			PlaybackCommandQueue queue = new PlaybackCommandQueue();
 
-		// get the command
-		PlaybackCommand command = request.getCommand();
+			// get the command
+			PlaybackCommand command = request.getCommand();
 
-		// for every speaker
-		SpeakerDeviceArray speakers = request.getSpeakers();
-		for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
+			// for every speaker
+			SpeakerDeviceArray speakers = request.getSpeakers();
+			for (SpeakerDevice speaker : speakers.getSpeakerDevice()) {
 
-			// Get or calculate set of volume levels for every channel
-			if (!volumeMap.containsKey(speaker.getLocation())) {
-				addLocChanels(speaker.getLocation());
+				// Get or calculate set of volume levels for every channel
+				if (!volumeMap.containsKey(speaker.getLocation())) {
+					addLocChanels(speaker.getLocation());
+				}
+				ChannelLayout[] channels = volumeMap.get(speaker.getLocation());
+
+				queue.addInstruction(new PlaybackCommandInstruction(speaker, channels, command));
+
 			}
-			ChannelLayout[] channels = volumeMap.get(speaker.getLocation());
 
-			queue.addInstruction(new PlaybackCommandInstruction(speaker, channels, command));
-
-		}
-
-		queue.send();
-		response = new ProcessPlaybackCommandResponse();
-		response.setProcessPlaybackCommandResponse(true);
+			queue.send();
+			response = new ProcessPlaybackCommandResponse();
+			response.setProcessPlaybackCommandResponse(true);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("An error occured: "+e);
+			throw new RuntimeException("An error occured: " + e);
 		}
 		return response;
 		// TODO : fill this with the necessary business logic
@@ -148,7 +147,7 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 		// speaker on source vector
 		double volumeMultiplier;
 
-		if (dotProduct(sourceLoc, sourceLoc) !=0) { 
+		if (dotProduct(sourceLoc, sourceLoc) != 0) {
 			volumeMultiplier = dotProduct(speakerLoc, sourceLoc) / dotProduct(sourceLoc, sourceLoc);
 		} else {
 			volumeMultiplier = 1;
@@ -182,6 +181,23 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 
 		public void send() {
 			// placeholder, no actual speakers to send to
+			System.out.println("==========Playback Queue Test Output==========");
+			for (PlaybackCommandInstruction instruction : queue) {
+				StringBuilder output = new StringBuilder();
+				output.append("S@ ");
+				output.append(instruction.getSpeakerDevice().getLocation());
+				output.append(" ");
+				output.append(instruction.getPlaybackCommand());
+				for (ChannelLayout channel : instruction.getChanelLayout()) {
+					output.append(" ");
+					output.append(channel.getLocation());
+					output.append(" ");
+					output.append(channel.getVolumeLevel().getVolumeLevel());
+
+				}
+				System.out.println(output);
+			}
+			System.out.println("==========END OF Playback Queue Test Output==========");
 			this.clear();
 		}
 	}
@@ -196,6 +212,18 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 			this.speaker = speaker;
 			this.chanelVolumes = chanelVolumes;
 			this.command = command;
+		}
+
+		public SpeakerDevice getSpeakerDevice() {
+			return this.speaker;
+		}
+
+		public ChannelLayout[] getChanelLayout() {
+			return this.chanelVolumes;
+		}
+
+		public PlaybackCommand getPlaybackCommand() {
+			return this.command;
 		}
 
 	}
