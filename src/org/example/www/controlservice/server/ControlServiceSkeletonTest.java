@@ -33,12 +33,14 @@ public class ControlServiceSkeletonTest {
 	}
 
 	@Test
-	public void addSoundScapeSourceLayoutTest() throws RuntimeException{
+	public void addSoundScapeSourceLayoutTest() throws RuntimeException {
 
 		SetSoundScapeSourceLayoutRequest request = new SetSoundScapeSourceLayoutRequest();
-		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] {100}, new short[] {1}, new short[] {1}, new short[] {1});
-		request.setSoundScapeSourceLayout(createSoundScapeSource(new double[] {100}, new short[] {1}, new short[] {1}, new short[] {1}));
-		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] {1}, new short[] {1}, new short[] {1});
+		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] { 100 }, new short[] { 1 },
+				new short[] { 1 }, new short[] { 1 });
+		request.setSoundScapeSourceLayout(sourceLayout);
+		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] { 1, 0, -1, 100 },
+				new short[] { 1, 0, -1, 100 }, new short[] { 1, 0, -1, 100 });
 		request.setSpeakers(sourceSpeakers);
 		SetSoundScapeSourceLayoutRequestE E = new SetSoundScapeSourceLayoutRequestE();
 		E.setSetSoundScapeSourceLayoutRequest(request);
@@ -53,30 +55,132 @@ public class ControlServiceSkeletonTest {
 			Location loc = speaker.getLocation();
 			assertTrue(skelleton.volumeMap.containsKey(loc));
 		}
-		
+
 	}
 
-	
+	@Test
+	public void centeredSoundScapeSourceLayoutTest() throws RuntimeException {
 
-	private SpeakerDeviceArray createSpeakerDeviceArraySpecific(long soundScapeID, short[] xArray, short[] yArray, short[] zArray) {
+		SetSoundScapeSourceLayoutRequest request = new SetSoundScapeSourceLayoutRequest();
+		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] { 100, 100 }, new short[] { 0 },
+				new short[] { 0 }, new short[] { 0 });
+		request.setSoundScapeSourceLayout(sourceLayout);
+		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] { 1, 0, -1, 100 },
+				new short[] { 1, 0, -1, 100 }, new short[] { 1, 0, -1, 100 });
+		request.setSpeakers(sourceSpeakers);
+		SetSoundScapeSourceLayoutRequestE E = new SetSoundScapeSourceLayoutRequestE();
+		E.setSetSoundScapeSourceLayoutRequest(request);
+		try {
+			skelleton.setSoundScapeSourceLayout(E);
+		} catch (ErrorMessage e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		assertTrue(skelleton.layout.equals(sourceLayout));
+		for (SpeakerDevice speaker : sourceSpeakers.getSpeakerDevice()) {
+			Location loc = speaker.getLocation();
+			ChannelLayout[] localLayout = skelleton.volumeMap.get(loc);
+			for (ChannelLayout channel : localLayout) {
+				VolumeLevel localVolume = channel.getVolumeLevel();
+				assertEquals(localVolume.getVolumeLevel(), (double) 100);
+			}
+
+		}
+
+	}
+
+	@Test
+	public void doubleDistanceSoundScapeSourceLayoutTest() throws RuntimeException {
+
+		SetSoundScapeSourceLayoutRequest request = new SetSoundScapeSourceLayoutRequest();
+		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] { 100 }, new short[] { 1 },
+				new short[] { 1 }, new short[] { 1 });
+		request.setSoundScapeSourceLayout(sourceLayout);
+		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] { 2 }, new short[] { 2 },
+				new short[] { 2 });
+		request.setSpeakers(sourceSpeakers);
+		SetSoundScapeSourceLayoutRequestE E = new SetSoundScapeSourceLayoutRequestE();
+		E.setSetSoundScapeSourceLayoutRequest(request);
+		try {
+			skelleton.setSoundScapeSourceLayout(E);
+		} catch (ErrorMessage e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		assertTrue(skelleton.layout.equals(sourceLayout));
+		for (SpeakerDevice speaker : sourceSpeakers.getSpeakerDevice()) {
+			Location loc = speaker.getLocation();
+			ChannelLayout[] localLayout = skelleton.volumeMap.get(loc);
+			for (ChannelLayout channel : localLayout) {
+				VolumeLevel localVolume = channel.getVolumeLevel();
+				assertEquals(localVolume.getVolumeLevel(), (double) 200);
+			}
+
+		}
+
+	}
+
+	@Test
+	public void angleCutoffSoundScapeSourceLayoutTest() throws RuntimeException {
+
+		SetSoundScapeSourceLayoutRequest request = new SetSoundScapeSourceLayoutRequest();
+		SoundScapeSourceLayout sourceLayout = createSoundScapeSource(new double[] { 100 }, new short[] { 1 },
+				new short[] { 1 }, new short[] { 1 });
+		request.setSoundScapeSourceLayout(sourceLayout);
+		SpeakerDeviceArray sourceSpeakers = createSpeakerDeviceArray((long) 1, new short[] { 1, 0, -1, 100 },
+				new short[] { 1, 0, -1, 100 }, new short[] { 1, 0, -1, 100 });
+		request.setSpeakers(sourceSpeakers);
+		SetSoundScapeSourceLayoutRequestE E = new SetSoundScapeSourceLayoutRequestE();
+		E.setSetSoundScapeSourceLayoutRequest(request);
+		try {
+			skelleton.setSoundScapeSourceLayout(E);
+		} catch (ErrorMessage e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		assertTrue(skelleton.layout.equals(sourceLayout));
+		for (SpeakerDevice speaker : sourceSpeakers.getSpeakerDevice()) {
+			Location loc = speaker.getLocation();
+			ChannelLayout[] localLayout = skelleton.volumeMap.get(loc);
+			for (ChannelLayout channel : localLayout) {
+				VolumeLevel localVolume = channel.getVolumeLevel();
+				//test if dot product < 0 (no length in positive vector direction) or source is universal
+				if ((speaker.getLocation().getX() * channel.getLocation().getX()
+						+ speaker.getLocation().getY() * channel.getLocation().getY()
+						+ speaker.getLocation().getZ() * channel.getLocation().getZ() > 0)
+						|| (channel.getLocation().getX() == 0 && channel.getLocation().getY() == 0
+								&& channel.getLocation().getZ() == 0)) {
+					assertTrue(localVolume.getVolumeLevel() > 0);
+				} else {
+					assertEquals(localVolume.getVolumeLevel(), (double) 0);
+				}
+
+			}
+		}
+
+	}
+
+	private SpeakerDeviceArray createSpeakerDeviceArraySpecific(long soundScapeID, short[] xArray, short[] yArray,
+			short[] zArray) {
 		assert (xArray.length == yArray.length) && (yArray.length == zArray.length);
 		SpeakerDeviceArray speakers = new SpeakerDeviceArray();
 		String ipBase = "1.1.1.";
 		for (int i = 0; i < xArray.length; i++) {
-			speakers.addSpeakerDevice(createSpeaker(ipBase + i,8081, soundScapeID, xArray[i], yArray[i], zArray[i]));
+			speakers.addSpeakerDevice(createSpeaker(ipBase + i, 8081, soundScapeID, xArray[i], yArray[i], zArray[i]));
 		}
 		return speakers;
 	}
 
-	private SpeakerDeviceArray createSpeakerDeviceArray(long soundScapeID, short[] xArray, short[] yArray, short[] zArray) {
-		SpeakerDeviceArray result = new SpeakerDeviceArray();
+	private SpeakerDeviceArray createSpeakerDeviceArray(long soundScapeID, short[] xArray, short[] yArray,
+			short[] zArray) {
 		SpeakerDeviceArray speakers = new SpeakerDeviceArray();
 		String ipBase = "1.1.1.";
 		int i = 0;
 		for (int x = 0; x < xArray.length; x++) {
 			for (int y = 0; y < yArray.length; y++) {
 				for (int z = 0; z < zArray.length; z++) {
-					speakers.addSpeakerDevice(createSpeaker(ipBase + i,8081, soundScapeID, xArray[x], yArray[y], zArray[z]));
+					speakers.addSpeakerDevice(
+							createSpeaker(ipBase + i, 8081, soundScapeID, xArray[x], yArray[y], zArray[z]));
 					i++;
 				}
 			}
@@ -104,11 +208,12 @@ public class ControlServiceSkeletonTest {
 		return channel;
 	}
 
-	private SoundScapeSourceLayout createSoundScapeSource(double[] volumes, short[] xArray, short[] yArray, short[] zArray) {
+	private SoundScapeSourceLayout createSoundScapeSource(double[] volumes, short[] xArray, short[] yArray,
+			short[] zArray) {
 		int i = 0;
 		SoundScapeSourceLayout layout = new SoundScapeSourceLayout();
 		for (int v = 0; v < volumes.length; v++) {
-			for(int x = 0; x < xArray.length; x++) {
+			for (int x = 0; x < xArray.length; x++) {
 				for (int y = 0; y < yArray.length; y++) {
 					for (int z = 0; z < zArray.length; z++) {
 						layout.addChannelLayouts(createChannel(i, volumes[v], xArray[x], yArray[y], zArray[z]));

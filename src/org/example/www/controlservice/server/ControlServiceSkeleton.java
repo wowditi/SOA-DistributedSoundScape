@@ -128,11 +128,13 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 
 	private void addLocChanels(Location speakerLoc) {
 		// Calculate new set of volume levels for every channel
-		ChannelLayout[] channels = layout.getChannelLayouts();
+		ChannelLayout[] channels = new ChannelLayout[layout.getChannelLayouts().length];
 		for (int i = 0; i < channels.length; i++) {
 			ChannelLayout sourceChannel = layout.getChannelLayouts()[i];
 
+			channels[i] = new ChannelLayout();
 			channels[i].setChannelNumber(sourceChannel.getChannelNumber());
+			channels[i].setLocation(sourceChannel.getLocation());
 			channels[i].setVolumeLevel(calcVolumeLevel(sourceChannel, speakerLoc));
 
 		}
