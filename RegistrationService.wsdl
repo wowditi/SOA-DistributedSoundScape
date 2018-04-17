@@ -155,7 +155,7 @@
 	<wsdl:service name="RegistrationService">
 		<wsdl:port binding="tns:RegistrationServiceSOAP" name="RegistrationServiceSOAP">
 			<soap:address
-				location="http://localhost:8080/DistributedSoundScape/services/RegistrationService/" />
+				location="http://localhost:9080/DistributedSoundScape/services/RegistrationService/" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT) --><serviceGroup>
-    <service name="ControlService">
+    <service name="DistributedSoundScapeServiceCallback">
         <messageReceivers>
-            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.controlservice.server.ControlServiceMessageReceiverInOut"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="distributedsoundscape.callback.DistributedSoundScapeServiceCallbackMessageReceiverInOnly"/>
         </messageReceivers>
-        <parameter name="ServiceClass">org.example.www.controlservice.server.ControlServiceSkeleton</parameter>
+        <parameter name="ServiceClass">distributedsoundscape.callback.DistributedSoundScapeServiceCallbackSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
-        <operation name="SetSoundScapeSourceLayout" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/ControlService/">
-            <actionMapping>http://www.example.org/ControlService/SetSoundScapeSourceLayout</actionMapping>
-            <outputActionMapping>http://www.example.org/ControlService/ControlService/SetSoundScapeSourceLayoutResponse</outputActionMapping>
-            <faultActionMapping faultName="Error">http://www.example.org/ControlService/ControlService/SetSoundScapeSourceLayout/Fault/Error</faultActionMapping>
-            <faultActionMapping faultName="ErrorMessage">http://www.example.org/ControlService/ControlService/SetSoundScapeSourceLayout/Fault/Error</faultActionMapping>
-            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/ControlService/ControlService/SetSoundScapeSourceLayout/Fault/Error</faultActionMapping>
-        </operation>
-        <operation name="ProcessPlaybackCommand" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/ControlService/">
-            <actionMapping>http://www.example.org/ControlService/ProcessPlaybackCommand</actionMapping>
-            <outputActionMapping>http://www.example.org/ControlService/ControlService/ProcessPlaybackCommandResponse</outputActionMapping>
-            <faultActionMapping faultName="Error">http://www.example.org/ControlService/ControlService/ProcessPlaybackCommand/Fault/Error</faultActionMapping>
-            <faultActionMapping faultName="ErrorMessage">http://www.example.org/ControlService/ControlService/ProcessPlaybackCommand/Fault/Error</faultActionMapping>
-            <faultActionMapping faultName="ErrorMessage_Exception">http://www.example.org/ControlService/ControlService/ProcessPlaybackCommand/Fault/Error</faultActionMapping>
+        <operation name="onResult" mep="http://www.w3.org/ns/wsdl/in-only" namespace="DistributedSoundScape">
+            <actionMapping>DistributedSoundScape/onResult</actionMapping>
         </operation>
     </service>
 </serviceGroup>

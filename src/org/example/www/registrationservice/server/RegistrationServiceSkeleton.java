@@ -196,6 +196,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 	public org.example.www.registrationserviceelements.RegisterUserResponse registerUser(
 			org.example.www.registrationserviceelements.RegisterUserRequestE registerUserRequest6) throws RuntimeException, SQLException {
 		MariaDB db;
+		System.out.println("test");
 		try {
 			db = new MariaDB(database);
 		} catch (Exception e) {
@@ -205,7 +206,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 		try {
 			GeneralDevice user = registerUserRequest6.getRegisterUserRequest().getUser();
 			String ipv4 = user.getIpAddress().getIPv4Address();
-			String statement = "INSERT INTO Users (ipAddress, port)";
+			String statement = "INSERT IGNORE INTO Users (ipAddress, port)";
 			statement += "VALUES (?, ?)";
 			PreparedStatement addSpeakerStatement = db.prepareStatement(statement);
 			addSpeakerStatement.setString(1, ipv4);
@@ -216,7 +217,7 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			createSoundScape.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
 			createSoundScape.executeUpdate();
 			createSoundScape.close();
-			PreparedStatement createLink = db.prepareStatement("insert into userToSoundScapes (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
+			PreparedStatement createLink = db.prepareStatement("insert ignore into userToSoundScapes (soundScapeId, ipAddress, port) VALUES (?, ?, ?)");
 			createLink.setLong(1, user.getSoundScapeId().getSoundscapeId().longValue());
 			createLink.setString(2, ipv4);
 			createLink.setInt(3, user.getPort().getPort().intValue());	
@@ -225,6 +226,10 @@ public class RegistrationServiceSkeleton implements RegistrationServiceSkeletonI
 			RegisterUserResponse response = new RegisterUserResponse();
 			response.setRegisterUserResponse(true);
 			return response;
+		} catch (Exception e) {
+			//for bpel debugging purposes
+			e.printStackTrace();
+			throw new RuntimeException("Something went horribly wrong");
 		} finally {
 			db.cleanUp();
 		}

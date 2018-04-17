@@ -74,7 +74,7 @@
 	<wsdl:service name="ControlService">
 		<wsdl:port binding="tns:ControlServiceSOAP" name="ControlServiceSOAP">
 			<soap:address
-				location="http://localhost:8080/DistributedSoundScape/services/ControlService/" />
+				location="http://localhost:9080/DistributedSoundScape/services/ControlService/" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

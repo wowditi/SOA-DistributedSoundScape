@@ -3,6 +3,7 @@
 	xmlns:tns="http://www.example.org/UploadService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UploadService"
 	xmlns:types="http://www.example.org/UploadServiceElements/"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
 	targetNamespace="http://www.example.org/UploadService/">
 	<wsdl:types>
 		<xsd:schema targetNamespace="http://www.example.org/UploadService/">
@@ -10,6 +11,17 @@
 				schemaLocation="schemas/type-definitions/UploadServiceElements.xsd" />
 		</xsd:schema>
 	</wsdl:types>
+	
+	<plnk:partnerLinkType name="UploadServiceLinkType"> 
+		<plnk:role name="uploadProvider" portType="tns:UploadService">
+			<plnk:portType name="tns:UploadService"/>
+		</plnk:role>
+		<plnk:role name="uploadRequester" portType="tns:UploadCallbackService">
+			<plnk:portType name="tns:UploadCallbackService"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+	
+	<!-- Provider -->
 	<wsdl:message name="UploadSongRequest">
 		<wsdl:part name="Request" element="types:UploadSongRequest" />
 	</wsdl:message>
@@ -22,9 +34,19 @@
 	<wsdl:message name="IsSongLoadedResponse">
 		<wsdl:part name="Response" element="types:IsSongLoadedResponse" />
 	</wsdl:message>
+	
+	<!-- Callback -->
+	<wsdl:message name="UploadSongResponse">
+		<wsdl:part name="Response" element="types:UploadSongResponse" />
+	</wsdl:message>
+	<wsdl:message name="DeleteSongResponse">
+		<wsdl:part name="Response" element="types:DeleteSongResponse" />
+	</wsdl:message>
 	<wsdl:message name="ErrorMessage">
 		<wsdl:part name="ErrorMessage" element="types:ErrorMessage"/>
 	</wsdl:message>
+	
+	<!-- Provider -->
 	<wsdl:portType name="UploadService">
 		<wsdl:operation name="UploadSong">
 			<wsdl:input message="tns:UploadSongRequest" />
@@ -38,6 +60,18 @@
 			<wsdl:fault name="Error" message="tns:ErrorMessage" />
 		</wsdl:operation>
 	</wsdl:portType>
+	
+	<!-- Callback -->
+	<wsdl:portType name="UploadCallbackService">
+		<wsdl:operation name="UploadSongCallback">
+			<wsdl:input message="tns:UploadSongResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSongCallback">
+			<wsdl:input message="tns:DeleteSongResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<!-- Provider -->
 	<wsdl:binding name="UploadServiceSOAP" type="tns:UploadService">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
@@ -66,10 +100,38 @@
 			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
+	
+	<!-- Callback -->
+	<wsdl:binding name="UploadCallbackServiceSOAP" type="tns:UploadCallbackService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="UploadSongCallback">
+			<soap:operation soapAction="http://www.example.org/UploadCallbackService/UploadSong" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSongCallback">
+			<soap:operation soapAction="http://www.example.org/UploadCallbackService/DeleteSong" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding> 
+	
+	<!-- Provider -->
 	<wsdl:service name="UploadService">
 		<wsdl:port binding="tns:UploadServiceSOAP" name="UploadServiceSOAP">
 			<soap:address
-				location="http://localhost:8080/DistributedSoundScape/services/UploadService/" />
+				location="http://localhost:9080/DistributedSoundScape/services/UploadService/" />
+		</wsdl:port>
+	</wsdl:service>
+	
+	<!-- Callback -->
+	<wsdl:service name="UploadCallbackService">
+		<wsdl:port binding="tns:UploadCallbackServiceSOAP" name="UploadCallbackServiceSOAP">
+			<soap:address
+				location="http://localhost:8889/ode/processes/UploadCallbackService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

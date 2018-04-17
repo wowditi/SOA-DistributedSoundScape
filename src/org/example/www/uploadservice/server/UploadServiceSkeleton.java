@@ -10,9 +10,11 @@ package org.example.www.uploadservice.server;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,11 +22,29 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import javax.xml.namespace.QName;
+
+import org.apache.axiom.om.OMAbstractFactory;
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.OMFactory;
+import org.apache.axiom.om.OMNamespace;
+import org.apache.axiom.om.impl.llom.OMElementImpl;
+import org.apache.axiom.soap.SOAPHeader;
+import org.apache.axiom.soap.SOAPHeaderBlock;
+import org.apache.axiom.soap.impl.llom.SOAPHeaderBlockImpl;
+import org.apache.axiom.soap.impl.llom.soap11.SOAP11Factory;
+import org.apache.axiom.soap.impl.llom.soap11.SOAP11HeaderBlockImpl;
+import org.apache.axis2.AxisFault;
+import org.apache.axis2.client.ServiceClient;
+import org.apache.axis2.context.MessageContext;
+import org.apache.axis2.databinding.ADBException;
 import org.example.www.database.MariaDB;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
+import org.example.www.uploadservice.client.UploadCallbackServiceStub;
 import org.example.www.uploadservice.server.ErrorMessage;
 import org.example.www.uploadservice.server.UploadServiceSkeletonInterface;
 import org.example.www.uploadserviceelements.IsSongLoadedResponse;
+import org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse;
 import org.example.www.utils.DownloadUtils;
 import org.example.www.utils.SpeakerUtils;
 
@@ -57,6 +77,40 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			throws SQLException {
 		MariaDB db;
 		try {
+			MessageContext msgCtx = MessageContext.getCurrentMessageContext();
+			System.out.println("test2");
+			String callbackEndPoint = ((OMElement) ((OMElement) msgCtx.getEnvelope().getHeader()
+					.getChildrenWithName(new QName("http://www.apache.org/ode/type/session", "callback")).next())
+							.getChildrenWithName(new QName("http://www.w3.org/2005/08/addressing", "Address")).next())
+									.getText();
+			UploadCallbackServiceStub stub = new UploadCallbackServiceStub();//callbackEndPoint
+			ServiceClient callbackClient = stub._getServiceClient(); 
+			SOAP11Factory factory = new SOAP11Factory();
+			OMNamespace addrNamespace = factory.createOMNamespace("http://www.w3.org/2005/08/addressing", "addr");
+			SOAPHeaderBlock replyToHeader = factory.createSOAPHeaderBlock("ReplyTo", addrNamespace);
+			OMElement replyToAddress = factory.createOMElement(new QName("http://www.w3.org/2005/08/addressing", "Address"));
+			replyToAddress.setText(callbackEndPoint); //msgCtx.getMessageID()
+			replyToHeader.addChild(replyToAddress);
+			
+			callbackClient.addHeader(replyToHeader);
+			SOAPHeaderBlock callbackOdeHeader = (SOAPHeaderBlock) msgCtx.getEnvelope().getHeader().getHeaderBlocksWithNSURI("http://www.apache.org/ode/type/session").get(0);
+			callbackClient.addHeader(callbackOdeHeader);
+			SOAPHeaderBlock callbackIntalioHeader = (SOAPHeaderBlock) msgCtx.getEnvelope().getHeader().getHeaderBlocksWithNSURI("http://www.intalio.com/type/session").get(0);
+			callbackClient.addHeader(callbackIntalioHeader);
+			UploadSongResponse response = new UploadSongResponse(true);
+			System.out.println("Sending");
+			//callbackClient.sendReceive(response.getOMElement(response.MY_QNAME, factory));
+			Thread.sleep(10000);
+			stub.uploadSongCallback(response); 
+			System.out.println("Send");
+			// client.addHeader(header);
+			// client.addHeader(null);
+			// stub.uploadSongCallback(response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		try {
 			db = new MariaDB(database);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -67,42 +121,44 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			String type = uploadSongRequest0.getUploadSongRequest().getLink().getType().getValue();
 			String url = uploadSongRequest0.getUploadSongRequest().getLink().getAddress();
 			String fileName;
+			System.out.println(url);
 			switch (type) {
-				case "http":
-					try {
-						fileName = DownloadUtils.downloadSong("http://" + url, "");
-					} catch (MalformedURLException e) {
-						throw new RuntimeException("Malformed url: \"http://" + url + "\": "+ e);
-					} catch (IOException e) {
-						throw new RuntimeException("Unable to download file: "+e);
-					}
-					break;
-				case "https":
-					try {
-						fileName = DownloadUtils.downloadSong("http://" + url, "");
-					} catch (MalformedURLException e) {
-						throw new RuntimeException("Malformed url: \"http://" + url + "\": "+ e);
-					} catch (IOException e) {
-						throw new RuntimeException("Unable to download file: "+e);
-					}
-					break;
-				case "ftp":
-					throw new RuntimeException("Sorry ftp is not (yet) supported");
-				default:
-					throw new RuntimeException("Only the ftp and http types are allowed");
+			case "http":
+				try {
+					fileName = DownloadUtils.downloadSong("http://" + url, "");
+				} catch (MalformedURLException e) {
+					throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
+				} catch (IOException e) {
+					throw new RuntimeException("Unable to download file: " + e);
+				}
+				break;
+			case "https":
+				try {
+					fileName = DownloadUtils.downloadSong("http://" + url, "");
+				} catch (MalformedURLException e) {
+					throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
+				} catch (IOException e) {
+					throw new RuntimeException("Unable to download file: " + e);
+				}
+				break;
+			case "ftp":
+				throw new RuntimeException("Sorry ftp is not (yet) supported");
+			default:
+				throw new RuntimeException("Only the ftp and http types are allowed");
 			}
 			// Send file to speakers
 			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
 			for (SpeakerDevice speaker : speakers) {
 				executor.submit(() -> {
-				    try {
-						SpeakerUtils.sendFileToSpeaker(new File(fileName), type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+					try {
+						SpeakerUtils.sendFileToSpeaker(new File(fileName), type + "://" + url,
+								speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
 					} catch (SQLIntegrityConstraintViolationException e) {
-						//Song was already loaded
+						// Song was already loaded
 					} catch (SQLException e) {
 						e.printStackTrace();
-						throw new RuntimeException("The database could not be updated with the new song"+e);
+						throw new RuntimeException("The database could not be updated with the new song" + e);
 					}
 				});
 			}
@@ -110,12 +166,12 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			try {
 				executor.awaitTermination(5, TimeUnit.MINUTES);
 			} catch (InterruptedException e) {
-				//Callback send failure
+				// Callback send failure
 				return;
 			}
-			//Callback send success
+			// Callback send success
 			return;
-			
+
 		} finally {
 			db.cleanUp();
 		}
@@ -127,7 +183,7 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * @param isSongLoadedRequest1
 	 * @return isSongLoadedResponse2
 	 * @throws ErrorMessage
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 
 	public org.example.www.uploadserviceelements.IsSongLoadedResponse isSongLoaded(
@@ -148,12 +204,13 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
 			for (SpeakerDevice speaker : speakers) {
 				Future<Boolean> future = executor.submit(() -> {
-				    try {
-						return SpeakerUtils.isSongLoadedOnSpeaker(type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+					try {
+						return SpeakerUtils.isSongLoadedOnSpeaker(type + "://" + url,
+								speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
 					} catch (SQLException e) {
 						e.printStackTrace();
-						throw new RuntimeException("The database could not be updated with the new song"+e);
+						throw new RuntimeException("The database could not be updated with the new song" + e);
 					}
 				});
 				futureList.add(future);
@@ -168,16 +225,16 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 						break;
 					}
 				} catch (ExecutionException e) {
-					throw new RuntimeException("Unable to get retrieve the needed information: "+e);
+					throw new RuntimeException("Unable to get retrieve the needed information: " + e);
 				} catch (TimeoutException e) {
-					throw new RuntimeException("Unable to get a timely response from the database: "+e);
+					throw new RuntimeException("Unable to get a timely response from the database: " + e);
 				} catch (InterruptedException e) {
-					throw new RuntimeException("Unable to get a timely response from the database: "+e);
+					throw new RuntimeException("Unable to get a timely response from the database: " + e);
 				}
 			}
-			//Callback send success
+			// Callback send success
 			return response;
-			
+
 		} finally {
 			db.cleanUp();
 		}
@@ -188,10 +245,11 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * 
 	 * @param deleteSongRequest3
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 
-	public void deleteSong(org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest3) throws SQLException {
+	public void deleteSong(org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest3)
+			throws SQLException {
 		MariaDB db;
 		try {
 			db = new MariaDB(database);
@@ -207,12 +265,13 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
 			for (SpeakerDevice speaker : speakers) {
 				executor.submit(() -> {
-				    try {
-						SpeakerUtils.deleteFileFromSpeaker(type+"://"+url, speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+					try {
+						SpeakerUtils.deleteFileFromSpeaker(type + "://" + url,
+								speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
 								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
 					} catch (SQLException e) {
 						e.printStackTrace();
-						throw new RuntimeException("The database could not be updated with the new song"+e);
+						throw new RuntimeException("The database could not be updated with the new song" + e);
 					}
 				});
 			}
@@ -220,12 +279,12 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			try {
 				executor.awaitTermination(5, TimeUnit.MINUTES);
 			} catch (InterruptedException e) {
-				//Callback send failure
+				// Callback send failure
 				return;
 			}
-			//Callback send success
+			// Callback send success
 			return;
-			
+
 		} finally {
 			db.cleanUp();
 		}

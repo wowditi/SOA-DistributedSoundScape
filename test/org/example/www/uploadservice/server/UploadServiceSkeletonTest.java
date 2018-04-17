@@ -32,7 +32,7 @@ public class UploadServiceSkeletonTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		skeleton.addSpeaker(new AddSpeakerRequestE("1.1.1.1", 1, (long) 1, (short) 1, (short) 1, (short) 1));
+		skeleton.addSpeaker(new AddSpeakerRequestE("1.1.1.1", 1, (long) 1, (short) 1, (short) 1, (short) 1)); 
 		skeleton.addSpeaker(new AddSpeakerRequestE("1.1.1.2", 1, (long) 1, (short) 1, (short) 1, (short) 1));
 	}
 
