@@ -33,6 +33,7 @@
 		<sequence>
 			<element name="Link" type="types:Link"></element>
 			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
+			<element name="conversationId" type="string"></element>
 		</sequence>
 	</complexType>
 

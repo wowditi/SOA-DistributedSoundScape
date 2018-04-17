@@ -79,17 +79,17 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 		try {
 			MessageContext msgCtx = MessageContext.getCurrentMessageContext();
 			System.out.println("test2");
-			String callbackEndPoint = ((OMElement) ((OMElement) msgCtx.getEnvelope().getHeader()
+			/*String callbackEndPoint = ((OMElement) ((OMElement) msgCtx.getEnvelope().getHeader()
 					.getChildrenWithName(new QName("http://www.apache.org/ode/type/session", "callback")).next())
 							.getChildrenWithName(new QName("http://www.w3.org/2005/08/addressing", "Address")).next())
-									.getText();
+									.getText();*/
 			UploadCallbackServiceStub stub = new UploadCallbackServiceStub();//callbackEndPoint
 			ServiceClient callbackClient = stub._getServiceClient(); 
-			SOAP11Factory factory = new SOAP11Factory();
+			/*SOAP11Factory factory = new SOAP11Factory();
 			OMNamespace addrNamespace = factory.createOMNamespace("http://www.w3.org/2005/08/addressing", "addr");
 			SOAPHeaderBlock replyToHeader = factory.createSOAPHeaderBlock("ReplyTo", addrNamespace);
 			OMElement replyToAddress = factory.createOMElement(new QName("http://www.w3.org/2005/08/addressing", "Address"));
-			replyToAddress.setText(callbackEndPoint); //msgCtx.getMessageID()
+			//replyToAddress.setText(callbackEndPoint); //msgCtx.getMessageID()
 			replyToHeader.addChild(replyToAddress);
 			
 			callbackClient.addHeader(replyToHeader);
@@ -97,10 +97,12 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			callbackClient.addHeader(callbackOdeHeader);
 			SOAPHeaderBlock callbackIntalioHeader = (SOAPHeaderBlock) msgCtx.getEnvelope().getHeader().getHeaderBlocksWithNSURI("http://www.intalio.com/type/session").get(0);
 			callbackClient.addHeader(callbackIntalioHeader);
-			UploadSongResponse response = new UploadSongResponse(true);
+			
 			System.out.println("Sending");
 			//callbackClient.sendReceive(response.getOMElement(response.MY_QNAME, factory));
-			Thread.sleep(10000);
+			*/
+			Thread.sleep(2000);
+			UploadSongResponse response = new UploadSongResponse(true);
 			stub.uploadSongCallback(response); 
 			System.out.println("Send");
 			// client.addHeader(header);
