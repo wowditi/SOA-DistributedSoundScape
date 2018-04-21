@@ -131,7 +131,7 @@
 	<wsdl:service name="UploadCallbackService">
 		<wsdl:port binding="tns:UploadCallbackServiceSOAP" name="UploadCallbackServiceSOAP">
 			<soap:address
-				location="http://localhost:8889/ode/processes/UploadCallbackService" />
+				location="http://localhost:8080/ode/processes/UploadCallbackService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

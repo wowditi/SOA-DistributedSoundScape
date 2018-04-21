@@ -1,0 +1,20 @@
+<message>
+	<Request>
+		<UploadSongRequest
+			xmlns="http://www.example.org/UploadServiceElements/"
+			xmlns:tns="http://www.example.org/UploadServiceElements/"
+			xmlns:tns1="http://www.example.org/SoundScapeDataTypes/"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<Link xmlns=""
+				xmlns:q0="http://www.example.org/UploadServiceElements/"
+				xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+				<Type>http</Type>
+				<Address>dsfsdf</Address>
+			</Link>
+			<Speakers xmlns=""
+				xmlns:q0="http://www.example.org/UploadServiceElements/"
+				xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+			<conversationId xmlns="" />
+		</UploadSongRequest>
+	</Request>
+</message>

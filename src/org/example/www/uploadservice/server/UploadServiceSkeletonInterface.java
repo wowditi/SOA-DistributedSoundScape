@@ -7,7 +7,10 @@
  */
     package org.example.www.uploadservice.server;
 
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+
+import org.apache.axis2.AxisFault;
 
 /**
      *  UploadServiceSkeletonInterface java skeleton interface for the axisService
@@ -20,13 +23,15 @@ import java.sql.SQLException;
          * 
                                     * @param uploadSongRequest
          * @throws SQLException 
+         * @throws AxisFault 
+         * @throws RemoteException 
          */
 
         
                 public void uploadSong
                 (
                   org.example.www.uploadserviceelements.UploadSongRequestE uploadSongRequest
-                 ) throws SQLException
+                 ) throws SQLException, AxisFault, RemoteException
             ;
         
          

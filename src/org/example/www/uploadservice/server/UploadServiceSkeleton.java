@@ -45,6 +45,7 @@ import org.example.www.uploadservice.server.ErrorMessage;
 import org.example.www.uploadservice.server.UploadServiceSkeletonInterface;
 import org.example.www.uploadserviceelements.IsSongLoadedResponse;
 import org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse;
+import org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE;
 import org.example.www.utils.DownloadUtils;
 import org.example.www.utils.SpeakerUtils;
 
@@ -69,113 +70,92 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * @param uploadSongRequest0
 	 * @return
 	 * @throws SQLException
+	 * @throws RemoteException 
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 */
 
 	public void uploadSong(org.example.www.uploadserviceelements.UploadSongRequestE uploadSongRequest0)
-			throws SQLException {
+			throws SQLException, RemoteException {
 		MariaDB db;
+		UploadCallbackServiceStub stub = new UploadCallbackServiceStub();//callbackEndPoint
+		UploadSongResponse innerResponse = new UploadSongResponse(uploadSongRequest0.getUploadSongRequest().getConversationId(), true);
+		UploadSongResponseE response = new UploadSongResponseE();
+		response.setUploadSongResponse(innerResponse);
+		System.out.print(uploadSongRequest0.getUploadSongRequest().getSpeakers().getSpeakerDevice().length);
 		try {
-			MessageContext msgCtx = MessageContext.getCurrentMessageContext();
-			System.out.println("test2");
-			/*String callbackEndPoint = ((OMElement) ((OMElement) msgCtx.getEnvelope().getHeader()
-					.getChildrenWithName(new QName("http://www.apache.org/ode/type/session", "callback")).next())
-							.getChildrenWithName(new QName("http://www.w3.org/2005/08/addressing", "Address")).next())
-									.getText();*/
-			UploadCallbackServiceStub stub = new UploadCallbackServiceStub();//callbackEndPoint
-			ServiceClient callbackClient = stub._getServiceClient(); 
-			/*SOAP11Factory factory = new SOAP11Factory();
-			OMNamespace addrNamespace = factory.createOMNamespace("http://www.w3.org/2005/08/addressing", "addr");
-			SOAPHeaderBlock replyToHeader = factory.createSOAPHeaderBlock("ReplyTo", addrNamespace);
-			OMElement replyToAddress = factory.createOMElement(new QName("http://www.w3.org/2005/08/addressing", "Address"));
-			//replyToAddress.setText(callbackEndPoint); //msgCtx.getMessageID()
-			replyToHeader.addChild(replyToAddress);
-			
-			callbackClient.addHeader(replyToHeader);
-			SOAPHeaderBlock callbackOdeHeader = (SOAPHeaderBlock) msgCtx.getEnvelope().getHeader().getHeaderBlocksWithNSURI("http://www.apache.org/ode/type/session").get(0);
-			callbackClient.addHeader(callbackOdeHeader);
-			SOAPHeaderBlock callbackIntalioHeader = (SOAPHeaderBlock) msgCtx.getEnvelope().getHeader().getHeaderBlocksWithNSURI("http://www.intalio.com/type/session").get(0);
-			callbackClient.addHeader(callbackIntalioHeader);
-			
-			System.out.println("Sending");
-			//callbackClient.sendReceive(response.getOMElement(response.MY_QNAME, factory));
-			*/
-			Thread.sleep(2000);
-			UploadSongResponse response = new UploadSongResponse(true);
-			stub.uploadSongCallback(response); 
-			System.out.println("Send");
-			// client.addHeader(header);
-			// client.addHeader(null);
-			// stub.uploadSongCallback(response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		try {
-			db = new MariaDB(database);
-		} catch (Exception e) {
-			System.out.println(e);
-			throw new RuntimeException("Unable to create a connection to the database: " + e);
-		}
-		try {
-			SpeakerDevice[] speakers = uploadSongRequest0.getUploadSongRequest().getSpeakers().getSpeakerDevice();
-			String type = uploadSongRequest0.getUploadSongRequest().getLink().getType().getValue();
-			String url = uploadSongRequest0.getUploadSongRequest().getLink().getAddress();
-			String fileName;
-			System.out.println(url);
-			switch (type) {
-			case "http":
-				try {
-					fileName = DownloadUtils.downloadSong("http://" + url, "");
-				} catch (MalformedURLException e) {
-					throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
-				} catch (IOException e) {
-					throw new RuntimeException("Unable to download file: " + e);
-				}
-				break;
-			case "https":
-				try {
-					fileName = DownloadUtils.downloadSong("http://" + url, "");
-				} catch (MalformedURLException e) {
-					throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
-				} catch (IOException e) {
-					throw new RuntimeException("Unable to download file: " + e);
-				}
-				break;
-			case "ftp":
-				throw new RuntimeException("Sorry ftp is not (yet) supported");
-			default:
-				throw new RuntimeException("Only the ftp and http types are allowed");
-			}
-			// Send file to speakers
-			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
-			for (SpeakerDevice speaker : speakers) {
-				executor.submit(() -> {
-					try {
-						SpeakerUtils.sendFileToSpeaker(new File(fileName), type + "://" + url,
-								speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
-								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
-					} catch (SQLIntegrityConstraintViolationException e) {
-						// Song was already loaded
-					} catch (SQLException e) {
-						e.printStackTrace();
-						throw new RuntimeException("The database could not be updated with the new song" + e);
-					}
-				});
-			}
-			executor.shutdown();
 			try {
-				executor.awaitTermination(5, TimeUnit.MINUTES);
-			} catch (InterruptedException e) {
-				// Callback send failure
-				return;
+				db = new MariaDB(database);
+			} catch (Exception e) {
+				System.out.println(e);
+				innerResponse = new UploadSongResponse(uploadSongRequest0.getUploadSongRequest().getConversationId(), e.toString());
+				response.setUploadSongResponse(innerResponse);
+				throw new RuntimeException("Unable to create a connection to the database: " + e);
 			}
-			// Callback send success
-			return;
-
+			try {
+				SpeakerDevice[] speakers = uploadSongRequest0.getUploadSongRequest().getSpeakers().getSpeakerDevice();
+				String type = uploadSongRequest0.getUploadSongRequest().getLink().getType().getValue();
+				String url = uploadSongRequest0.getUploadSongRequest().getLink().getAddress();
+				String fileName;
+				System.out.println(url);
+				switch (type) {
+				case "http":
+					try {
+						fileName = DownloadUtils.downloadSong("http://" + url, "");
+					} catch (MalformedURLException e) {
+						throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
+					} catch (IOException e) {
+						throw new RuntimeException("Unable to download file: " + e);
+					}
+					break;
+				case "https":
+					try {
+						fileName = DownloadUtils.downloadSong("http://" + url, "");
+					} catch (MalformedURLException e) {
+						throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
+					} catch (IOException e) {
+						throw new RuntimeException("Unable to download file: " + e);
+					}
+					break;
+				case "ftp":
+					throw new RuntimeException("Sorry ftp is not (yet) supported");
+				default:
+					throw new RuntimeException("Only the ftp and http types are allowed");
+				}
+				// Send file to speakers
+				ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
+				for (SpeakerDevice speaker : speakers) {
+					executor.submit(() -> {
+						try {
+							SpeakerUtils.sendFileToSpeaker(new File(fileName), type + "://" + url,
+									speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+									speaker.getGeneralDevice().getPort().getPort().intValue(), db);
+						} catch (SQLIntegrityConstraintViolationException e) {
+							// Song was already loaded
+						} catch (SQLException e) {
+							e.printStackTrace();
+							throw new RuntimeException("The database could not be updated with the new song" + e);
+						}
+					});
+				}
+				executor.shutdown();
+				try {
+					executor.awaitTermination(5, TimeUnit.MINUTES);
+				} catch (InterruptedException e) {
+					// Callback send failure
+					innerResponse = new UploadSongResponse(uploadSongRequest0.getUploadSongRequest().getConversationId(), e.toString());
+					response.setUploadSongResponse(innerResponse);
+				}
+				// Callback send success
+	
+			} catch(Exception e) {
+				innerResponse = new UploadSongResponse(uploadSongRequest0.getUploadSongRequest().getConversationId(), e.toString());
+				response.setUploadSongResponse(innerResponse);
+			} finally {
+				db.cleanUp();
+			}
 		} finally {
-			db.cleanUp();
+			stub.uploadSongCallback(response); 
 		}
 	}
 

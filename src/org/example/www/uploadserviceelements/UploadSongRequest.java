@@ -84,6 +84,36 @@
                                }
                             
 
+                        /**
+                        * field for ConversationId
+                        */
+
+                        
+                                    protected java.lang.String localConversationId ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getConversationId(){
+                               return localConversationId;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ConversationId
+                               */
+                               public void setConversationId(java.lang.String param){
+                            
+                                            this.localConversationId=param;
+                                       
+
+                               }
+                            
+
      
      
         /**
@@ -155,6 +185,24 @@
                                            localSpeakers.serialize(new javax.xml.namespace.QName("","Speakers"),
                                                xmlWriter);
                                         
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "conversationId", xmlWriter);
+                             
+
+                                          if (localConversationId==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localConversationId);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
                     xmlWriter.writeEndElement();
                
 
@@ -358,6 +406,15 @@
                                     }
                                     elementList.add(localSpeakers);
                                 
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "conversationId"));
+                                 
+                                        if (localConversationId != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConversationId));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -455,6 +512,31 @@
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","Speakers").equals(reader.getName())){
                                 
                                                 object.setSpeakers(org.example.www.soundscapedatatypes.SpeakerDeviceArray.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","conversationId").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"conversationId" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setConversationId(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     

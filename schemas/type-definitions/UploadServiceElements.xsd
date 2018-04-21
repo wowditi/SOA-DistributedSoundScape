@@ -13,7 +13,7 @@
 
 	<element name="DeleteSongResponse" type="types:ASyncResponse"></element>
 
-	<element name="UploadSongResponse" type="types:ASyncResponse"></element>
+	<element name="UploadSongResponse" type="tns:UploadSongResponse"></element>
 
 	<complexType name="DeleteSongRequest">
 		<sequence>
@@ -38,4 +38,11 @@
 	</complexType>
 
     <element name="ErrorMessage" type="string"></element>
+
+    <complexType name="UploadSongResponse">
+    	<sequence>
+    		<element name="conversationId" type="string"></element>
+    		<element name="response" type="types:ASyncResponse"></element>
+    	</sequence>
+    </complexType>
 </schema>

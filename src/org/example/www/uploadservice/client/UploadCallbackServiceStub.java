@@ -7,6 +7,8 @@
  */
 package org.example.www.uploadservice.client;
 
+import org.apache.axis2.jaxws.client.async.AsyncResponse;
+
 /*
 *  UploadCallbackServiceStub java implementation
 */
@@ -95,7 +97,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public UploadCallbackServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext)
 			throws org.apache.axis2.AxisFault {
 
-		this(configurationContext, "http://localhost:8889/ode/processes/UploadCallbackService/");
+		this(configurationContext, "http://localhost:8080/ode/processes/UploadCallbackService");
 
 	}
 
@@ -104,7 +106,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	 */
 	public UploadCallbackServiceStub() throws org.apache.axis2.AxisFault {
 
-		this("http://localhost:8889/ode/processes/UploadCallbackService/");
+		this("http://localhost:8080/ode/processes/UploadCallbackService");
 
 	}
 
@@ -168,7 +170,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	 * 
 	 */
 	public void uploadSongCallback(
-			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse uploadSongResponse1
+			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE uploadSongResponse1
 
 	) throws java.rmi.RemoteException
 
@@ -239,12 +241,12 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		return false;
 	}
 
-	// http://localhost:8889/ode/processes/UploadCallbackService/
+	// http://localhost:8889/ode/processes/UploadCallbackService
 	public static class GeneralDevice implements org.apache.axis2.databinding.ADBBean {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * GeneralDevice Namespace URI = http://www.example.org/SoundScapeDataTypes/
-		 * Namespace Prefix = ns1
+		 * Namespace Prefix = ns2
 		 */
 
 		/**
@@ -394,7 +396,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -733,7 +735,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name = Link
 		 * Namespace URI = http://www.example.org/SoundScapeDataTypes/ Namespace Prefix
-		 * = ns1
+		 * = ns2
 		 */
 
 		/**
@@ -861,7 +863,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -1182,7 +1184,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class IsSongLoadedResponse implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "IsSongLoadedResponse", "ns4");
+				"http://www.example.org/UploadServiceElements/", "IsSongLoadedResponse", "ns3");
 
 		/**
 		 * field for IsSongLoadedResponse
@@ -1270,7 +1272,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -1575,6 +1577,13 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 			}
 
+			if ("http://www.example.org/UploadServiceElements/".equals(namespaceURI)
+					&& "UploadSongResponse".equals(typeName)) {
+
+				return UploadSongResponse.Factory.parse(reader);
+
+			}
+
 			if ("http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI)
 					&& "ASyncResponse".equals(typeName)) {
 
@@ -1630,7 +1639,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name = Location
 		 * Namespace URI = http://www.example.org/SoundScapeDataTypes/ Namespace Prefix
-		 * = ns1
+		 * = ns2
 		 */
 
 		/**
@@ -1803,7 +1812,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -2154,7 +2163,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class LinkType implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/SoundScapeDataTypes/", "LinkType", "ns1");
+				"http://www.example.org/SoundScapeDataTypes/", "LinkType", "ns2");
 
 		/**
 		 * field for LinkType
@@ -2268,7 +2277,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -2562,7 +2571,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * SpeakerDevice Namespace URI = http://www.example.org/SoundScapeDataTypes/
-		 * Namespace Prefix = ns1
+		 * Namespace Prefix = ns2
 		 */
 
 		/**
@@ -2680,7 +2689,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -2994,7 +3003,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * SpeakerDeviceArray Namespace URI =
-		 * http://www.example.org/SoundScapeDataTypes/ Namespace Prefix = ns1
+		 * http://www.example.org/SoundScapeDataTypes/ Namespace Prefix = ns2
 		 */
 
 		/**
@@ -3134,7 +3143,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -3459,10 +3468,324 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 	}
 
+	public static class UploadSongResponseE implements org.apache.axis2.databinding.ADBBean {
+
+		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+				"http://www.example.org/UploadServiceElements/", "UploadSongResponse", "ns3");
+
+		/**
+		 * field for UploadSongResponse
+		 */
+
+		protected UploadSongResponse localUploadSongResponse;
+
+		/**
+		 * Auto generated getter method
+		 * 
+		 * @return UploadSongResponse
+		 */
+		public UploadSongResponse getUploadSongResponse() {
+			return localUploadSongResponse;
+		}
+
+		/**
+		 * Auto generated setter method
+		 * 
+		 * @param param
+		 *            UploadSongResponse
+		 */
+		public void setUploadSongResponse(UploadSongResponse param) {
+
+			this.localUploadSongResponse = param;
+
+		}
+
+		/**
+		 *
+		 * @param parentQName
+		 * @param factory
+		 * @return org.apache.axiom.om.OMElement
+		 */
+		public org.apache.axiom.om.OMElement getOMElement(final javax.xml.namespace.QName parentQName,
+				final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
+
+			org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+					MY_QNAME);
+			return factory.createOMElement(dataSource, MY_QNAME);
+
+		}
+
+		public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter)
+				throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
+			serialize(parentQName, xmlWriter, false);
+		}
+
+		public void serialize(final javax.xml.namespace.QName parentQName, javax.xml.stream.XMLStreamWriter xmlWriter,
+				boolean serializeType)
+				throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
+
+			// We can safely assume an element has only one type associated with it
+
+			if (localUploadSongResponse == null) {
+				throw new org.apache.axis2.databinding.ADBException("UploadSongResponse cannot be null!");
+			}
+			localUploadSongResponse.serialize(MY_QNAME, xmlWriter);
+
+		}
+
+		private static java.lang.String generatePrefix(java.lang.String namespace) {
+			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
+				return "ns3";
+			}
+			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+		}
+
+		/**
+		 * Utility method to write an element start tag.
+		 */
+		private void writeStartElement(java.lang.String prefix, java.lang.String namespace, java.lang.String localPart,
+				javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+			java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+			if (writerPrefix != null) {
+				xmlWriter.writeStartElement(namespace, localPart);
+			} else {
+				if (namespace.length() == 0) {
+					prefix = "";
+				} else if (prefix == null) {
+					prefix = generatePrefix(namespace);
+				}
+
+				xmlWriter.writeStartElement(prefix, localPart, namespace);
+				xmlWriter.writeNamespace(prefix, namespace);
+				xmlWriter.setPrefix(prefix, namespace);
+			}
+		}
+
+		/**
+		 * Util method to write an attribute with the ns prefix
+		 */
+		private void writeAttribute(java.lang.String prefix, java.lang.String namespace, java.lang.String attName,
+				java.lang.String attValue, javax.xml.stream.XMLStreamWriter xmlWriter)
+				throws javax.xml.stream.XMLStreamException {
+			if (xmlWriter.getPrefix(namespace) == null) {
+				xmlWriter.writeNamespace(prefix, namespace);
+				xmlWriter.setPrefix(prefix, namespace);
+			}
+			xmlWriter.writeAttribute(namespace, attName, attValue);
+		}
+
+		/**
+		 * Util method to write an attribute without the ns prefix
+		 */
+		private void writeAttribute(java.lang.String namespace, java.lang.String attName, java.lang.String attValue,
+				javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+			if (namespace.equals("")) {
+				xmlWriter.writeAttribute(attName, attValue);
+			} else {
+				registerPrefix(xmlWriter, namespace);
+				xmlWriter.writeAttribute(namespace, attName, attValue);
+			}
+		}
+
+		/**
+		 * Util method to write an attribute without the ns prefix
+		 */
+		private void writeQNameAttribute(java.lang.String namespace, java.lang.String attName,
+				javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
+				throws javax.xml.stream.XMLStreamException {
+
+			java.lang.String attributeNamespace = qname.getNamespaceURI();
+			java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+			if (attributePrefix == null) {
+				attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+			}
+			java.lang.String attributeValue;
+			if (attributePrefix.trim().length() > 0) {
+				attributeValue = attributePrefix + ":" + qname.getLocalPart();
+			} else {
+				attributeValue = qname.getLocalPart();
+			}
+
+			if (namespace.equals("")) {
+				xmlWriter.writeAttribute(attName, attributeValue);
+			} else {
+				registerPrefix(xmlWriter, namespace);
+				xmlWriter.writeAttribute(namespace, attName, attributeValue);
+			}
+		}
+
+		/**
+		 * method to handle Qnames
+		 */
+
+		private void writeQName(javax.xml.namespace.QName qname, javax.xml.stream.XMLStreamWriter xmlWriter)
+				throws javax.xml.stream.XMLStreamException {
+			java.lang.String namespaceURI = qname.getNamespaceURI();
+			if (namespaceURI != null) {
+				java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+				if (prefix == null) {
+					prefix = generatePrefix(namespaceURI);
+					xmlWriter.writeNamespace(prefix, namespaceURI);
+					xmlWriter.setPrefix(prefix, namespaceURI);
+				}
+
+				if (prefix.trim().length() > 0) {
+					xmlWriter.writeCharacters(
+							prefix + ":" + org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+				} else {
+					// i.e this is the default namespace
+					xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+				}
+
+			} else {
+				xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qname));
+			}
+		}
+
+		private void writeQNames(javax.xml.namespace.QName[] qnames, javax.xml.stream.XMLStreamWriter xmlWriter)
+				throws javax.xml.stream.XMLStreamException {
+
+			if (qnames != null) {
+				// we have to store this data until last moment since it is not possible to
+				// write any
+				// namespace data after writing the charactor data
+				java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+				java.lang.String namespaceURI = null;
+				java.lang.String prefix = null;
+
+				for (int i = 0; i < qnames.length; i++) {
+					if (i > 0) {
+						stringToWrite.append(" ");
+					}
+					namespaceURI = qnames[i].getNamespaceURI();
+					if (namespaceURI != null) {
+						prefix = xmlWriter.getPrefix(namespaceURI);
+						if ((prefix == null) || (prefix.length() == 0)) {
+							prefix = generatePrefix(namespaceURI);
+							xmlWriter.writeNamespace(prefix, namespaceURI);
+							xmlWriter.setPrefix(prefix, namespaceURI);
+						}
+
+						if (prefix.trim().length() > 0) {
+							stringToWrite.append(prefix).append(":").append(
+									org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+						} else {
+							stringToWrite.append(
+									org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+						}
+					} else {
+						stringToWrite
+								.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(qnames[i]));
+					}
+				}
+				xmlWriter.writeCharacters(stringToWrite.toString());
+			}
+
+		}
+
+		/**
+		 * Register a namespace prefix
+		 */
+		private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace)
+				throws javax.xml.stream.XMLStreamException {
+			java.lang.String prefix = xmlWriter.getPrefix(namespace);
+			if (prefix == null) {
+				prefix = generatePrefix(namespace);
+				javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+				while (true) {
+					java.lang.String uri = nsContext.getNamespaceURI(prefix);
+					if (uri == null || uri.length() == 0) {
+						break;
+					}
+					prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+				}
+				xmlWriter.writeNamespace(prefix, namespace);
+				xmlWriter.setPrefix(prefix, namespace);
+			}
+			return prefix;
+		}
+
+		/**
+		 * databinding method to get an XML representation of this object
+		 *
+		 */
+		public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
+				throws org.apache.axis2.databinding.ADBException {
+
+			// We can safely assume an element has only one type associated with it
+			return localUploadSongResponse.getPullParser(MY_QNAME);
+
+		}
+
+		/**
+		 * Factory class that keeps the parse method
+		 */
+		public static class Factory {
+
+			/**
+			 * static method to create the object Precondition: If this object is an
+			 * element, the current or next start element starts this object and any
+			 * intervening reader events are ignorable If this object is not an element, it
+			 * is a complex type and the reader is at the event just after the outer start
+			 * element Postcondition: If this object is an element, the reader is positioned
+			 * at its end element If this object is a complex type, the reader is positioned
+			 * at the end element of its outer element
+			 */
+			public static UploadSongResponseE parse(javax.xml.stream.XMLStreamReader reader)
+					throws java.lang.Exception {
+				UploadSongResponseE object = new UploadSongResponseE();
+
+				int event;
+				java.lang.String nillableValue = null;
+				java.lang.String prefix = "";
+				java.lang.String namespaceuri = "";
+				try {
+
+					while (!reader.isStartElement() && !reader.isEndElement())
+						reader.next();
+
+					// Note all attributes that were handled. Used to differ normal attributes
+					// from anyAttributes.
+					java.util.Vector handledAttributes = new java.util.Vector();
+
+					while (!reader.isEndElement()) {
+						if (reader.isStartElement()) {
+
+							if (reader.isStartElement()
+									&& new javax.xml.namespace.QName("http://www.example.org/UploadServiceElements/",
+											"UploadSongResponse").equals(reader.getName())) {
+
+								object.setUploadSongResponse(UploadSongResponse.Factory.parse(reader));
+
+							} // End of if for expected property start element
+
+							else {
+								// A start element we are not expecting indicates an invalid parameter was
+								// passed
+								throw new org.apache.axis2.databinding.ADBException(
+										"Unexpected subelement " + reader.getName());
+							}
+
+						} else {
+							reader.next();
+						}
+					} // end of while loop
+
+				} catch (javax.xml.stream.XMLStreamException e) {
+					throw new java.lang.Exception(e);
+				}
+
+				return object;
+			}
+
+		}// end of factory class
+
+	}
+
 	public static class DeleteSongRequestE implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "DeleteSongRequest", "ns4");
+				"http://www.example.org/UploadServiceElements/", "DeleteSongRequest", "ns3");
 
 		/**
 		 * field for DeleteSongRequest
@@ -3526,7 +3849,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -3775,7 +4098,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class UploadSongRequestE implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "UploadSongRequest", "ns4");
+				"http://www.example.org/UploadServiceElements/", "UploadSongRequest", "ns3");
 
 		/**
 		 * field for UploadSongRequest
@@ -3839,7 +4162,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -4086,42 +4409,80 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	}
 
 	public static class UploadSongResponse implements org.apache.axis2.databinding.ADBBean {
-
-		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "UploadSongResponse", "ns4");
-
-		/**
-		 * field for UploadSongResponse
+		/*
+		 * This type was generated from the piece of schema that had name =
+		 * UploadSongResponse Namespace URI =
+		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns3
 		 */
 		
 		public UploadSongResponse() {}
 		
-		public UploadSongResponse(boolean success) {
+		public UploadSongResponse(String conersationId, boolean success) {
 			ASyncResponse response = new ASyncResponse();
 			response.setSuccessfull(success);
-			setUploadSongResponse(response);
+			setConversationId(conersationId);
+			setResponse(response);
+		}
+		
+		public UploadSongResponse(String conersationId, String error) {
+			ASyncResponse response = new ASyncResponse();
+			response.setSuccessfull(false);
+			response.setErrorMessage(error);
+			setConversationId(conersationId);
+			setResponse(response);
 		}
 
-		protected ASyncResponse localUploadSongResponse;
+		/**
+		 * field for ConversationId
+		 */
+
+		protected java.lang.String localConversationId;
 
 		/**
 		 * Auto generated getter method
 		 * 
-		 * @return ASyncResponse
+		 * @return java.lang.String
 		 */
-		public ASyncResponse getUploadSongResponse() {
-			return localUploadSongResponse;
+		public java.lang.String getConversationId() {
+			return localConversationId;
 		}
 
 		/**
 		 * Auto generated setter method
 		 * 
 		 * @param param
-		 *            UploadSongResponse
+		 *            ConversationId
 		 */
-		public void setUploadSongResponse(ASyncResponse param) {
+		public void setConversationId(java.lang.String param) {
 
-			this.localUploadSongResponse = param;
+			this.localConversationId = param;
+
+		}
+
+		/**
+		 * field for Response
+		 */
+
+		protected ASyncResponse localResponse;
+
+		/**
+		 * Auto generated getter method
+		 * 
+		 * @return ASyncResponse
+		 */
+		public ASyncResponse getResponse() {
+			return localResponse;
+		}
+
+		/**
+		 * Auto generated setter method
+		 * 
+		 * @param param
+		 *            Response
+		 */
+		public void setResponse(ASyncResponse param) {
+
+			this.localResponse = param;
 
 		}
 
@@ -4135,8 +4496,8 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 				final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
 
 			org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-					MY_QNAME);
-			return factory.createOMElement(dataSource, MY_QNAME);
+					parentQName);
+			return factory.createOMElement(dataSource, parentQName);
 
 		}
 
@@ -4149,18 +4510,55 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 				boolean serializeType)
 				throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException {
 
-			// We can safely assume an element has only one type associated with it
+			java.lang.String prefix = null;
+			java.lang.String namespace = null;
 
-			if (localUploadSongResponse == null) {
-				throw new org.apache.axis2.databinding.ADBException("UploadSongResponse cannot be null!");
+			prefix = parentQName.getPrefix();
+			namespace = parentQName.getNamespaceURI();
+			writeStartElement(prefix, namespace, parentQName.getLocalPart(), xmlWriter);
+
+			if (serializeType) {
+
+				java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+						"http://www.example.org/UploadServiceElements/");
+				if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
+					writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
+							namespacePrefix + ":UploadSongResponse", xmlWriter);
+				} else {
+					writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "UploadSongResponse",
+							xmlWriter);
+				}
+
 			}
-			localUploadSongResponse.serialize(MY_QNAME, xmlWriter);
+
+			namespace = "";
+			writeStartElement(null, namespace, "conversationId", xmlWriter);
+
+			if (localConversationId == null) {
+				// write the nil attribute
+
+				throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+
+			} else {
+
+				xmlWriter.writeCharacters(localConversationId);
+
+			}
+
+			xmlWriter.writeEndElement();
+
+			if (localResponse == null) {
+				throw new org.apache.axis2.databinding.ADBException("response cannot be null!!");
+			}
+			localResponse.serialize(new javax.xml.namespace.QName("", "response"), xmlWriter);
+
+			xmlWriter.writeEndElement();
 
 		}
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -4337,8 +4735,26 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName)
 				throws org.apache.axis2.databinding.ADBException {
 
-			// We can safely assume an element has only one type associated with it
-			return localUploadSongResponse.getPullParser(MY_QNAME);
+			java.util.ArrayList elementList = new java.util.ArrayList();
+			java.util.ArrayList attribList = new java.util.ArrayList();
+
+			elementList.add(new javax.xml.namespace.QName("", "conversationId"));
+
+			if (localConversationId != null) {
+				elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConversationId));
+			} else {
+				throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+			}
+
+			elementList.add(new javax.xml.namespace.QName("", "response"));
+
+			if (localResponse == null) {
+				throw new org.apache.axis2.databinding.ADBException("response cannot be null!!");
+			}
+			elementList.add(localResponse);
+
+			return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(),
+					attribList.toArray());
 
 		}
 
@@ -4368,32 +4784,88 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 					while (!reader.isStartElement() && !reader.isEndElement())
 						reader.next();
 
+					if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "type") != null) {
+						java.lang.String fullTypeName = reader
+								.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "type");
+						if (fullTypeName != null) {
+							java.lang.String nsPrefix = null;
+							if (fullTypeName.indexOf(":") > -1) {
+								nsPrefix = fullTypeName.substring(0, fullTypeName.indexOf(":"));
+							}
+							nsPrefix = nsPrefix == null ? "" : nsPrefix;
+
+							java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":") + 1);
+
+							if (!"UploadSongResponse".equals(type)) {
+								// find namespace for the prefix
+								java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
+								return (UploadSongResponse) ExtensionMapper.getTypeObject(nsUri, type, reader);
+							}
+
+						}
+
+					}
+
 					// Note all attributes that were handled. Used to differ normal attributes
 					// from anyAttributes.
 					java.util.Vector handledAttributes = new java.util.Vector();
 
-					while (!reader.isEndElement()) {
-						if (reader.isStartElement()) {
+					reader.next();
 
-							if (reader.isStartElement()
-									&& new javax.xml.namespace.QName("http://www.example.org/UploadServiceElements/",
-											"UploadSongResponse").equals(reader.getName())) {
+					while (!reader.isStartElement() && !reader.isEndElement())
+						reader.next();
 
-								object.setUploadSongResponse(ASyncResponse.Factory.parse(reader));
+					if (reader.isStartElement()
+							&& new javax.xml.namespace.QName("", "conversationId").equals(reader.getName())) {
 
-							} // End of if for expected property start element
-
-							else {
-								// A start element we are not expecting indicates an invalid parameter was
-								// passed
-								throw new org.apache.axis2.databinding.ADBException(
-										"Unexpected subelement " + reader.getName());
-							}
-
-						} else {
-							reader.next();
+						nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+						if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+							throw new org.apache.axis2.databinding.ADBException(
+									"The element: " + "conversationId" + "  cannot be null");
 						}
-					} // end of while loop
+
+						java.lang.String content = reader.getElementText();
+
+						object.setConversationId(
+								org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+
+						reader.next();
+
+					} // End of if for expected property start element
+
+					else {
+						// A start element we are not expecting indicates an invalid parameter was
+						// passed
+						throw new org.apache.axis2.databinding.ADBException(
+								"Unexpected subelement " + reader.getName());
+					}
+
+					while (!reader.isStartElement() && !reader.isEndElement())
+						reader.next();
+
+					if (reader.isStartElement()
+							&& new javax.xml.namespace.QName("", "response").equals(reader.getName())) {
+
+						object.setResponse(ASyncResponse.Factory.parse(reader));
+
+						reader.next();
+
+					} // End of if for expected property start element
+
+					else {
+						// A start element we are not expecting indicates an invalid parameter was
+						// passed
+						throw new org.apache.axis2.databinding.ADBException(
+								"Unexpected subelement " + reader.getName());
+					}
+
+					while (!reader.isStartElement() && !reader.isEndElement())
+						reader.next();
+
+					if (reader.isStartElement())
+						// A start element we are not expecting indicates a trailing invalid property
+						throw new org.apache.axis2.databinding.ADBException(
+								"Unexpected subelement " + reader.getName());
 
 				} catch (javax.xml.stream.XMLStreamException e) {
 					throw new java.lang.Exception(e);
@@ -4410,7 +4882,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * ASyncResponse Namespace URI = http://www.example.org/SoundScapeDataTypes/
-		 * Namespace Prefix = ns1
+		 * Namespace Prefix = ns2
 		 */
 
 		/**
@@ -4591,7 +5063,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -4908,7 +5380,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class ErrorMessage implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "ErrorMessage", "ns4");
+				"http://www.example.org/UploadServiceElements/", "ErrorMessage", "ns3");
 
 		/**
 		 * field for ErrorMessage
@@ -4997,7 +5469,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -5260,7 +5732,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * IsSongLoadedRequest Namespace URI =
-		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns4
+		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns3
 		 */
 
 		/**
@@ -5378,7 +5850,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -5691,7 +6163,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class IsSongLoadedRequestE implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "IsSongLoadedRequest", "ns4");
+				"http://www.example.org/UploadServiceElements/", "IsSongLoadedRequest", "ns3");
 
 		/**
 		 * field for IsSongLoadedRequest
@@ -5755,7 +6227,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -6005,7 +6477,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class DeleteSongResponse implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/UploadServiceElements/", "DeleteSongResponse", "ns4");
+				"http://www.example.org/UploadServiceElements/", "DeleteSongResponse", "ns3");
 
 		/**
 		 * field for DeleteSongResponse
@@ -6069,7 +6541,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -6318,7 +6790,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class IPv4Address implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/SoundScapeDataTypes/", "IPv4Address", "ns1");
+				"http://www.example.org/SoundScapeDataTypes/", "IPv4Address", "ns2");
 
 		/**
 		 * field for IPv4Address
@@ -6418,7 +6890,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -6698,7 +7170,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * UploadSongRequest Namespace URI =
-		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns4
+		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns3
 		 */
 
 		/**
@@ -6752,6 +7224,33 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		public void setSpeakers(SpeakerDeviceArray param) {
 
 			this.localSpeakers = param;
+
+		}
+
+		/**
+		 * field for ConversationId
+		 */
+
+		protected java.lang.String localConversationId;
+
+		/**
+		 * Auto generated getter method
+		 * 
+		 * @return java.lang.String
+		 */
+		public java.lang.String getConversationId() {
+			return localConversationId;
+		}
+
+		/**
+		 * Auto generated setter method
+		 * 
+		 * @param param
+		 *            ConversationId
+		 */
+		public void setConversationId(java.lang.String param) {
+
+			this.localConversationId = param;
 
 		}
 
@@ -6810,13 +7309,29 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 			}
 			localSpeakers.serialize(new javax.xml.namespace.QName("", "Speakers"), xmlWriter);
 
+			namespace = "";
+			writeStartElement(null, namespace, "conversationId", xmlWriter);
+
+			if (localConversationId == null) {
+				// write the nil attribute
+
+				throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+
+			} else {
+
+				xmlWriter.writeCharacters(localConversationId);
+
+			}
+
+			xmlWriter.writeEndElement();
+
 			xmlWriter.writeEndElement();
 
 		}
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -7010,6 +7525,14 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 			}
 			elementList.add(localSpeakers);
 
+			elementList.add(new javax.xml.namespace.QName("", "conversationId"));
+
+			if (localConversationId != null) {
+				elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConversationId));
+			} else {
+				throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
+			}
+
 			return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(),
 					attribList.toArray());
 
@@ -7109,6 +7632,34 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 					while (!reader.isStartElement() && !reader.isEndElement())
 						reader.next();
 
+					if (reader.isStartElement()
+							&& new javax.xml.namespace.QName("", "conversationId").equals(reader.getName())) {
+
+						nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+						if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
+							throw new org.apache.axis2.databinding.ADBException(
+									"The element: " + "conversationId" + "  cannot be null");
+						}
+
+						java.lang.String content = reader.getElementText();
+
+						object.setConversationId(
+								org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+
+						reader.next();
+
+					} // End of if for expected property start element
+
+					else {
+						// A start element we are not expecting indicates an invalid parameter was
+						// passed
+						throw new org.apache.axis2.databinding.ADBException(
+								"Unexpected subelement " + reader.getName());
+					}
+
+					while (!reader.isStartElement() && !reader.isEndElement())
+						reader.next();
+
 					if (reader.isStartElement())
 						// A start element we are not expecting indicates a trailing invalid property
 						throw new org.apache.axis2.databinding.ADBException(
@@ -7129,7 +7680,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 		/*
 		 * This type was generated from the piece of schema that had name =
 		 * DeleteSongRequest Namespace URI =
-		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns4
+		 * http://www.example.org/UploadServiceElements/ Namespace Prefix = ns3
 		 */
 
 		/**
@@ -7247,7 +7798,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/UploadServiceElements/")) {
-				return "ns4";
+				return "ns3";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -7559,7 +8110,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class Port implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/SoundScapeDataTypes/", "Port", "ns1");
+				"http://www.example.org/SoundScapeDataTypes/", "Port", "ns2");
 
 		/**
 		 * field for Port
@@ -7653,7 +8204,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -7931,7 +8482,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	public static class SoundscapeId implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-				"http://www.example.org/SoundScapeDataTypes/", "SoundscapeId", "ns1");
+				"http://www.example.org/SoundScapeDataTypes/", "SoundscapeId", "ns2");
 
 		/**
 		 * field for SoundscapeId
@@ -8027,7 +8578,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 		private static java.lang.String generatePrefix(java.lang.String namespace) {
 			if (namespace.equals("http://www.example.org/SoundScapeDataTypes/")) {
-				return "ns1";
+				return "ns2";
 			}
 			return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 		}
@@ -8319,12 +8870,12 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	}
 
 	private org.apache.axiom.om.OMElement toOM(
-			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse param,
+			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE param,
 			boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
 			return param.getOMElement(
-					org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse.MY_QNAME,
+					org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE.MY_QNAME,
 					org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -8353,7 +8904,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 	/* methods to provide back word compatibility */
 
 	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory,
-			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse param,
+			org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE param,
 			boolean optimizeContent, javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
@@ -8361,7 +8912,7 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
 			emptyEnvelope.getBody()
 					.addChild(param.getOMElement(
-							org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse.MY_QNAME,
+							org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE.MY_QNAME,
 							factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
@@ -8391,9 +8942,9 @@ public class UploadCallbackServiceStub extends org.apache.axis2.client.Stub {
 
 			}
 
-			if (org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse.class.equals(type)) {
+			if (org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE.class.equals(type)) {
 
-				return org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse.Factory
+				return org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE.Factory
 						.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
