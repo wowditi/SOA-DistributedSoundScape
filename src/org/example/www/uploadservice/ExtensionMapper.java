@@ -82,6 +82,16 @@
 
               
                   if (
+                  "http://www.example.org/UploadServiceElements/".equals(namespaceURI) &&
+                  "UploadSongResponse".equals(typeName)){
+                   
+                            return  org.example.www.uploadserviceelements.UploadSongResponse.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
                   "http://www.example.org/SoundScapeDataTypes/".equals(namespaceURI) &&
                   "ASyncResponse".equals(typeName)){
                    
@@ -96,6 +106,16 @@
                   "IsSongLoadedRequest".equals(typeName)){
                    
                             return  org.example.www.uploadserviceelements.IsSongLoadedRequest.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.example.org/UploadServiceElements/".equals(namespaceURI) &&
+                  "DeleteSongResponse".equals(typeName)){
+                   
+                            return  org.example.www.uploadserviceelements.DeleteSongResponse.Factory.parse(reader);
                         
 
                   }

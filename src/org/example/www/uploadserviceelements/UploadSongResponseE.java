@@ -1,6 +1,6 @@
 
 /**
- * DeleteSongResponse.java
+ * UploadSongResponseE.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
@@ -11,74 +11,45 @@
             
 
             /**
-            *  DeleteSongResponse bean class
+            *  UploadSongResponseE bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class DeleteSongResponse
+        public  class UploadSongResponseE
         implements org.apache.axis2.databinding.ADBBean{
-        /* This type was generated from the piece of schema that had
-                name = DeleteSongResponse
-                Namespace URI = http://www.example.org/UploadServiceElements/
-                Namespace Prefix = ns2
-                */
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.example.org/UploadServiceElements/",
+                "UploadSongResponse",
+                "ns2");
+
             
 
                         /**
-                        * field for Response
+                        * field for UploadSongResponse
                         */
 
                         
-                                    protected org.example.www.soundscapedatatypes.ASyncResponse localResponse ;
+                                    protected org.example.www.uploadserviceelements.UploadSongResponse localUploadSongResponse ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return org.example.www.soundscapedatatypes.ASyncResponse
+                           * @return org.example.www.uploadserviceelements.UploadSongResponse
                            */
-                           public  org.example.www.soundscapedatatypes.ASyncResponse getResponse(){
-                               return localResponse;
+                           public  org.example.www.uploadserviceelements.UploadSongResponse getUploadSongResponse(){
+                               return localUploadSongResponse;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Response
+                               * @param param UploadSongResponse
                                */
-                               public void setResponse(org.example.www.soundscapedatatypes.ASyncResponse param){
+                               public void setUploadSongResponse(org.example.www.uploadserviceelements.UploadSongResponse param){
                             
-                                            this.localResponse=param;
-                                       
-
-                               }
-                            
-
-                        /**
-                        * field for ConversationId
-                        */
-
-                        
-                                    protected java.lang.String localConversationId ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getConversationId(){
-                               return localConversationId;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ConversationId
-                               */
-                               public void setConversationId(java.lang.String param){
-                            
-                                            this.localConversationId=param;
+                                            this.localUploadSongResponse=param;
                                        
 
                                }
@@ -99,8 +70,8 @@
 
         
                org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName);
-               return factory.createOMElement(dataSource,parentQName);
+                       new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME);
+               return factory.createOMElement(dataSource,MY_QNAME);
             
         }
 
@@ -116,59 +87,13 @@
             throws javax.xml.stream.XMLStreamException, org.apache.axis2.databinding.ADBException{
             
                 
-
-
-                java.lang.String prefix = null;
-                java.lang.String namespace = null;
+                //We can safely assume an element has only one type associated with it
                 
-
-                    prefix = parentQName.getPrefix();
-                    namespace = parentQName.getNamespaceURI();
-                    writeStartElement(prefix, namespace, parentQName.getLocalPart(), xmlWriter);
-                
-                  if (serializeType){
-               
-
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/UploadServiceElements/");
-                   if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
-                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":DeleteSongResponse",
-                           xmlWriter);
-                   } else {
-                       writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "DeleteSongResponse",
-                           xmlWriter);
-                   }
-
-               
-                   }
-               
-                                            if (localResponse==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("response cannot be null!!");
-                                            }
-                                           localResponse.serialize(new javax.xml.namespace.QName("","response"),
-                                               xmlWriter);
-                                        
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "conversationId", xmlWriter);
-                             
-
-                                          if (localConversationId==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localConversationId);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                    xmlWriter.writeEndElement();
-               
+                                 if (localUploadSongResponse==null){
+                                   throw new org.apache.axis2.databinding.ADBException("UploadSongResponse cannot be null!");
+                                 }
+                                 localUploadSongResponse.serialize(MY_QNAME,xmlWriter);
+                            
 
         }
 
@@ -348,32 +273,9 @@
 
 
         
-                 java.util.ArrayList elementList = new java.util.ArrayList();
-                 java.util.ArrayList attribList = new java.util.ArrayList();
-
                 
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "response"));
-                            
-                            
-                                    if (localResponse==null){
-                                         throw new org.apache.axis2.databinding.ADBException("response cannot be null!!");
-                                    }
-                                    elementList.add(localResponse);
-                                
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "conversationId"));
-                                 
-                                        if (localConversationId != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConversationId));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("conversationId cannot be null!!");
-                                        }
-                                    
-
-                return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
-            
-            
+                //We can safely assume an element has only one type associated with it
+                return localUploadSongResponse.getPullParser(MY_QNAME);
 
         }
 
@@ -394,9 +296,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static DeleteSongResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            DeleteSongResponse object =
-                new DeleteSongResponse();
+        public static UploadSongResponseE parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            UploadSongResponseE object =
+                new UploadSongResponseE();
 
             int event;
             java.lang.String nillableValue = null;
@@ -408,32 +310,6 @@
                     reader.next();
 
                 
-                if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","type")!=null){
-                  java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                        "type");
-                  if (fullTypeName!=null){
-                    java.lang.String nsPrefix = null;
-                    if (fullTypeName.indexOf(":") > -1){
-                        nsPrefix = fullTypeName.substring(0,fullTypeName.indexOf(":"));
-                    }
-                    nsPrefix = nsPrefix==null?"":nsPrefix;
-
-                    java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
-                    
-                            if (!"DeleteSongResponse".equals(type)){
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (DeleteSongResponse)org.example.www.uploadservice.ExtensionMapper.getTypeObject(
-                                     nsUri,type,reader);
-                              }
-                        
-
-                  }
-                
-
-                }
-
-                
 
                 
                 // Note all attributes that were handled. Used to differ normal attributes
@@ -441,58 +317,26 @@
                 java.util.Vector handledAttributes = new java.util.Vector();
                 
 
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement() ){
                 
-                    
-                    reader.next();
-                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.example.org/UploadServiceElements/","UploadSongResponse").equals(reader.getName())){
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","response").equals(reader.getName())){
-                                
-                                                object.setResponse(org.example.www.soundscapedatatypes.ASyncResponse.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    
+                                                object.setUploadSongResponse(org.example.www.uploadserviceelements.UploadSongResponse.Factory.parse(reader));
+                                            
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","conversationId").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"conversationId" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setConversationId(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
-                            while (!reader.isStartElement() && !reader.isEndElement())
+                             else{
+                                        // A start element we are not expecting indicates an invalid parameter was passed
+                                        throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                             }
+                          
+                             } else {
                                 reader.next();
-                            
-                                if (reader.isStartElement())
-                                // A start element we are not expecting indicates a trailing invalid property
-                                throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                            
+                             }  
+                           }  // end of while loop
+                        
 
 
 

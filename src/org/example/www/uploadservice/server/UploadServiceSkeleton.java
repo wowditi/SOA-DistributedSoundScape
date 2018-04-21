@@ -40,10 +40,12 @@ import org.apache.axis2.context.MessageContext;
 import org.apache.axis2.databinding.ADBException;
 import org.example.www.database.MariaDB;
 import org.example.www.soundscapedatatypes.SpeakerDevice;
+import org.example.www.uploadservice.client.UploadCallbackServiceStub.DeleteSongResponseE;
 import org.example.www.uploadservice.client.UploadCallbackServiceStub;
 import org.example.www.uploadservice.server.ErrorMessage;
 import org.example.www.uploadservice.server.UploadServiceSkeletonInterface;
 import org.example.www.uploadserviceelements.IsSongLoadedResponse;
+import org.example.www.uploadservice.client.UploadCallbackServiceStub.DeleteSongResponse;
 import org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponse;
 import org.example.www.uploadservice.client.UploadCallbackServiceStub.UploadSongResponseE;
 import org.example.www.utils.DownloadUtils;
@@ -228,11 +230,16 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 	 * @param deleteSongRequest3
 	 * @return
 	 * @throws SQLException
+	 * @throws RemoteException 
 	 */
 
 	public void deleteSong(org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest3)
-			throws SQLException {
+			throws SQLException, RemoteException {
 		MariaDB db;
+		UploadCallbackServiceStub stub = new UploadCallbackServiceStub();//callbackEndPoint
+		DeleteSongResponse innerResponse = new DeleteSongResponse(deleteSongRequest3.getDeleteSongRequest().getConversationId(), true);
+		DeleteSongResponseE response = new DeleteSongResponseE();
+		response.setDeleteSongResponse(innerResponse);
 		try {
 			db = new MariaDB(database);
 		} catch (Exception e) {
@@ -240,35 +247,42 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 			throw new RuntimeException("Unable to create a connection to the database: " + e);
 		}
 		try {
-			SpeakerDevice[] speakers = deleteSongRequest3.getDeleteSongRequest().getSpeakers().getSpeakerDevice();
-			String type = deleteSongRequest3.getDeleteSongRequest().getLink().getType().getValue();
-			String url = deleteSongRequest3.getDeleteSongRequest().getLink().getAddress();
-			// Send file to speakers
-			ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
-			for (SpeakerDevice speaker : speakers) {
-				executor.submit(() -> {
-					try {
-						SpeakerUtils.deleteFileFromSpeaker(type + "://" + url,
-								speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
-								speaker.getGeneralDevice().getPort().getPort().intValue(), db);
-					} catch (SQLException e) {
-						e.printStackTrace();
-						throw new RuntimeException("The database could not be updated with the new song" + e);
-					}
-				});
-			}
-			executor.shutdown();
 			try {
-				executor.awaitTermination(5, TimeUnit.MINUTES);
-			} catch (InterruptedException e) {
-				// Callback send failure
+				SpeakerDevice[] speakers = deleteSongRequest3.getDeleteSongRequest().getSpeakers().getSpeakerDevice();
+				String type = deleteSongRequest3.getDeleteSongRequest().getLink().getType().getValue();
+				String url = deleteSongRequest3.getDeleteSongRequest().getLink().getAddress();
+				// Send file to speakers
+				ExecutorService executor = Executors.newFixedThreadPool(speakers.length);
+				for (SpeakerDevice speaker : speakers) {
+					executor.submit(() -> {
+						try {
+							SpeakerUtils.deleteFileFromSpeaker(type + "://" + url,
+									speaker.getGeneralDevice().getIpAddress().getIPv4Address(),
+									speaker.getGeneralDevice().getPort().getPort().intValue(), db);
+						} catch (SQLException e) {
+							e.printStackTrace();
+							DeleteSongResponse t = new DeleteSongResponse(deleteSongRequest3.getDeleteSongRequest().getConversationId(), e.toString());
+							response.setDeleteSongResponse(t);
+							throw new RuntimeException("The database could not be updated with the new song" + e);
+						}
+					});
+				}
+				executor.shutdown();
+				try {
+					executor.awaitTermination(5, TimeUnit.MINUTES);
+				} catch (InterruptedException e) {
+					// Callback send failure
+					innerResponse = new DeleteSongResponse(deleteSongRequest3.getDeleteSongRequest().getConversationId(), e.toString());
+					response.setDeleteSongResponse(innerResponse);
+				}
+				// Callback send success
 				return;
+	
+			} finally {
+				db.cleanUp();
 			}
-			// Callback send success
-			return;
-
 		} finally {
-			db.cleanUp();
+			stub.deleteSongCallback(response);
 		}
 	}
 

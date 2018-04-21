@@ -11,7 +11,7 @@
 
 	<element name="IsSongLoadedResponse" type="boolean"></element>
 
-	<element name="DeleteSongResponse" type="types:ASyncResponse"></element>
+	<element name="DeleteSongResponse" type="tns:DeleteSongResponse"></element>
 
 	<element name="UploadSongResponse" type="tns:UploadSongResponse"></element>
 
@@ -19,6 +19,7 @@
 		<sequence>
 			<element name="Link" type="types:Link"></element>
 			<element name="Speakers" type="types:SpeakerDeviceArray"></element>
+			<element name="conversationId" type="string"></element>
 		</sequence>
 	</complexType>
 
@@ -43,6 +44,13 @@
     	<sequence>
     		<element name="conversationId" type="string"></element>
     		<element name="response" type="types:ASyncResponse"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DeleteSongResponse">
+    	<sequence>
+    		<element name="response" type="types:ASyncResponse"></element>
+    		<element name="conversationId" type="string"></element>
     	</sequence>
     </complexType>
 </schema>

@@ -56,13 +56,15 @@ import org.apache.axis2.AxisFault;
          * 
                                     * @param deleteSongRequest
          * @throws SQLException 
+         * @throws AxisFault 
+         * @throws RemoteException 
          */
 
         
                 public void deleteSong
                 (
                   org.example.www.uploadserviceelements.DeleteSongRequestE deleteSongRequest
-                 ) throws SQLException
+                 ) throws SQLException, AxisFault, RemoteException
             ;
         
          }
