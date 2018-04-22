@@ -84,7 +84,6 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 		UploadSongResponse innerResponse = new UploadSongResponse(uploadSongRequest0.getUploadSongRequest().getConversationId(), true);
 		UploadSongResponseE response = new UploadSongResponseE();
 		response.setUploadSongResponse(innerResponse);
-		System.out.print(uploadSongRequest0.getUploadSongRequest().getSpeakers().getSpeakerDevice().length);
 		try {
 			try {
 				db = new MariaDB(database);
@@ -99,11 +98,11 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 				String type = uploadSongRequest0.getUploadSongRequest().getLink().getType().getValue();
 				String url = uploadSongRequest0.getUploadSongRequest().getLink().getAddress();
 				String fileName;
-				System.out.println(url);
 				switch (type) {
 				case "http":
 					try {
-						fileName = DownloadUtils.downloadSong("http://" + url, "");
+						System.out.println("http://" + url);
+						fileName = DownloadUtils.downloadSong("http://" + url, "B:\\SOA\\apache-tomcat-8.5.30\\downloads");
 					} catch (MalformedURLException e) {
 						throw new RuntimeException("Malformed url: \"http://" + url + "\": " + e);
 					} catch (IOException e) {
@@ -276,12 +275,12 @@ public class UploadServiceSkeleton implements UploadServiceSkeletonInterface {
 					response.setDeleteSongResponse(innerResponse);
 				}
 				// Callback send success
-				return;
 	
 			} finally {
 				db.cleanUp();
 			}
 		} finally {
+			System.out.println("Callback: " + deleteSongRequest3.getDeleteSongRequest().getConversationId());
 			stub.deleteSongCallback(response);
 		}
 	}

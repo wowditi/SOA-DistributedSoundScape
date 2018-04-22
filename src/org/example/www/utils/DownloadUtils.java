@@ -44,7 +44,11 @@ public class DownloadUtils {
 			if (allowedExtensions.contains(splitFilename[splitFilename.length-1])) {
 				// opens input stream from the HTTP connection
 				InputStream inputStream = httpConn.getInputStream();
-				String saveFilePath = saveDir + File.separator + fileName;
+				String saveFilePath;
+				if (saveDir == "")
+					saveFilePath = fileName;
+				else
+					saveFilePath = saveDir + File.separator + fileName;
 
 				// opens an output stream to save into file
 				FileOutputStream outputStream = new FileOutputStream(saveFilePath);

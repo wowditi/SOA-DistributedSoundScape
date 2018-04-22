@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import org.example.www.controlserviceelements.ProcessPlaybackCommandRequest;
 import org.example.www.controlserviceelements.ProcessPlaybackCommandRequestE;
 import org.example.www.controlserviceelements.ProcessPlaybackCommandResponse;
@@ -87,6 +89,9 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 	public org.example.www.controlserviceelements.ProcessPlaybackCommandResponse processPlaybackCommand(
 			org.example.www.controlserviceelements.ProcessPlaybackCommandRequestE processPlaybackCommandRequest)
 			throws ErrorMessage, RuntimeException {
+		//fault test
+		if (processPlaybackCommandRequest.getProcessPlaybackCommandRequest().getCommand().getPlaybackCommand().equals("faulty"))
+			throw new RuntimeException("An intended error has occured");
 		// make a queue for simultanious sending
 		ProcessPlaybackCommandResponse response = new ProcessPlaybackCommandResponse();
 		response.setProcessPlaybackCommandResponse(false);
@@ -127,7 +132,11 @@ public class ControlServiceSkeleton implements ControlServiceSkeletonInterface {
 
 	private void addLocChanels(Location speakerLoc) {
 		// Calculate new set of volume levels for every channel
-		ChannelLayout[] channels = new ChannelLayout[layout.getChannelLayouts().length];
+		ChannelLayout[] channels;
+		if (layout != null && layout.getChannelLayouts() != null)
+			channels = new ChannelLayout[layout.getChannelLayouts().length];
+		else
+			channels = new ChannelLayout[0];
 		for (int i = 0; i < channels.length; i++) {
 			ChannelLayout sourceChannel = layout.getChannelLayouts()[i];
 

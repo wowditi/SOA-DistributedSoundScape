@@ -3,6 +3,7 @@ package org.example.www.uploadservice.server;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 import org.example.www.database.MariaDB;
@@ -37,7 +38,7 @@ public class UploadServiceSkeletonTest {
 	}
 
 	@Test
-	public void uploadServiceTest() throws SQLException {
+	public void uploadServiceTest() throws SQLException, RemoteException {
 		UploadServiceSkeleton skel = new UploadServiceSkeleton("DistributedSoundScapeTest");
 		Link url1 = new Link("tegos.kz/new/mp3_full/Kygo_feat._Justin_Jesso_-_Stargazing.mp3", "http");
 		Link url2 = new Link("a.tumblr.com/tumblr_lh4wdoJdgt1qa5xk1o1.mp3", "https");
@@ -53,7 +54,7 @@ public class UploadServiceSkeletonTest {
 		assertTrue(skel.isSongLoaded(new IsSongLoadedRequestE(url2, speakers)).getIsSongLoadedResponse());
 		skeleton.addSpeaker(new AddSpeakerRequestE("1.1.1.3", 1, (long) 1, (short) 1, (short) 1, (short) 1));
 		speakers = skeleton.getSpeakers(new GetSpeakersRequestE("1.1.1.1", 1, 1)).getGetSpeakersResponse()
-				.getSpeakers();
+				.getSpeakers(); 
 		assertFalse(skel.isSongLoaded(new IsSongLoadedRequestE(url1, speakers)).getIsSongLoadedResponse());
 		assertFalse(skel.isSongLoaded(new IsSongLoadedRequestE(url2, speakers)).getIsSongLoadedResponse());
 		skel.uploadSong(new UploadSongRequestE(url2, speakers));
